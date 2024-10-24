@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
@@ -23,9 +24,13 @@ class FFAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _test = '';
-  String get test => _test;
-  set test(String value) {
-    _test = value;
+  CustomerDataStruct _customerData = CustomerDataStruct();
+  CustomerDataStruct get customerData => _customerData;
+  set customerData(CustomerDataStruct value) {
+    _customerData = value;
+  }
+
+  void updateCustomerDataStruct(Function(CustomerDataStruct) updateFn) {
+    updateFn(_customerData);
   }
 }
