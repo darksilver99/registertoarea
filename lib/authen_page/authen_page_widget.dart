@@ -4,6 +4,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'authen_page_model.dart';
 export 'authen_page_model.dart';
 
@@ -54,18 +56,18 @@ class _AuthenPageWidgetState extends State<AuthenPageWidget> {
               wrapWithModel(
                 model: _model.backgroundViewModel,
                 updateCallback: () => safeSetState(() {}),
-                child: const BackgroundViewWidget(),
+                child: BackgroundViewWidget(),
               ),
               SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    const Row(
+                    Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [],
                     ),
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
+                      padding: EdgeInsetsDirectional.fromSTEB(
                           32.0, 180.0, 32.0, 0.0),
                       child: Container(
                         width: () {
@@ -88,7 +90,7 @@ class _AuthenPageWidgetState extends State<AuthenPageWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 32.0, 16.0, 32.0),
                           child: Form(
                             key: _model.formKey,
@@ -97,9 +99,9 @@ class _AuthenPageWidgetState extends State<AuthenPageWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
-                                  child: SizedBox(
+                                  child: Container(
                                     width: double.infinity,
                                     child: TextFormField(
                                       controller: _model.emailTextController,
@@ -179,9 +181,9 @@ class _AuthenPageWidgetState extends State<AuthenPageWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
-                                  child: SizedBox(
+                                  child: Container(
                                     width: double.infinity,
                                     child: TextFormField(
                                       controller: _model.passwordTextController,
@@ -298,10 +300,10 @@ class _AuthenPageWidgetState extends State<AuthenPageWidget> {
                                       text: 'เข้าสู่ระบบ',
                                       options: FFButtonOptions(
                                         height: 40.0,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             16.0, 0.0, 16.0, 0.0),
                                         iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
+                                            EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
@@ -326,8 +328,8 @@ class _AuthenPageWidgetState extends State<AuthenPageWidget> {
                       ),
                     ),
                   ]
-                      .addToStart(const SizedBox(height: 8.0))
-                      .addToEnd(const SizedBox(height: 32.0)),
+                      .addToStart(SizedBox(height: 8.0))
+                      .addToEnd(SizedBox(height: 32.0)),
                 ),
               ),
             ],

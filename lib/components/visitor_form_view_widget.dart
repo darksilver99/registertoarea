@@ -1,6 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'visitor_form_view_model.dart';
 export 'visitor_form_view_model.dart';
 
@@ -48,7 +50,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(16.0),
@@ -60,7 +62,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -74,7 +76,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
             ),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 8.0),
+            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 8.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -94,7 +96,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
+              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -104,7 +106,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -117,9 +119,9 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 16.0),
-                                child: SizedBox(
+                                child: Container(
                                   width: () {
                                     if (MediaQuery.sizeOf(context).width <
                                         kBreakpointSmall) {
@@ -213,9 +215,9 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 16.0),
-                                child: SizedBox(
+                                child: Container(
                                   width: () {
                                     if (MediaQuery.sizeOf(context).width <
                                         kBreakpointSmall) {
@@ -312,8 +314,8 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                           ),
                         ),
                       ]
-                          .addToStart(const SizedBox(height: 8.0))
-                          .addToEnd(const SizedBox(height: 32.0)),
+                          .addToStart(SizedBox(height: 8.0))
+                          .addToEnd(SizedBox(height: 32.0)),
                     ),
                   ),
                 ),

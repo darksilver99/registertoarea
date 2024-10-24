@@ -2,7 +2,10 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/components/visitor_form_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
@@ -56,7 +59,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         color: FlutterFlowTheme.of(context).primary,
                       ),
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -73,21 +76,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           context: context,
                                           builder: (alertDialogContext) {
                                             return AlertDialog(
-                                              title: const Text('ออกจากระบบ?'),
+                                              title: Text('ออกจากระบบ?'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext,
                                                           false),
-                                                  child: const Text('ยกเลิก'),
+                                                  child: Text('ยกเลิก'),
                                                 ),
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext,
                                                           true),
-                                                  child: const Text('ยืนยัน'),
+                                                  child: Text('ยืนยัน'),
                                                 ),
                                               ],
                                             );
@@ -126,7 +129,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             32.0, 32.0, 32.0, 32.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -161,7 +164,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             child: Padding(
                                               padding: MediaQuery.viewInsetsOf(
                                                   context),
-                                              child: const VisitorFormViewWidget(),
+                                              child: VisitorFormViewWidget(),
                                             ),
                                           );
                                         },
@@ -209,7 +212,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             ),
                                             Expanded(
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         8.0, 16.0, 8.0, 0.0),
                                                 child: Row(
@@ -285,7 +288,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       8.0, 16.0, 8.0, 0.0),
                                               child: Row(
@@ -358,7 +361,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           ),
                                           Expanded(
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       8.0, 16.0, 8.0, 0.0),
                                               child: Row(
@@ -397,8 +400,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ),
                       ),
                     ]
-                        .addToStart(const SizedBox(height: 8.0))
-                        .addToEnd(const SizedBox(height: 32.0)),
+                        .addToStart(SizedBox(height: 8.0))
+                        .addToEnd(SizedBox(height: 32.0)),
                   ),
                 ),
               ),
