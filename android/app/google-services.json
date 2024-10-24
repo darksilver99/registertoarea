@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "441423312575",
+    "project_id": "register-to-area-zf5kr6",
+    "storage_bucket": "register-to-area-zf5kr6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441423312575:android:be867d47341db6c83eb80a",
+        "android_client_info": {
+          "package_name": "com.silver.registertoarea"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-1kCNmb5vGJFZbMgn6zKIwzfmTSfDOhw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
