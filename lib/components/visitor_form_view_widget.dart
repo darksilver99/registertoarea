@@ -866,7 +866,9 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                     child: FlutterFlowDropDown<String>(
                                       controller:
                                           _model.dropDownValueController2 ??=
-                                              FormFieldController<String>(null),
+                                              FormFieldController<String>(
+                                        _model.dropDownValue2 ??= 'เปิดใช้งาน',
+                                      ),
                                       options: ['เปิดใช้งาน', 'ปิดใช้งาน'],
                                       onChanged: (val) => safeSetState(
                                           () => _model.dropDownValue2 = val),
