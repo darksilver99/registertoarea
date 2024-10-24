@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/component/loading_view/loading_view_widget.dart';
 import '/component/no_data_view/no_data_view_widget.dart';
 import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -27,18 +28,25 @@ class VistitorListPageModel extends FlutterFlowModel<VistitorListPageWidget> {
   void updateDataListAtIndex(int index, Function(VisitorRecord) updateFn) =>
       dataList[index] = updateFn(dataList[index]);
 
+  bool isLoading = true;
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for PaginatedDataTable widget.
   final paginatedDataTableController =
       FlutterFlowDataTableController<VisitorRecord>();
+  // Model for LoadingView component.
+  late LoadingViewModel loadingViewModel;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    loadingViewModel = createModel(context, () => LoadingViewModel());
+  }
 
   @override
   void dispose() {
     paginatedDataTableController.dispose();
+    loadingViewModel.dispose();
   }
 
   /// Action blocks.
