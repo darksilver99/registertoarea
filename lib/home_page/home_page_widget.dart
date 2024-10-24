@@ -143,8 +143,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           children: [
                             Expanded(
                               child: Wrap(
-                                spacing: 16.0,
-                                runSpacing: 16.0,
+                                spacing: 32.0,
+                                runSpacing: 32.0,
                                 alignment: WrapAlignment.center,
                                 crossAxisAlignment: WrapCrossAlignment.start,
                                 direction: Axis.horizontal,
@@ -207,8 +207,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     MainAxisAlignment.end,
                                                 children: [
                                                   Icon(
-                                                    Icons
-                                                        .account_circle_rounded,
+                                                    Icons.edit_document,
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primary,

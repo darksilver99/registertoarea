@@ -81,6 +81,11 @@ class VisitorRecord extends FirestoreRecord {
   String get company => _company ?? '';
   bool hasCompany() => _company != null;
 
+  // "no" field.
+  String? _no;
+  String get no => _no ?? '';
+  bool hasNo() => _no != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -97,6 +102,7 @@ class VisitorRecord extends FirestoreRecord {
     _image = snapshotData['image'] as String?;
     _areaList = getDataList(snapshotData['area_list']);
     _company = snapshotData['company'] as String?;
+    _no = snapshotData['no'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -151,6 +157,7 @@ Map<String, dynamic> createVisitorRecordData({
   String? idCardNumber,
   String? image,
   String? company,
+  String? no,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -166,6 +173,7 @@ Map<String, dynamic> createVisitorRecordData({
       'id_card_number': idCardNumber,
       'image': image,
       'company': company,
+      'no': no,
     }.withoutNulls,
   );
 
@@ -190,7 +198,8 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
         e1?.idCardNumber == e2?.idCardNumber &&
         e1?.image == e2?.image &&
         listEquality.equals(e1?.areaList, e2?.areaList) &&
-        e1?.company == e2?.company;
+        e1?.company == e2?.company &&
+        e1?.no == e2?.no;
   }
 
   @override
@@ -207,7 +216,8 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
         e?.idCardNumber,
         e?.image,
         e?.areaList,
-        e?.company
+        e?.company,
+        e?.no
       ]);
 
   @override

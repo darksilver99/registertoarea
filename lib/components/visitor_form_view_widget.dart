@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -795,6 +796,11 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                             );
                                           });
                                         }
+                                        if (_model.datePicked != null) {
+                                          _model.selectedDate =
+                                              _model.datePicked;
+                                          safeSetState(() {});
+                                        }
                                       },
                                       child: Container(
                                         width: double.infinity,
@@ -831,7 +837,13 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                  'เลือกวันที่หมดอายุบัตร',
+                                                  valueOrDefault<String>(
+                                                    _model.selectedDate != null
+                                                        ? functions.dateTh(
+                                                            _model.selectedDate)
+                                                        : 'เลือกวันที่หมดอายุบัตร',
+                                                    '-',
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
@@ -897,58 +909,116 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                         return;
                                       }
                                       if (_model.dropDownValue1 == null) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('เลือกเพศ'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('ตกลง'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
                                         return;
                                       }
                                       if (_model.datePicked == null) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                  'เลือกวันที่หมดอายุบัตร'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
                                         return;
                                       }
                                       if (_model.dropDownValue2 == null) {
                                         return;
                                       }
-
-                                      await VisitorRecord.createDoc(FFAppState()
-                                              .customerData
-                                              .customerRef!)
-                                          .set({
-                                        ...createVisitorRecordData(
-                                          createDate: getCurrentTimestamp,
-                                          status: _model.dropDownValue2 ==
-                                                  'เปิดใช้งาน'
-                                              ? 1
-                                              : 0,
-                                          expireDate: _model.datePicked,
-                                          fullName: _model.textController1.text,
-                                          carNumber:
-                                              _model.textController4.text,
-                                          gender: _model.dropDownValue1,
-                                          idCardNumber:
-                                              _model.textController2.text,
-                                          company: _model.textController3.text,
-                                        ),
-                                        ...mapToFirestore(
-                                          {
-                                            'area_list':
-                                                _model.choiceChipsValues,
+                                      if (_model.choiceChipsValues != null &&
+                                          (_model.choiceChipsValues)!
+                                              .isNotEmpty) {
+                                        await VisitorRecord.createDoc(
+                                                FFAppState()
+                                                    .customerData
+                                                    .customerRef!)
+                                            .set({
+                                          ...createVisitorRecordData(
+                                            createDate: getCurrentTimestamp,
+                                            status: _model.dropDownValue2 ==
+                                                    'เปิดใช้งาน'
+                                                ? 1
+                                                : 0,
+                                            expireDate: _model.datePicked,
+                                            fullName:
+                                                _model.textController1.text,
+                                            carNumber:
+                                                _model.textController4.text,
+                                            gender: _model.dropDownValue1,
+                                            idCardNumber:
+                                                _model.textController2.text,
+                                            company:
+                                                _model.textController3.text,
+                                          ),
+                                          ...mapToFirestore(
+                                            {
+                                              'area_list':
+                                                  _model.choiceChipsValues,
+                                            },
+                                          ),
+                                        });
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                  'บันทึกข้อมูลเรียบร้อยแล้ว'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('ตกลง'),
+                                                ),
+                                              ],
+                                            );
                                           },
-                                        ),
-                                      });
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text(
-                                                'บันทึกข้อมูลเรียบร้อยแล้ว'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('ตกลง'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                      Navigator.pop(context);
+                                        );
+                                        Navigator.pop(context);
+                                      } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                  'เลือกโซนพื้นที่ที่ให้เข้า'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('ตกลง'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      }
                                     },
                                     text: 'บันทึกข้อมูล',
                                     options: FFButtonOptions(
