@@ -45,7 +45,7 @@ class _BackgroundViewWidgetState extends State<BackgroundViewWidget> {
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(0.0),
             child: Image.asset(
               'assets/images/7588695_1414_(2).jpg',
               width: double.infinity,
