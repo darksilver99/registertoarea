@@ -31,16 +31,16 @@ class _RegisterViewWidgetState extends State<RegisterViewWidget> {
     super.initState();
     _model = createModel(context, () => RegisterViewModel());
 
-    _model.emailTextController ??= TextEditingController();
+    _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController1 ??= TextEditingController();
+    _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
+    _model.textController3 ??= TextEditingController();
     _model.textFieldFocusNode3 ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
+    _model.emailTextController ??= TextEditingController();
     _model.textFieldFocusNode4 ??= FocusNode();
 
     _model.passwordTextController ??= TextEditingController();
@@ -155,110 +155,13 @@ class _RegisterViewWidgetState extends State<RegisterViewWidget> {
                                     }
                                   }(),
                                   child: TextFormField(
-                                    controller: _model.emailTextController,
+                                    controller: _model.textController1,
                                     focusNode: _model.textFieldFocusNode1,
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       isDense: false,
                                       labelText: 'ชื่อ-นามสกุล',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
-                                          ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      filled: true,
-                                      fillColor: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          fontSize: 22.0,
-                                          letterSpacing: 0.0,
-                                        ),
-                                    cursorColor: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    validator: _model
-                                        .emailTextControllerValidator
-                                        .asValidator(context),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 16.0),
-                                child: Container(
-                                  width: () {
-                                    if (MediaQuery.sizeOf(context).width <
-                                        kBreakpointSmall) {
-                                      return MediaQuery.sizeOf(context).width;
-                                    } else if (MediaQuery.sizeOf(context)
-                                            .width <
-                                        kBreakpointMedium) {
-                                      return MediaQuery.sizeOf(context).width;
-                                    } else if (MediaQuery.sizeOf(context)
-                                            .width <
-                                        kBreakpointLarge) {
-                                      return 300.0;
-                                    } else {
-                                      return 300.0;
-                                    }
-                                  }(),
-                                  child: TextFormField(
-                                    controller: _model.textController1,
-                                    focusNode: _model.textFieldFocusNode2,
-                                    autofocus: false,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      isDense: false,
-                                      labelText: 'เบอร์โทรศัพท์',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelMedium
                                           .override(
@@ -349,12 +252,12 @@ class _RegisterViewWidgetState extends State<RegisterViewWidget> {
                                   }(),
                                   child: TextFormField(
                                     controller: _model.textController2,
-                                    focusNode: _model.textFieldFocusNode3,
+                                    focusNode: _model.textFieldFocusNode2,
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       isDense: false,
-                                      labelText: 'โครงการ',
+                                      labelText: 'เบอร์โทรศัพท์',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelMedium
                                           .override(
@@ -445,6 +348,102 @@ class _RegisterViewWidgetState extends State<RegisterViewWidget> {
                                   }(),
                                   child: TextFormField(
                                     controller: _model.textController3,
+                                    focusNode: _model.textFieldFocusNode3,
+                                    autofocus: false,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      isDense: false,
+                                      labelText: 'โครงการ',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            fontSize: 22.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            fontSize: 22.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      filled: true,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          fontSize: 22.0,
+                                          letterSpacing: 0.0,
+                                        ),
+                                    cursorColor: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    validator: _model.textController3Validator
+                                        .asValidator(context),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 16.0),
+                                child: Container(
+                                  width: () {
+                                    if (MediaQuery.sizeOf(context).width <
+                                        kBreakpointSmall) {
+                                      return MediaQuery.sizeOf(context).width;
+                                    } else if (MediaQuery.sizeOf(context)
+                                            .width <
+                                        kBreakpointMedium) {
+                                      return MediaQuery.sizeOf(context).width;
+                                    } else if (MediaQuery.sizeOf(context)
+                                            .width <
+                                        kBreakpointLarge) {
+                                      return 300.0;
+                                    } else {
+                                      return 300.0;
+                                    }
+                                  }(),
+                                  child: TextFormField(
+                                    controller: _model.emailTextController,
                                     focusNode: _model.textFieldFocusNode4,
                                     autofocus: false,
                                     obscureText: false,
@@ -514,7 +513,8 @@ class _RegisterViewWidgetState extends State<RegisterViewWidget> {
                                         ),
                                     cursorColor: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    validator: _model.textController3Validator
+                                    validator: _model
+                                        .emailTextControllerValidator
                                         .asValidator(context),
                                   ),
                                 ),
@@ -777,9 +777,9 @@ class _RegisterViewWidgetState extends State<RegisterViewWidget> {
                                       .doc(user.uid)
                                       .update(createUsersRecordData(
                                         displayName:
-                                            _model.emailTextController.text,
-                                        phoneNumber:
                                             _model.textController1.text,
+                                        phoneNumber:
+                                            _model.textController2.text,
                                       ));
 
                                   await CustomerListRecord.collection
@@ -789,7 +789,7 @@ class _RegisterViewWidgetState extends State<RegisterViewWidget> {
                                         createBy: currentUserReference,
                                         status: 1,
                                         customerName:
-                                            _model.textController2.text,
+                                            _model.textController3.text,
                                         expireDate: getCurrentTimestamp,
                                       ));
                                   await showDialog(
