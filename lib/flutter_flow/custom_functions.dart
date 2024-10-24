@@ -31,3 +31,16 @@ String? dateTh(DateTime? date) {
   final buddhistYear = date.year + 543;
   return formatter.format(date).replaceFirst('${date.year}', '$buddhistYear');
 }
+
+String getNextNo(VisitorRecord? lastVisitor) {
+  if (lastVisitor == null) {
+    return "000001"; // Return "000001" if lastVisitor is null
+  } else {
+    // Assuming 'no' is a string and should be converted to an int
+    int lastNo = int.parse(lastVisitor.no); // Convert 'no' to an integer
+    int nextNo = lastNo + 1; // Increment by 1
+    return nextNo
+        .toString()
+        .padLeft(6, '0'); // Convert back to string and pad with zeros
+  }
+}

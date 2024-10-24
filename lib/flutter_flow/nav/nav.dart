@@ -98,6 +98,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'AuthenPage',
           path: '/authenPage',
           builder: (context, params) => AuthenPageWidget(),
+        ),
+        FFRoute(
+          name: 'VistitorListPage',
+          path: '/vistitorListPage',
+          requireAuth: true,
+          builder: (context, params) => VistitorListPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

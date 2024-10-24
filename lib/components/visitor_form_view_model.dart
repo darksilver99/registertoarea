@@ -9,6 +9,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'visitor_form_view_widget.dart' show VisitorFormViewWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -83,6 +84,8 @@ class VisitorFormViewModel extends FlutterFlowModel<VisitorFormViewWidget> {
   // State field(s) for DropDown widget.
   String? dropDownValue2;
   FormFieldController<String>? dropDownValueController2;
+  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
+  VisitorRecord? lastVisitorResult;
 
   @override
   void initState(BuildContext context) {

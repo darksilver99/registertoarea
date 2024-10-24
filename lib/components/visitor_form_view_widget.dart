@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -955,6 +956,18 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                       if (_model.choiceChipsValues != null &&
                                           (_model.choiceChipsValues)!
                                               .isNotEmpty) {
+                                        _model.lastVisitorResult =
+                                            await queryVisitorRecordOnce(
+                                          parent: FFAppState()
+                                              .customerData
+                                              .customerRef,
+                                          queryBuilder: (visitorRecord) =>
+                                              visitorRecord.orderBy(
+                                                  'create_date',
+                                                  descending: true),
+                                          singleRecord: true,
+                                        ).then((s) => s.firstOrNull);
+
                                         await VisitorRecord.createDoc(
                                                 FFAppState()
                                                     .customerData
@@ -976,6 +989,8 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                 _model.textController2.text,
                                             company:
                                                 _model.textController3.text,
+                                            no: functions.getNextNo(
+                                                _model.lastVisitorResult),
                                           ),
                                           ...mapToFirestore(
                                             {
@@ -1021,6 +1036,8 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                           },
                                         );
                                       }
+
+                                      safeSetState(() {});
                                     },
                                     text: 'บันทึกข้อมูล',
                                     options: FFButtonOptions(
