@@ -472,17 +472,12 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                               fontSize: 22.0,
                                               letterSpacing: 0.0,
                                             ),
-                                        keyboardType: TextInputType.number,
                                         cursorColor:
                                             FlutterFlowTheme.of(context)
                                                 .primaryText,
                                         validator: _model
                                             .textController3Validator
                                             .asValidator(context),
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter.allow(
-                                              RegExp('[0-9]'))
-                                        ],
                                       ),
                                     ),
                                   ),
@@ -568,17 +563,12 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                               fontSize: 22.0,
                                               letterSpacing: 0.0,
                                             ),
-                                        keyboardType: TextInputType.number,
                                         cursorColor:
                                             FlutterFlowTheme.of(context)
                                                 .primaryText,
                                         validator: _model
                                             .textController4Validator
                                             .asValidator(context),
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter.allow(
-                                              RegExp('[0-9]'))
-                                        ],
                                       ),
                                     ),
                                   ),
