@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/authen_view/register_view/register_view_widget.dart';
 import '/component/background_view/background_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -64,7 +65,41 @@ class _AuthenPageWidgetState extends State<AuthenPageWidget> {
                   children: [
                     Row(
                       mainAxisSize: MainAxisSize.max,
-                      children: [],
+                      children: [
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              enableDrag: false,
+                              useSafeArea: true,
+                              context: context,
+                              builder: (context) {
+                                return GestureDetector(
+                                  onTap: () => FocusScope.of(context).unfocus(),
+                                  child: Padding(
+                                    padding: MediaQuery.viewInsetsOf(context),
+                                    child: RegisterViewWidget(),
+                                  ),
+                                );
+                              },
+                            ).then((value) => safeSetState(() {}));
+                          },
+                          child: Text(
+                            'ลงทะเบียน',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(
