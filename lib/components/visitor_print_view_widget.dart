@@ -161,31 +161,31 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  WidgetsToImage(
-                                    controller: controller,
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 32.0),
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        elevation: 3.0,
-                                        shape: RoundedRectangleBorder(
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 32.0),
+                                    child: Material(
+                                      color: Colors.transparent,
+                                      elevation: 3.0,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 300.0,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
                                           borderRadius:
                                               BorderRadius.circular(8.0),
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                          ),
                                         ),
                                         child: Container(
-                                          width: double.infinity,
-                                          height: 300.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            border: Border.all(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .alternate,
-                                            ),
-                                          ),
+                                          decoration: BoxDecoration(),
                                           child: Padding(
                                             padding: EdgeInsets.all(8.0),
                                             child: Column(
@@ -208,7 +208,8 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                       4.0),
                                                           child: Column(
                                                             mainAxisSize:
-                                                                MainAxisSize.max,
+                                                                MainAxisSize
+                                                                    .max,
                                                             children: [
                                                               Expanded(
                                                                 child: Row(
@@ -226,8 +227,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                       child:
                                                                           Padding(
                                                                         padding:
-                                                                            EdgeInsets.all(
-                                                                                4.0),
+                                                                            EdgeInsets.all(4.0),
                                                                         child:
                                                                             Builder(
                                                                           builder:
@@ -236,24 +236,15 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                                 _model.visitorResult?.areaList?.toList() ?? [];
 
                                                                             return Wrap(
-                                                                              spacing:
-                                                                                  4.0,
-                                                                              runSpacing:
-                                                                                  4.0,
-                                                                              alignment:
-                                                                                  WrapAlignment.center,
-                                                                              crossAxisAlignment:
-                                                                                  WrapCrossAlignment.start,
-                                                                              direction:
-                                                                                  Axis.horizontal,
-                                                                              runAlignment:
-                                                                                  WrapAlignment.start,
-                                                                              verticalDirection:
-                                                                                  VerticalDirection.down,
-                                                                              clipBehavior:
-                                                                                  Clip.antiAlias,
-                                                                              children:
-                                                                                  List.generate(areaList.length, (areaListIndex) {
+                                                                              spacing: 4.0,
+                                                                              runSpacing: 4.0,
+                                                                              alignment: WrapAlignment.center,
+                                                                              crossAxisAlignment: WrapCrossAlignment.start,
+                                                                              direction: Axis.horizontal,
+                                                                              runAlignment: WrapAlignment.start,
+                                                                              verticalDirection: VerticalDirection.down,
+                                                                              clipBehavior: Clip.antiAlias,
+                                                                              children: List.generate(areaList.length, (areaListIndex) {
                                                                                 final areaListItem = areaList[areaListIndex];
                                                                                 return Text(
                                                                                   areaListItem,
@@ -272,14 +263,14 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                 ),
                                                               ),
                                                               Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            32.0,
-                                                                            0.0,
-                                                                            32.0,
-                                                                            0.0),
-                                                                child: Container(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        32.0,
+                                                                        0.0,
+                                                                        32.0,
+                                                                        0.0),
+                                                                child:
+                                                                    Container(
                                                                   width: double
                                                                       .infinity,
                                                                   height: 1.0,
@@ -301,11 +292,9 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                       child:
                                                                           Column(
                                                                         mainAxisSize:
-                                                                            MainAxisSize
-                                                                                .max,
+                                                                            MainAxisSize.max,
                                                                         mainAxisAlignment:
-                                                                            MainAxisAlignment
-                                                                                .center,
+                                                                            MainAxisAlignment.center,
                                                                         children: [
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
@@ -315,8 +304,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                                 4.0),
                                                                             child:
                                                                                 Row(
-                                                                              mainAxisSize:
-                                                                                  MainAxisSize.max,
+                                                                              mainAxisSize: MainAxisSize.max,
                                                                               children: [
                                                                                 Expanded(
                                                                                   child: Text(
@@ -378,8 +366,8 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                   '') {
                                                             return Container(
                                                               width: 160.0,
-                                                              height:
-                                                                  double.infinity,
+                                                              height: double
+                                                                  .infinity,
                                                               decoration:
                                                                   BoxDecoration(
                                                                 borderRadius:
@@ -399,8 +387,8 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                     BorderRadius
                                                                         .circular(
                                                                             8.0),
-                                                                child:
-                                                                    Image.network(
+                                                                child: Image
+                                                                    .network(
                                                                   _model
                                                                       .visitorResult!
                                                                       .image,
@@ -416,12 +404,12 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                           } else {
                                                             return Container(
                                                               width: 160.0,
-                                                              height:
-                                                                  double.infinity,
+                                                              height: double
+                                                                  .infinity,
                                                               decoration:
                                                                   BoxDecoration(
-                                                                color: FlutterFlowTheme
-                                                                        .of(context)
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
                                                                     .secondaryBackground,
                                                                 borderRadius:
                                                                     BorderRadius
@@ -478,7 +466,8 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                       0.0),
                                                           child: Column(
                                                             mainAxisSize:
-                                                                MainAxisSize.max,
+                                                                MainAxisSize
+                                                                    .max,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .center,
@@ -493,8 +482,8 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                 width: double
                                                                     .infinity,
                                                                 height: 80.0,
-                                                                color: FlutterFlowTheme
-                                                                        .of(context)
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
                                                                     .primaryText,
                                                                 backgroundColor:
                                                                     Colors

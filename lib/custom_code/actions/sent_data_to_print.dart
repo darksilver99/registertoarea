@@ -11,13 +11,19 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:pdf/widgets.dart' as pw;
-import 'package:widgets_to_image/widgets_to_image.dart';
 import 'dart:html' as html;
+import 'package:image/image.dart' as img;
 
 Future sentDataToPrint(dynamic imageBytes) async {
   // Add your function code here!
 
   final bytes = await imageBytes.capture();
+
+  /*img.Image? originalImage = img.decodeImage(bytes!);
+  img.Image resizedImage = img.copyResize(originalImage!, width: (originalImage.width * 0.5).toInt());
+  List<int> resizedBytes = img.encodeJpg(resizedImage, quality: 85);
+  Uint8List.fromList(resizedBytes)
+  */
 
   // Create a PDF document
   final pdf = pw.Document();
@@ -53,8 +59,5 @@ Future sentDataToPrint(dynamic imageBytes) async {
   // Open the PDF in a new browser tab
   html.window.open(pdfUrl, '_blank');
 
-  // Optionally, revoke the URL after a delay
-  Future.delayed(const Duration(seconds: 1), () {
-    html.Url.revokeObjectUrl(pdfUrl);
-  });
+  html.Url.revokeObjectUrl(pdfUrl);
 }
