@@ -193,7 +193,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                           MainAxisSize.max,
                                                       children: [
                                                         Expanded(
-                                                          flex: 14,
+                                                          flex: 12,
                                                           child: Padding(
                                                             padding:
                                                                 EdgeInsetsDirectional
@@ -452,7 +452,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                           MainAxisSize.max,
                                                       children: [
                                                         Expanded(
-                                                          flex: 14,
+                                                          flex: 12,
                                                           child: Padding(
                                                             padding:
                                                                 EdgeInsetsDirectional
@@ -536,7 +536,10 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                       ?.expireDate),
                                                                   '-',
                                                                 ),
-                                                                maxLines: 1,
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                maxLines: 2,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium
@@ -544,7 +547,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                       fontFamily:
                                                                           'Inter',
                                                                       fontSize:
-                                                                          12.0,
+                                                                          10.0,
                                                                       letterSpacing:
                                                                           0.0,
                                                                     ),
