@@ -350,8 +350,8 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                               Expanded(
                                 child: Text(
                                   dataListViewItem.status == 1
-                                      ? 'เปิดการใช้งาน'
-                                      : 'ปิดการใช้งาน',
+                                      ? 'เปิดใช้งาน'
+                                      : 'ปิดใช้งาน',
                                   textAlign: TextAlign.center,
                                   maxLines: 1,
                                   style: FlutterFlowTheme.of(context)

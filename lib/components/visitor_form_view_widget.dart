@@ -797,7 +797,12 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
                                                 .genderDropdownValueController ??=
-                                            FormFieldController<String>(null),
+                                            FormFieldController<String>(
+                                          _model.genderDropdownValue ??=
+                                              widget!.visitorDocument != null
+                                                  ? _model.visitorResult?.gender
+                                                  : '',
+                                        ),
                                         options: ['ชาย', 'หญิง'],
                                         onChanged: (val) => safeSetState(() =>
                                             _model.genderDropdownValue = val),
@@ -1163,7 +1168,12 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                               .choiceChipsValueController ??=
                                                           FormFieldController<
                                                               List<String>>(
-                                                        [],
+                                                        widget!.visitorDocument !=
+                                                                null
+                                                            ? _model
+                                                                .visitorResult
+                                                                ?.areaList
+                                                            : ([]),
                                                       ),
                                                       wrapped: true,
                                                     ),

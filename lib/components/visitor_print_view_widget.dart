@@ -199,9 +199,12 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                             mainAxisSize:
                                                                 MainAxisSize
                                                                     .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
-                                                                    .start,
+                                                                    .center,
                                                             children: [
                                                               Expanded(
                                                                 child: Padding(
@@ -223,7 +226,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                         runSpacing:
                                                                             4.0,
                                                                         alignment:
-                                                                            WrapAlignment.start,
+                                                                            WrapAlignment.center,
                                                                         crossAxisAlignment:
                                                                             WrapCrossAlignment.start,
                                                                         direction:
@@ -253,6 +256,26 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                 ),
                                                               ),
                                                             ],
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      32.0,
+                                                                      0.0,
+                                                                      32.0,
+                                                                      0.0),
+                                                          child: Container(
+                                                            width:
+                                                                double.infinity,
+                                                            height: 1.0,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .alternate,
+                                                            ),
                                                           ),
                                                         ),
                                                         Expanded(
@@ -292,8 +315,9 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                               maxLines: 2,
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Inter',
-                                                                                    fontSize: 22.0,
+                                                                                    fontSize: 24.0,
                                                                                     letterSpacing: 0.0,
+                                                                                    fontWeight: FontWeight.w500,
                                                                                   ),
                                                                             ),
                                                                           ),
