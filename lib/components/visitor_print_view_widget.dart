@@ -578,7 +578,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                       _model.isLoadingPrinting = true;
                                       safeSetState(() {});
                                       await actions.sentDataToPrint(
-                                        null!,
+                                        controller,
                                       );
                                       _model.isLoadingPrinting = false;
                                       safeSetState(() {});
