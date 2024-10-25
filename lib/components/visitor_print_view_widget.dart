@@ -184,8 +184,8 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                 .alternate,
                                           ),
                                         ),
-                                        child: Container(
-                                          decoration: BoxDecoration(),
+                                        child: WidgetsToImage(
+                                          controller: controller,
                                           child: Padding(
                                             padding: EdgeInsets.all(8.0),
                                             child: Column(
