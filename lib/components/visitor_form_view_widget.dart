@@ -1258,26 +1258,6 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                           );
                                           return;
                                         }
-                                        if (_model.datePicked == null) {
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                    'เลือกวันที่หมดอายุบัตร'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('Ok'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                          return;
-                                        }
                                         if (_model.statusDropdownValue ==
                                             null) {
                                           return;
@@ -1285,114 +1265,140 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                         if (_model.choiceChipsValues != null &&
                                             (_model.choiceChipsValues)!
                                                 .isNotEmpty) {
-                                          if (widget!.visitorDocument != null) {
-                                            await widget!
-                                                .visitorDocument!.reference
-                                                .update({
-                                              ...createVisitorRecordData(
-                                                updateDate: getCurrentTimestamp,
-                                                updateBy: currentUserReference,
-                                                status:
-                                                    _model.statusDropdownValue ==
-                                                            'เปิดใช้งาน'
-                                                        ? 1
-                                                        : 0,
-                                                expireDate: _model.selectedDate,
-                                                fullName: _model
-                                                    .fullnameTextfieldTextController
-                                                    .text,
-                                                gender:
-                                                    _model.genderDropdownValue,
-                                                carNumber: _model
-                                                    .carNumberTextfieldTextController
-                                                    .text,
-                                                idCardNumber: _model
-                                                    .idCardTextfieldTextController
-                                                    .text,
-                                                company: _model
-                                                    .companyTextfieldTextController
-                                                    .text,
-                                                image: _model.imageUrl,
-                                              ),
-                                              ...mapToFirestore(
-                                                {
-                                                  'area_list':
-                                                      _model.choiceChipsValues,
-                                                },
-                                              ),
-                                            });
+                                          if (_model.selectedDate != null) {
+                                            if (widget!.visitorDocument !=
+                                                null) {
+                                              await widget!
+                                                  .visitorDocument!.reference
+                                                  .update({
+                                                ...createVisitorRecordData(
+                                                  updateDate:
+                                                      getCurrentTimestamp,
+                                                  updateBy:
+                                                      currentUserReference,
+                                                  status:
+                                                      _model.statusDropdownValue ==
+                                                              'เปิดใช้งาน'
+                                                          ? 1
+                                                          : 0,
+                                                  expireDate:
+                                                      _model.selectedDate,
+                                                  fullName: _model
+                                                      .fullnameTextfieldTextController
+                                                      .text,
+                                                  gender: _model
+                                                      .genderDropdownValue,
+                                                  carNumber: _model
+                                                      .carNumberTextfieldTextController
+                                                      .text,
+                                                  idCardNumber: _model
+                                                      .idCardTextfieldTextController
+                                                      .text,
+                                                  company: _model
+                                                      .companyTextfieldTextController
+                                                      .text,
+                                                  image: _model.imageUrl,
+                                                ),
+                                                ...mapToFirestore(
+                                                  {
+                                                    'area_list': _model
+                                                        .choiceChipsValues,
+                                                  },
+                                                ),
+                                              });
+                                            } else {
+                                              _model.lastVisitorResult =
+                                                  await queryVisitorRecordOnce(
+                                                parent: FFAppState()
+                                                    .customerData
+                                                    .customerRef,
+                                                queryBuilder: (visitorRecord) =>
+                                                    visitorRecord.orderBy(
+                                                        'create_date',
+                                                        descending: true),
+                                                singleRecord: true,
+                                              ).then((s) => s.firstOrNull);
+
+                                              await VisitorRecord.createDoc(
+                                                      FFAppState()
+                                                          .customerData
+                                                          .customerRef!)
+                                                  .set({
+                                                ...createVisitorRecordData(
+                                                  createDate:
+                                                      getCurrentTimestamp,
+                                                  status:
+                                                      _model.statusDropdownValue ==
+                                                              'เปิดใช้งาน'
+                                                          ? 1
+                                                          : 0,
+                                                  expireDate: _model.datePicked,
+                                                  fullName: _model
+                                                      .fullnameTextfieldTextController
+                                                      .text,
+                                                  carNumber: _model
+                                                      .carNumberTextfieldTextController
+                                                      .text,
+                                                  gender: _model
+                                                      .genderDropdownValue,
+                                                  idCardNumber: _model
+                                                      .idCardTextfieldTextController
+                                                      .text,
+                                                  company: _model
+                                                      .companyTextfieldTextController
+                                                      .text,
+                                                  no: functions.getNextNo(
+                                                      _model.lastVisitorResult),
+                                                  createBy:
+                                                      currentUserReference,
+                                                  image: _model.imageUrl,
+                                                ),
+                                                ...mapToFirestore(
+                                                  {
+                                                    'area_list': _model
+                                                        .choiceChipsValues,
+                                                  },
+                                                ),
+                                              });
+                                            }
+
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                      'บันทึกข้อมูลเรียบร้อยแล้ว'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('ตกลง'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            Navigator.pop(context);
                                           } else {
-                                            _model.lastVisitorResult =
-                                                await queryVisitorRecordOnce(
-                                              parent: FFAppState()
-                                                  .customerData
-                                                  .customerRef,
-                                              queryBuilder: (visitorRecord) =>
-                                                  visitorRecord.orderBy(
-                                                      'create_date',
-                                                      descending: true),
-                                              singleRecord: true,
-                                            ).then((s) => s.firstOrNull);
-
-                                            await VisitorRecord.createDoc(
-                                                    FFAppState()
-                                                        .customerData
-                                                        .customerRef!)
-                                                .set({
-                                              ...createVisitorRecordData(
-                                                createDate: getCurrentTimestamp,
-                                                status:
-                                                    _model.statusDropdownValue ==
-                                                            'เปิดใช้งาน'
-                                                        ? 1
-                                                        : 0,
-                                                expireDate: _model.datePicked,
-                                                fullName: _model
-                                                    .fullnameTextfieldTextController
-                                                    .text,
-                                                carNumber: _model
-                                                    .carNumberTextfieldTextController
-                                                    .text,
-                                                gender:
-                                                    _model.genderDropdownValue,
-                                                idCardNumber: _model
-                                                    .idCardTextfieldTextController
-                                                    .text,
-                                                company: _model
-                                                    .companyTextfieldTextController
-                                                    .text,
-                                                no: functions.getNextNo(
-                                                    _model.lastVisitorResult),
-                                                createBy: currentUserReference,
-                                                image: _model.imageUrl,
-                                              ),
-                                              ...mapToFirestore(
-                                                {
-                                                  'area_list':
-                                                      _model.choiceChipsValues,
-                                                },
-                                              ),
-                                            });
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                      'เลือกวันที่หมดอายุบัตร'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('ตกลง'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
                                           }
-
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                    'บันทึกข้อมูลเรียบร้อยแล้ว'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('ตกลง'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                          Navigator.pop(context);
                                         } else {
                                           await showDialog(
                                             context: context,
