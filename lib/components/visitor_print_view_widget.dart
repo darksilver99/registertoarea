@@ -367,17 +367,37 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                         _model.visitorResult
                                                                 ?.image !=
                                                             '') {
-                                                      return ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                        child: Image.network(
-                                                          _model.visitorResult!
-                                                              .image,
-                                                          width: 160.0,
-                                                          height:
-                                                              double.infinity,
-                                                          fit: BoxFit.contain,
+                                                      return Container(
+                                                        width: 160.0,
+                                                        height: double.infinity,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                          border: Border.all(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .alternate,
+                                                            width: 1.0,
+                                                          ),
+                                                        ),
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                          child: Image.network(
+                                                            _model
+                                                                .visitorResult!
+                                                                .image,
+                                                            width:
+                                                                double.infinity,
+                                                            height:
+                                                                double.infinity,
+                                                            fit: BoxFit.contain,
+                                                          ),
                                                         ),
                                                       );
                                                     } else {
