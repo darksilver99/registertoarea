@@ -1232,6 +1232,10 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                                 [].toList().cast<
                                                                     String>();
                                                             safeSetState(() {});
+                                                            safeSetState(() {
+                                                              _model.checkboxValue =
+                                                                  true;
+                                                            });
                                                           } else {
                                                             _model.isAllZone =
                                                                 false;
