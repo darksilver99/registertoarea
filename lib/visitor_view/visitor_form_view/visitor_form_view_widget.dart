@@ -95,12 +95,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                 _model.visitorResult!.areaList.toList())
             .toList()
             .cast<String>();
-        if (_model.visitorResult!.isAllZone) {
-          _model.isAllZone = true;
-        } else {
-          _model.isAllZone = false;
-        }
-
+        _model.isAllZone = _model.visitorResult!.isAllZone;
         _model.selectedDate = _model.visitorResult?.expireDate;
         _model.imageUrl = _model.visitorResult?.image;
       }
