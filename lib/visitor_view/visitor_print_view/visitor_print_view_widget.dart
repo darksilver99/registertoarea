@@ -534,7 +534,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                             String>(
                                                                           _model
                                                                               .visitorResult
-                                                                              ?.no,
+                                                                              ?.cardNo,
                                                                           '-',
                                                                         ),
                                                                         textAlign:

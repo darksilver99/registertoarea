@@ -8,8 +8,8 @@ import 'schema/util/firestore_util.dart';
 import 'schema/users_record.dart';
 import 'schema/customer_list_record.dart';
 import 'schema/visitor_record.dart';
-import 'schema/transaction_list_record.dart';
 import 'schema/zone_list_record.dart';
+import 'schema/transaction_list_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -21,8 +21,8 @@ export 'schema/util/schema_util.dart';
 export 'schema/users_record.dart';
 export 'schema/customer_list_record.dart';
 export 'schema/visitor_record.dart';
-export 'schema/transaction_list_record.dart';
 export 'schema/zone_list_record.dart';
+export 'schema/transaction_list_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -138,43 +138,6 @@ Future<List<VisitorRecord>> queryVisitorRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query TransactionListRecords (as a Stream and as a Future).
-Future<int> queryTransactionListRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      TransactionListRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<TransactionListRecord>> queryTransactionListRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      TransactionListRecord.collection,
-      TransactionListRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<TransactionListRecord>> queryTransactionListRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      TransactionListRecord.collection,
-      TransactionListRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
 /// Functions to query ZoneListRecords (as a Stream and as a Future).
 Future<int> queryZoneListRecordCount({
   DocumentReference? parent,
@@ -210,6 +173,46 @@ Future<List<ZoneListRecord>> queryZoneListRecordOnce({
     queryCollectionOnce(
       ZoneListRecord.collection(parent),
       ZoneListRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query TransactionListRecords (as a Stream and as a Future).
+Future<int> queryTransactionListRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      TransactionListRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<TransactionListRecord>> queryTransactionListRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      TransactionListRecord.collection(parent),
+      TransactionListRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<TransactionListRecord>> queryTransactionListRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      TransactionListRecord.collection(parent),
+      TransactionListRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
