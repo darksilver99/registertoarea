@@ -1233,6 +1233,11 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                                     String>();
                                                             safeSetState(() {});
                                                             safeSetState(() {
+                                                              _model
+                                                                  .choiceChipsValueController
+                                                                  ?.value = ([]);
+                                                            });
+                                                            safeSetState(() {
                                                               _model.checkboxValue =
                                                                   true;
                                                             });
