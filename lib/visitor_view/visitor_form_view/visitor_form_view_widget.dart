@@ -89,8 +89,6 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
           _model.statusDropdownValueController?.value =
               (_model.visitorResult?.status == 1 ? 'เปิดใช้งาน' : 'ปิดใช้งาน');
         });
-        _model.selectedZone =
-            _model.visitorResult!.areaList.toList().cast<String>();
         if (_model.visitorResult!.areaList.contains('ทั้งหมด')) {
           _model.isAllZone = true;
         } else {
