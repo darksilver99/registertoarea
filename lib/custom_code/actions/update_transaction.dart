@@ -16,14 +16,23 @@ Future<int> updateTransaction(VisitorRecord visitorDoc) async {
       .collection(
           "${FFAppState().customerData.customerRef!.path}/transaction_list")
       .where("status", isEqualTo: 0)
-      .where("card_no", isEqualTo: visitorDoc.carNumber)
+      .where("card_no", isEqualTo: visitorDoc.cardNo)
       .get();
   if (rs.size != 0) {
     // แสดงว่ามีเข้าค้างอยู่ให้ เปลี่ยนสถานะเป็น 1 คือ การสแกนออก
     rs.docs[0].reference.update({"status": 1, "date_out": getCurrentTimestamp});
     return 1; // สแกนออก
   } else {
-    rs.docs[0].reference.set({"status": 0, "date_in": getCurrentTimestamp});
+    FirebaseFirestore.instance
+        .collection(
+            "${FFAppState().customerData.customerRef!.path}/transaction_list")
+        .doc()
+        .set({
+      "status": 0,
+      "date_in": getCurrentTimestamp,
+      "card_no": visitorDoc.cardNo,
+      "full_name": visitorDoc.fullName,
+    });
     return 0; // สแกนเข้า
   }
 }
