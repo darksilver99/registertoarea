@@ -457,24 +457,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
-                                                  await showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title:
-                                                            Text('Coming soon'),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext),
-                                                            child: Text('ตกลง'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
+                                                  context.pushNamed(
+                                                      'TransactionListPage');
                                                 },
                                                 child: Material(
                                                   color: Colors.transparent,
