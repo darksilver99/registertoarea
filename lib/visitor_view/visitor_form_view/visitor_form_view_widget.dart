@@ -1452,6 +1452,11 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                             null) {
                                           return;
                                         }
+                                        _model.selectedZone = _model.isAllZone
+                                            ? (["ทั้งหมด"])
+                                            : _model.selectedZone
+                                                .toList()
+                                                .cast<String>();
                                         if (_model.selectedZone.isNotEmpty) {
                                           if (_model.selectedDate != null) {
                                             if (widget!.visitorDocument !=
