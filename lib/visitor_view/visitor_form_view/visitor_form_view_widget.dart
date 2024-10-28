@@ -1454,7 +1454,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                         }
                                         _model.selectedZone = _model.isAllZone
                                             ? (["ทั้งหมด"])
-                                            : _model.selectedZone
+                                            : _model.choiceChipsValues!
                                                 .toList()
                                                 .cast<String>();
                                         if (_model.selectedZone.isNotEmpty) {
