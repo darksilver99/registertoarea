@@ -560,7 +560,13 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Inter',
+                                        color: dataListViewItem.status == 1
+                                            ? FlutterFlowTheme.of(context)
+                                                .success
+                                            : FlutterFlowTheme.of(context)
+                                                .error,
                                         letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                 ),
                               ),
