@@ -114,6 +114,12 @@ class _ZoneListPageWidgetState extends State<ZoneListPageWidget> {
                           );
                         },
                       ).then((value) => safeSetState(() {}));
+
+                      _model.isLoading = true;
+                      safeSetState(() {});
+                      await _model.initZoneData(context);
+                      _model.isLoading = false;
+                      safeSetState(() {});
                     },
                     text: 'เพิ่มข้อมูล',
                     options: FFButtonOptions(
