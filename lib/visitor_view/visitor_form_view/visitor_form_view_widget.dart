@@ -1145,11 +1145,14 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                       child: Checkbox(
                                                         value: _model
                                                                 .checkboxValue ??=
-                                                            _model
-                                                                .visitorResult!
-                                                                .areaList
-                                                                .contains(
-                                                                    'ทั้งหมด'),
+                                                            widget!.visitorDocument !=
+                                                                    null
+                                                                ? _model
+                                                                    .visitorResult!
+                                                                    .areaList
+                                                                    .contains(
+                                                                        'ทั้งหมด')
+                                                                : true,
                                                         onChanged:
                                                             (newValue) async {
                                                           safeSetState(() =>
