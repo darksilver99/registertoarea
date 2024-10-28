@@ -560,7 +560,13 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Inter',
+                                        color: dataListViewItem.status == 1
+                                            ? FlutterFlowTheme.of(context)
+                                                .success
+                                            : FlutterFlowTheme.of(context)
+                                                .error,
                                         letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                 ),
                               ),
@@ -594,7 +600,20 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                                           ),
                                         );
                                       },
-                                    ).then((value) => safeSetState(() {}));
+                                    ).then((value) => safeSetState(
+                                        () => _model.isUpdate = value));
+
+                                    if ((_model.isUpdate != null &&
+                                            _model.isUpdate != '') &&
+                                        (_model.isUpdate == 'update')) {
+                                      _model.isLoading = true;
+                                      safeSetState(() {});
+                                      await _model.initVisitorData(context);
+                                      _model.isLoading = false;
+                                      safeSetState(() {});
+                                    }
+
+                                    safeSetState(() {});
                                   },
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,

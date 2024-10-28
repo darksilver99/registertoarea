@@ -203,6 +203,79 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                   ],
                 ),
               ),
+              if (widget!.visitorDocument != null)
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            var confirmDialogResponse = await showDialog<bool>(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('ต้องการลบข้อมูล?'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, false),
+                                          child: Text('ยกเลิก'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, true),
+                                          child: Text('ยืนยัน'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ) ??
+                                false;
+                            if (confirmDialogResponse) {
+                              await widget!.visitorDocument!.reference.delete();
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('ลบข้อมูลเรียบร้อยแล้ว'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: Text('ตกลง'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                              Navigator.pop(context, 'update');
+                            }
+                          },
+                          child: Text(
+                            'ลบข้อมูล',
+                            textAlign: TextAlign.end,
+                            maxLines: 1,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).error,
+                                  fontSize: 22.0,
+                                  letterSpacing: 0.0,
+                                  decoration: TextDecoration.underline,
+                                ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               if (!_model.isLoading)
                 Expanded(
                   child: Padding(
@@ -294,21 +367,27 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    'รูปถ่าย',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          fontSize: 22.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                ],
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 0.0, 4.0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Text(
+                                                      'รูปถ่าย',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            fontSize: 22.0,
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                               if (_model.imageUrl != null &&
                                                   _model.imageUrl != '')
@@ -1573,7 +1652,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                 );
                                               },
                                             );
-                                            Navigator.pop(context);
+                                            Navigator.pop(context, 'update');
                                           } else {
                                             await showDialog(
                                               context: context,
