@@ -37,7 +37,7 @@ String getNextNo(VisitorRecord? lastVisitor) {
     return "000001"; // Return "000001" if lastVisitor is null
   } else {
     // Assuming 'no' is a string and should be converted to an int
-    int lastNo = int.parse(lastVisitor.no); // Convert 'no' to an integer
+    int lastNo = int.parse(lastVisitor.cardNo); // Convert 'no' to an integer
     int nextNo = lastNo + 1; // Increment by 1
     return nextNo
         .toString()

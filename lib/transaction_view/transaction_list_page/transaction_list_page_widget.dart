@@ -5,38 +5,37 @@ import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/visitor_view/visitor_form_view/visitor_form_view_widget.dart';
-import '/visitor_view/visitor_print_view/visitor_print_view_widget.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'vistitor_list_page_model.dart';
-export 'vistitor_list_page_model.dart';
+import 'transaction_list_page_model.dart';
+export 'transaction_list_page_model.dart';
 
-class VistitorListPageWidget extends StatefulWidget {
-  const VistitorListPageWidget({super.key});
+class TransactionListPageWidget extends StatefulWidget {
+  const TransactionListPageWidget({super.key});
 
   @override
-  State<VistitorListPageWidget> createState() => _VistitorListPageWidgetState();
+  State<TransactionListPageWidget> createState() =>
+      _TransactionListPageWidgetState();
 }
 
-class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
-  late VistitorListPageModel _model;
+class _TransactionListPageWidgetState extends State<TransactionListPageWidget> {
+  late TransactionListPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => VistitorListPageModel());
+    _model = createModel(context, () => TransactionListPageModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await action_blocks.initCustomer(context);
-      await _model.initVisitorData(context);
+      await _model.initTransactionData(context);
       _model.isLoading = false;
       safeSetState(() {});
     });
@@ -72,7 +71,7 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                 children: [
                   Expanded(
                     child: Text(
-                      'รายชื่อผู้เข้าพื้นที่',
+                      'รายการเข้า-ออก',
                       maxLines: 1,
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Inter',
@@ -207,47 +206,6 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        FFButtonWidget(
-                          onPressed: () async {
-                            await showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              enableDrag: false,
-                              useSafeArea: true,
-                              context: context,
-                              builder: (context) {
-                                return Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: VisitorFormViewWidget(),
-                                );
-                              },
-                            ).then((value) => safeSetState(() {}));
-
-                            _model.isLoading = true;
-                            safeSetState(() {});
-                            await _model.initVisitorData(context);
-                            _model.isLoading = false;
-                            safeSetState(() {});
-                          },
-                          text: 'เพิ่มข้อมูล',
-                          options: FFButtonOptions(
-                            height: 40.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 0.0, 16.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).success,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Inter',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                ),
-                            elevation: 0.0,
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -263,7 +221,7 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                       return NoDataViewWidget();
                     }
 
-                    return FlutterFlowDataTable<VisitorRecord>(
+                    return FlutterFlowDataTable<TransactionListRecord>(
                       controller: _model.paginatedDataTableController,
                       data: dataListView,
                       columnsBuilder: (onSortChanged) => [
@@ -275,7 +233,7 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'รหัสบัตร',
+                                    'หมายเลขบัตร',
                                     textAlign: TextAlign.center,
                                     maxLines: 1,
                                     style: FlutterFlowTheme.of(context)
@@ -300,7 +258,7 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'ชื่อ-นามสกุล',
+                                    'ชื่อ-สกุล',
                                     textAlign: TextAlign.center,
                                     maxLines: 1,
                                     style: FlutterFlowTheme.of(context)
@@ -325,7 +283,7 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'สังกัดบริษัท',
+                                    'วันเวลาที่เข้า',
                                     textAlign: TextAlign.center,
                                     maxLines: 1,
                                     style: FlutterFlowTheme.of(context)
@@ -350,82 +308,7 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'ทะเบียน',
-                                    textAlign: TextAlign.center,
-                                    maxLines: 1,
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        DataColumn2(
-                          label: DefaultTextStyle.merge(
-                            softWrap: true,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'วันที่หมดอายุบัตร',
-                                    textAlign: TextAlign.center,
-                                    maxLines: 1,
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        DataColumn2(
-                          label: DefaultTextStyle.merge(
-                            softWrap: true,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'สถานะ',
-                                    textAlign: TextAlign.center,
-                                    maxLines: 1,
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        DataColumn2(
-                          label: DefaultTextStyle.merge(
-                            softWrap: true,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'จัดการข้อมูล',
+                                    'วันเวลาที่ออก',
                                     textAlign: TextAlign.center,
                                     maxLines: 1,
                                     style: FlutterFlowTheme.of(context)
@@ -493,45 +376,9 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  dataListViewItem.company,
-                                  textAlign: TextAlign.center,
-                                  maxLines: 1,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  dataListViewItem.carNumber,
-                                  textAlign: TextAlign.center,
-                                  maxLines: 1,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: Text(
                                   valueOrDefault<String>(
                                     functions
-                                        .dateTh(dataListViewItem.expireDate),
+                                        .dateTimeTh(dataListViewItem.dateIn),
                                     '-',
                                   ),
                                   textAlign: TextAlign.center,
@@ -551,138 +398,19 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  dataListViewItem.status == 1
-                                      ? 'เปิดใช้งาน'
-                                      : 'ปิดใช้งาน',
+                                  valueOrDefault<String>(
+                                    functions
+                                        .dateTimeTh(dataListViewItem.dateOut),
+                                    '-',
+                                  ),
                                   textAlign: TextAlign.center,
                                   maxLines: 1,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Inter',
-                                        color: dataListViewItem.status == 1
-                                            ? FlutterFlowTheme.of(context)
-                                                .success
-                                            : FlutterFlowTheme.of(context)
-                                                .error,
                                         letterSpacing: 0.0,
-                                        fontWeight: FontWeight.bold,
                                       ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 8.0, 0.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    await showModalBottomSheet(
-                                      isScrollControlled: true,
-                                      backgroundColor: Colors.transparent,
-                                      enableDrag: false,
-                                      useSafeArea: true,
-                                      context: context,
-                                      builder: (context) {
-                                        return Padding(
-                                          padding:
-                                              MediaQuery.viewInsetsOf(context),
-                                          child: VisitorFormViewWidget(
-                                            visitorDocument: dataListViewItem,
-                                          ),
-                                        );
-                                      },
-                                    ).then((value) => safeSetState(
-                                        () => _model.isUpdate = value));
-
-                                    if ((_model.isUpdate != null &&
-                                            _model.isUpdate != '') &&
-                                        (_model.isUpdate == 'update')) {
-                                      _model.isLoading = true;
-                                      safeSetState(() {});
-                                      await _model.initVisitorData(context);
-                                      _model.isLoading = false;
-                                      safeSetState(() {});
-                                    }
-
-                                    safeSetState(() {});
-                                  },
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.remove_red_eye,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        size: 24.0,
-                                      ),
-                                      Text(
-                                        'รายละเอียด',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              fontSize: 10.0,
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    enableDrag: false,
-                                    useSafeArea: true,
-                                    context: context,
-                                    builder: (context) {
-                                      return Padding(
-                                        padding:
-                                            MediaQuery.viewInsetsOf(context),
-                                        child: VisitorPrintViewWidget(
-                                          visitorDocument: dataListViewItem,
-                                        ),
-                                      );
-                                    },
-                                  ).then((value) => safeSetState(() {}));
-                                },
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.print_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      size: 24.0,
-                                    ),
-                                    Text(
-                                      'พิมพ์บัตร',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            fontSize: 10.0,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                  ],
                                 ),
                               ),
                             ],

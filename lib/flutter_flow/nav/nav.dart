@@ -110,6 +110,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/zoneListPage',
           requireAuth: true,
           builder: (context, params) => ZoneListPageWidget(),
+        ),
+        FFRoute(
+          name: 'ScanBarCodeWithWebPage',
+          path: '/scanBarCodeWithWebPage',
+          requireAuth: true,
+          builder: (context, params) => ScanBarCodeWithWebPageWidget(),
+        ),
+        FFRoute(
+          name: 'TransactionListPage',
+          path: '/transactionListPage',
+          requireAuth: true,
+          builder: (context, params) => TransactionListPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

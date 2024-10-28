@@ -5,3 +5,7 @@ export '/visitor_view/vistitor_list_page/vistitor_list_page_widget.dart'
     show VistitorListPageWidget;
 export '/zone_view/zone_list_page/zone_list_page_widget.dart'
     show ZoneListPageWidget;
+export '/scan_bar_code_with_web_page/scan_bar_code_with_web_page_widget.dart'
+    show ScanBarCodeWithWebPageWidget;
+export '/transaction_view/transaction_list_page/transaction_list_page_widget.dart'
+    show TransactionListPageWidget;

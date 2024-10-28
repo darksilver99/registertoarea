@@ -71,15 +71,15 @@ class VisitorRecord extends FirestoreRecord {
   String get company => _company ?? '';
   bool hasCompany() => _company != null;
 
-  // "no" field.
-  String? _no;
-  String get no => _no ?? '';
-  bool hasNo() => _no != null;
-
   // "is_all_zone" field.
   bool? _isAllZone;
   bool get isAllZone => _isAllZone ?? false;
   bool hasIsAllZone() => _isAllZone != null;
+
+  // "card_no" field.
+  String? _cardNo;
+  String get cardNo => _cardNo ?? '';
+  bool hasCardNo() => _cardNo != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
 
@@ -95,8 +95,8 @@ class VisitorRecord extends FirestoreRecord {
     _image = snapshotData['image'] as String?;
     _areaList = getDataList(snapshotData['area_list']);
     _company = snapshotData['company'] as String?;
-    _no = snapshotData['no'] as String?;
     _isAllZone = snapshotData['is_all_zone'] as bool?;
+    _cardNo = snapshotData['card_no'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -149,8 +149,8 @@ Map<String, dynamic> createVisitorRecordData({
   String? idCardNumber,
   String? image,
   String? company,
-  String? no,
   bool? isAllZone,
+  String? cardNo,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -164,8 +164,8 @@ Map<String, dynamic> createVisitorRecordData({
       'id_card_number': idCardNumber,
       'image': image,
       'company': company,
-      'no': no,
       'is_all_zone': isAllZone,
+      'card_no': cardNo,
     }.withoutNulls,
   );
 
@@ -189,8 +189,8 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
         e1?.image == e2?.image &&
         listEquality.equals(e1?.areaList, e2?.areaList) &&
         e1?.company == e2?.company &&
-        e1?.no == e2?.no &&
-        e1?.isAllZone == e2?.isAllZone;
+        e1?.isAllZone == e2?.isAllZone &&
+        e1?.cardNo == e2?.cardNo;
   }
 
   @override
@@ -206,8 +206,8 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
         e?.image,
         e?.areaList,
         e?.company,
-        e?.no,
-        e?.isAllZone
+        e?.isAllZone,
+        e?.cardNo
       ]);
 
   @override

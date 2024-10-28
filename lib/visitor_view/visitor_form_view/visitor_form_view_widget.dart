@@ -330,7 +330,8 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                 Expanded(
                                                   child: Text(
                                                     valueOrDefault<String>(
-                                                      _model.visitorResult?.no,
+                                                      _model.visitorResult
+                                                          ?.cardNo,
                                                       '-',
                                                     ),
                                                     maxLines: 1,
@@ -1734,10 +1735,10 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                   company: _model
                                                       .companyTextfieldTextController
                                                       .text,
-                                                  no: functions.getNextNo(
-                                                      _model.lastVisitorResult),
                                                   image: _model.imageUrl,
                                                   isAllZone: _model.isAllZone,
+                                                  cardNo: functions.getNextNo(
+                                                      _model.lastVisitorResult),
                                                 ),
                                                 ...mapToFirestore(
                                                   {

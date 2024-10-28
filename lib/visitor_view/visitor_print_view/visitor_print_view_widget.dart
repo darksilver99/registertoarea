@@ -1,5 +1,3 @@
-import 'package:widgets_to_image/widgets_to_image.dart';
-
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/component/loading_view/loading_view_widget.dart';
@@ -32,8 +30,6 @@ class VisitorPrintViewWidget extends StatefulWidget {
 
 class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
   late VisitorPrintViewModel _model;
-
-  WidgetsToImageController controller = WidgetsToImageController();
 
   @override
   void setState(VoidCallback callback) {
@@ -170,401 +166,316 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 32.0),
-                                          child: WidgetsToImage(
-                                            controller : controller,
-                                            child: Container(
-                                              width: 400.0,
-                                              height: 211.0,
-                                              decoration: BoxDecoration(
+                                          child: Container(
+                                            width: 400.0,
+                                            height: 211.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              border: Border.all(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                border: Border.all(
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .alternate,
-                                                ),
+                                                        .alternate,
                                               ),
-                                              child: Padding(
-                                                padding: EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 6,
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 12,
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          4.0),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Expanded(
-                                                                    child: Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .center,
-                                                                      children: [
-                                                                        Expanded(
-                                                                          child:
-                                                                              Builder(
-                                                                            builder:
-                                                                                (context) {
-                                                                              if (!_model.visitorResult!.isAllZone) {
-                                                                                return Padding(
-                                                                                  padding: EdgeInsets.all(4.0),
-                                                                                  child: Builder(
-                                                                                    builder: (context) {
-                                                                                      final areaList = _model.visitorResult?.areaList?.toList() ?? [];
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Expanded(
+                                                    flex: 6,
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 12,
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        8.0,
+                                                                        0.0,
+                                                                        8.0,
+                                                                        4.0),
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Expanded(
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Builder(
+                                                                          builder:
+                                                                              (context) {
+                                                                            if (!_model.visitorResult!.isAllZone) {
+                                                                              return Padding(
+                                                                                padding: EdgeInsets.all(4.0),
+                                                                                child: Builder(
+                                                                                  builder: (context) {
+                                                                                    final areaList = _model.visitorResult?.areaList?.toList() ?? [];
 
-                                                                                      return Wrap(
-                                                                                        spacing: 4.0,
-                                                                                        runSpacing: 4.0,
-                                                                                        alignment: WrapAlignment.center,
-                                                                                        crossAxisAlignment: WrapCrossAlignment.start,
-                                                                                        direction: Axis.horizontal,
-                                                                                        runAlignment: WrapAlignment.start,
-                                                                                        verticalDirection: VerticalDirection.down,
-                                                                                        clipBehavior: Clip.antiAlias,
-                                                                                        children: List.generate(areaList.length, (areaListIndex) {
-                                                                                          final areaListItem = areaList[areaListIndex];
-                                                                                          return Text(
-                                                                                            areaListItem,
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  fontFamily: 'Inter',
-                                                                                                  fontSize: 12.0,
-                                                                                                  letterSpacing: 0.0,
-                                                                                                ),
-                                                                                          );
-                                                                                        }),
-                                                                                      );
-                                                                                    },
-                                                                                  ),
-                                                                                );
-                                                                              } else {
-                                                                                return Text(
-                                                                                  'ทั้งหมด',
-                                                                                  textAlign: TextAlign.center,
-                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        fontFamily: 'Inter',
-                                                                                        fontSize: 24.0,
-                                                                                        letterSpacing: 0.0,
-                                                                                        fontWeight: FontWeight.normal,
-                                                                                      ),
-                                                                                );
-                                                                              }
-                                                                            },
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            32.0,
-                                                                            0.0,
-                                                                            32.0,
-                                                                            0.0),
-                                                                    child:
-                                                                        Container(
-                                                                      width: double
-                                                                          .infinity,
-                                                                      height: 1.0,
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        color: FlutterFlowTheme.of(
-                                                                                context)
-                                                                            .alternate,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  Expanded(
-                                                                    child: Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
-                                                                        Expanded(
-                                                                          child:
-                                                                              Column(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.center,
-                                                                            children: [
-                                                                              Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
-                                                                                child: Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  children: [
-                                                                                    Expanded(
-                                                                                      child: Text(
-                                                                                        valueOrDefault<String>(
-                                                                                          _model.visitorResult?.fullName,
-                                                                                          '-',
-                                                                                        ),
-                                                                                        textAlign: TextAlign.center,
-                                                                                        maxLines: 2,
-                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                              fontFamily: 'Inter',
-                                                                                              fontSize: 18.0,
-                                                                                              letterSpacing: 0.0,
-                                                                                              fontWeight: FontWeight.w500,
-                                                                                            ),
-                                                                                      ),
-                                                                                    ),
-                                                                                  ],
+                                                                                    return Wrap(
+                                                                                      spacing: 4.0,
+                                                                                      runSpacing: 4.0,
+                                                                                      alignment: WrapAlignment.center,
+                                                                                      crossAxisAlignment: WrapCrossAlignment.start,
+                                                                                      direction: Axis.horizontal,
+                                                                                      runAlignment: WrapAlignment.start,
+                                                                                      verticalDirection: VerticalDirection.down,
+                                                                                      clipBehavior: Clip.antiAlias,
+                                                                                      children: List.generate(areaList.length, (areaListIndex) {
+                                                                                        final areaListItem = areaList[areaListIndex];
+                                                                                        return Text(
+                                                                                          areaListItem,
+                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                fontFamily: 'Inter',
+                                                                                                fontSize: 12.0,
+                                                                                                letterSpacing: 0.0,
+                                                                                              ),
+                                                                                        );
+                                                                                      }),
+                                                                                    );
+                                                                                  },
                                                                                 ),
-                                                                              ),
-                                                                              Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                children: [
-                                                                                  Expanded(
-                                                                                    child: Text(
-                                                                                      valueOrDefault<String>(
-                                                                                        _model.visitorResult?.company,
-                                                                                        '-',
-                                                                                      ),
-                                                                                      textAlign: TextAlign.center,
-                                                                                      maxLines: 2,
-                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                            fontFamily: 'Inter',
-                                                                                            fontSize: 14.0,
-                                                                                            letterSpacing: 0.0,
-                                                                                          ),
+                                                                              );
+                                                                            } else {
+                                                                              return Text(
+                                                                                'ทั้งหมด',
+                                                                                textAlign: TextAlign.center,
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Inter',
+                                                                                      fontSize: 24.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FontWeight.normal,
                                                                                     ),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            ],
-                                                                          ),
+                                                                              );
+                                                                            }
+                                                                          },
                                                                         ),
-                                                                      ],
-                                                                    ),
+                                                                      ),
+                                                                    ],
                                                                   ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 5,
-                                                            child: Builder(
-                                                              builder: (context) {
-                                                                if (_model.visitorResult
-                                                                            ?.image !=
-                                                                        null &&
-                                                                    _model.visitorResult
-                                                                            ?.image !=
-                                                                        '') {
-                                                                  return Container(
-                                                                    width: double
-                                                                        .infinity,
-                                                                    height: double
-                                                                        .infinity,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8.0),
-                                                                      border:
-                                                                          Border
-                                                                              .all(
-                                                                        color: FlutterFlowTheme.of(
-                                                                                context)
-                                                                            .alternate,
-                                                                        width:
-                                                                            1.0,
-                                                                      ),
-                                                                    ),
-                                                                    child:
-                                                                        ClipRRect(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8.0),
-                                                                      child: Image
-                                                                          .network(
-                                                                        _model
-                                                                            .visitorResult!
-                                                                            .image,
-                                                                        width: double
-                                                                            .infinity,
-                                                                        height: double
-                                                                            .infinity,
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                } else {
-                                                                  return Container(
-                                                                    width: double
-                                                                        .infinity,
-                                                                    height: double
-                                                                        .infinity,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryBackground,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8.0),
-                                                                      border:
-                                                                          Border
-                                                                              .all(
-                                                                        color: FlutterFlowTheme.of(
-                                                                                context)
-                                                                            .alternate,
-                                                                        width:
-                                                                            1.0,
-                                                                      ),
-                                                                    ),
-                                                                    child: Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children: [
-                                                                        FaIcon(
-                                                                          FontAwesomeIcons
-                                                                              .userTie,
-                                                                          color: FlutterFlowTheme.of(context)
-                                                                              .secondaryText,
-                                                                          size:
-                                                                              64.0,
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  );
-                                                                }
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 4,
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 12,
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          8.0,
+                                                                          32.0,
                                                                           0.0,
-                                                                          8.0,
+                                                                          32.0,
                                                                           0.0),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            4.0),
-                                                                    child:
-                                                                        BarcodeWidget(
-                                                                      data: _model
-                                                                          .visitorResult!
-                                                                          .reference
-                                                                          .id,
-                                                                      barcode: Barcode
-                                                                          .code128(),
-                                                                      width:
-                                                                          200.0,
-                                                                      height:
-                                                                          45.0,
+                                                                  child:
+                                                                      Container(
+                                                                    width: double
+                                                                        .infinity,
+                                                                    height: 1.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .primaryText,
-                                                                      backgroundColor:
-                                                                          Colors
-                                                                              .transparent,
-                                                                      errorBuilder:
-                                                                          (_context,
-                                                                                  _error) =>
-                                                                              SizedBox(
-                                                                        width:
-                                                                            200.0,
-                                                                        height:
-                                                                            45.0,
-                                                                      ),
-                                                                      drawText:
-                                                                          false,
+                                                                          .alternate,
                                                                     ),
                                                                   ),
-                                                                  Row(
+                                                                ),
+                                                                Expanded(
+                                                                  child: Row(
                                                                     mainAxisSize:
                                                                         MainAxisSize
                                                                             .max,
                                                                     children: [
                                                                       Expanded(
                                                                         child:
-                                                                            Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            _model
-                                                                                .visitorResult
-                                                                                ?.no,
-                                                                            '-',
-                                                                          ),
-                                                                          textAlign:
-                                                                              TextAlign.center,
-                                                                          maxLines:
-                                                                              1,
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'Inter',
-                                                                                fontSize: 20.0,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.bold,
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          children: [
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                children: [
+                                                                                  Expanded(
+                                                                                    child: Text(
+                                                                                      valueOrDefault<String>(
+                                                                                        _model.visitorResult?.fullName,
+                                                                                        '-',
+                                                                                      ),
+                                                                                      textAlign: TextAlign.center,
+                                                                                      maxLines: 2,
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            fontFamily: 'Inter',
+                                                                                            fontSize: 18.0,
+                                                                                            letterSpacing: 0.0,
+                                                                                            fontWeight: FontWeight.w500,
+                                                                                          ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
                                                                               ),
+                                                                            ),
+                                                                            Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: [
+                                                                                Expanded(
+                                                                                  child: Text(
+                                                                                    valueOrDefault<String>(
+                                                                                      _model.visitorResult?.company,
+                                                                                      '-',
+                                                                                    ),
+                                                                                    textAlign: TextAlign.center,
+                                                                                    maxLines: 2,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Inter',
+                                                                                          fontSize: 14.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ),
                                                                     ],
                                                                   ),
-                                                                ],
-                                                              ),
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
-                                                          Expanded(
-                                                            flex: 5,
+                                                        ),
+                                                        Expanded(
+                                                          flex: 5,
+                                                          child: Builder(
+                                                            builder: (context) {
+                                                              if (_model.visitorResult
+                                                                          ?.image !=
+                                                                      null &&
+                                                                  _model.visitorResult
+                                                                          ?.image !=
+                                                                      '') {
+                                                                return Container(
+                                                                  width: double
+                                                                      .infinity,
+                                                                  height: double
+                                                                      .infinity,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.0),
+                                                                    border:
+                                                                        Border
+                                                                            .all(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .alternate,
+                                                                      width:
+                                                                          1.0,
+                                                                    ),
+                                                                  ),
+                                                                  child:
+                                                                      ClipRRect(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.0),
+                                                                    child: Image
+                                                                        .network(
+                                                                      _model
+                                                                          .visitorResult!
+                                                                          .image,
+                                                                      width: double
+                                                                          .infinity,
+                                                                      height: double
+                                                                          .infinity,
+                                                                      fit: BoxFit
+                                                                          .contain,
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              } else {
+                                                                return Container(
+                                                                  width: double
+                                                                      .infinity,
+                                                                  height: double
+                                                                      .infinity,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryBackground,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.0),
+                                                                    border:
+                                                                        Border
+                                                                            .all(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .alternate,
+                                                                      width:
+                                                                          1.0,
+                                                                    ),
+                                                                  ),
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      FaIcon(
+                                                                        FontAwesomeIcons
+                                                                            .userTie,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryText,
+                                                                        size:
+                                                                            64.0,
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                );
+                                                              }
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 4,
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 12,
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        8.0,
+                                                                        0.0,
+                                                                        8.0,
+                                                                        0.0),
                                                             child: Column(
                                                               mainAxisSize:
                                                                   MainAxisSize
@@ -573,56 +484,138 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                   MainAxisAlignment
                                                                       .center,
                                                               children: [
-                                                                Text(
-                                                                  'หมดอายุ',
-                                                                  maxLines: 1,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        fontSize:
-                                                                            14.0,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w600,
-                                                                      ),
-                                                                ),
-                                                                Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    functions.dateTh(_model
-                                                                        .visitorResult
-                                                                        ?.expireDate),
-                                                                    '-',
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          4.0),
+                                                                  child:
+                                                                      BarcodeWidget(
+                                                                    data: _model
+                                                                        .visitorResult!
+                                                                        .reference
+                                                                        .id,
+                                                                    barcode: Barcode
+                                                                        .code128(),
+                                                                    width:
+                                                                        200.0,
+                                                                    height:
+                                                                        45.0,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    errorBuilder:
+                                                                        (_context,
+                                                                                _error) =>
+                                                                            SizedBox(
+                                                                      width:
+                                                                          200.0,
+                                                                      height:
+                                                                          45.0,
+                                                                    ),
+                                                                    drawText:
+                                                                        false,
                                                                   ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                  maxLines: 2,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        fontSize:
-                                                                            10.0,
-                                                                        letterSpacing:
-                                                                            0.0,
+                                                                ),
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          _model
+                                                                              .visitorResult
+                                                                              ?.cardNo,
+                                                                          '-',
+                                                                        ),
+                                                                        textAlign:
+                                                                            TextAlign.center,
+                                                                        maxLines:
+                                                                            1,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              fontSize: 20.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FontWeight.bold,
+                                                                            ),
                                                                       ),
+                                                                    ),
+                                                                  ],
                                                                 ),
                                                               ],
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 5,
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Text(
+                                                                'หมดอายุ',
+                                                                maxLines: 1,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Inter',
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                    ),
+                                                              ),
+                                                              Text(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  functions.dateTh(_model
+                                                                      .visitorResult
+                                                                      ?.expireDate),
+                                                                  '-',
+                                                                ),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                maxLines: 2,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Inter',
+                                                                      fontSize:
+                                                                          10.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
@@ -635,7 +628,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                       _model.isLoadingPrinting = true;
                                       safeSetState(() {});
                                       await actions.sentDataToPrint(
-                                        controller,
+                                        null!,
                                       );
                                       _model.isLoadingPrinting = false;
                                       safeSetState(() {});
