@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -21,6 +22,9 @@ class _CustomCarmeraState extends State<CustomCarmera>{
   @override
   void reassemble() {
     super.reassemble();
+    if (Platform.isAndroid) {
+      controller!.pauseCamera();
+    }
     controller!.resumeCamera();
   }
 
