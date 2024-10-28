@@ -522,12 +522,28 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                                     null;
                                                                 safeSetState(
                                                                     () {});
-                                                                await FirebaseStorage
-                                                                    .instance
-                                                                    .refFromURL(_model
-                                                                        .visitorResult!
-                                                                        .image)
-                                                                    .delete();
+                                                                if (widget!
+                                                                        .visitorDocument !=
+                                                                    null) {
+                                                                  await FirebaseStorage
+                                                                      .instance
+                                                                      .refFromURL(_model
+                                                                          .visitorResult!
+                                                                          .image)
+                                                                      .delete();
+
+                                                                  await widget!
+                                                                      .visitorDocument!
+                                                                      .reference
+                                                                      .update({
+                                                                    ...mapToFirestore(
+                                                                      {
+                                                                        'image':
+                                                                            FieldValue.delete(),
+                                                                      },
+                                                                    ),
+                                                                  });
+                                                                }
                                                               }
                                                             },
                                                             child: Icon(
