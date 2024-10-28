@@ -1350,7 +1350,13 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                 .statusDropdownValueController ??=
                                             FormFieldController<String>(
                                           _model.statusDropdownValue ??=
-                                              'เปิดใช้งาน',
+                                              widget!.visitorDocument != null
+                                                  ? (_model.visitorResult
+                                                              ?.status ==
+                                                          1
+                                                      ? 'เปิดใช้งาน'
+                                                      : 'ปิดใช้งาน')
+                                                  : 'เปิดใช้งาน',
                                         ),
                                         options: ['เปิดใช้งาน', 'ปิดใช้งาน'],
                                         onChanged: (val) => safeSetState(() =>
@@ -1419,10 +1425,12 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                             null) {
                                           return;
                                         }
-                                        _model.selectedZone = _model
-                                            .choiceChipsValues!
-                                            .toList()
-                                            .cast<String>();
+                                        _model.selectedZone =
+                                            _model.choiceChipsValues != null &&
+                                                    (_model.choiceChipsValues)!
+                                                        .isNotEmpty
+                                                ? _model.choiceChipsValues!
+                                                : ([]).toList().cast<String>();
                                         if (() {
                                           if (_model.selectedZone.isNotEmpty) {
                                             return true;
