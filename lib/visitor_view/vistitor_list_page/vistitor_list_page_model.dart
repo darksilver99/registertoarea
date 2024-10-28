@@ -41,6 +41,8 @@ class VistitorListPageModel extends FlutterFlowModel<VistitorListPageWidget> {
   // State field(s) for PaginatedDataTable widget.
   final paginatedDataTableController =
       FlutterFlowDataTableController<VisitorRecord>();
+  // Stores action output result for [Bottom Sheet - VisitorFormView] action in Column widget.
+  String? isUpdate;
   // Model for LoadingView component.
   late LoadingViewModel loadingViewModel;
 

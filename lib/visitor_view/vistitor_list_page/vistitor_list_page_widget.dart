@@ -594,7 +594,20 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                                           ),
                                         );
                                       },
-                                    ).then((value) => safeSetState(() {}));
+                                    ).then((value) => safeSetState(
+                                        () => _model.isUpdate = value));
+
+                                    if ((_model.isUpdate != null &&
+                                            _model.isUpdate != '') &&
+                                        (_model.isUpdate == 'update')) {
+                                      _model.isLoading = true;
+                                      safeSetState(() {});
+                                      await _model.initVisitorData(context);
+                                      _model.isLoading = false;
+                                      safeSetState(() {});
+                                    }
+
+                                    safeSetState(() {});
                                   },
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
