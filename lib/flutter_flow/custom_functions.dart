@@ -51,3 +51,25 @@ List<String> removeNotContainerInList(
 ) {
   return list2.where((element) => list1.contains(element)).toList();
 }
+
+bool areListsEqual(
+  List<String> list1,
+  List<String> list2,
+) {
+  if (list1.length != list2.length) {
+    return false; // Different lengths, so they cannot be the same
+  }
+
+  // Sort both lists
+  List<String> sortedList1 = List.from(list1)..sort();
+  List<String> sortedList2 = List.from(list2)..sort();
+
+  // Check if each element in both sorted lists is the same
+  for (int i = 0; i < sortedList1.length; i++) {
+    if (sortedList1[i] != sortedList2[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
