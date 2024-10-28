@@ -97,9 +97,6 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
           _model.isAllZone = false;
         }
 
-        safeSetState(() {
-          _model.choiceChipsValueController?.value = _model.selectedZone;
-        });
         _model.selectedDate = _model.visitorResult?.expireDate;
         _model.imageUrl = _model.visitorResult?.image;
       }
@@ -1160,12 +1157,31 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                               _model.checkboxValue =
                                                                   newValue!);
                                                           if (newValue!) {
+                                                            safeSetState(() {
+                                                              _model
+                                                                  .choiceChipsValueController
+                                                                  ?.value = ([]);
+                                                            });
                                                             _model.isAllZone =
                                                                 true;
+                                                            _model
+                                                                .selectedZone = [
+                                                              'ทั้งหมด'
+                                                            ]
+                                                                .toList()
+                                                                .cast<String>();
                                                             safeSetState(() {});
                                                           } else {
+                                                            safeSetState(() {
+                                                              _model
+                                                                  .choiceChipsValueController
+                                                                  ?.value = ([]);
+                                                            });
                                                             _model.isAllZone =
                                                                 false;
+                                                            _model.selectedZone =
+                                                                [].toList().cast<
+                                                                    String>();
                                                             safeSetState(() {});
                                                           }
                                                         },
@@ -1253,21 +1269,10 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                                     ChipData(
                                                                         label))
                                                                 .toList(),
-                                                            onChanged:
-                                                                (val) async {
-                                                              safeSetState(() =>
-                                                                  _model.choiceChipsValues =
-                                                                      val);
-                                                              _model.selectedZone =
-                                                                  ['ทั้งหมด'];
-                                                              _model.selectedZone = _model
-                                                                  .choiceChipsValues!
-                                                                  .toList()
-                                                                  .cast<
-                                                                      String>();
-                                                              safeSetState(
-                                                                  () {});
-                                                            },
+                                                            onChanged: (val) =>
+                                                                safeSetState(() =>
+                                                                    _model.choiceChipsValues =
+                                                                        val),
                                                             selectedChipStyle:
                                                                 ChipStyle(
                                                               backgroundColor:
@@ -1360,8 +1365,11 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                               widget!.visitorDocument !=
                                                                       null
                                                                   ? _model
-                                                                      .selectedZone
-                                                                  : ([]),
+                                                                      .visitorResult
+                                                                      ?.areaList
+                                                                  : ([
+                                                                      'ทั้งหมด'
+                                                                    ]),
                                                             ),
                                                             wrapped: true,
                                                           );
@@ -1453,10 +1461,11 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                           return;
                                         }
                                         _model.selectedZone = _model.isAllZone
-                                            ? (["ทั้งหมด"])
+                                            ? (['ทั้งหมด'])
                                             : _model.choiceChipsValues!
                                                 .toList()
                                                 .cast<String>();
+                                        safeSetState(() {});
                                         if (_model.selectedZone.isNotEmpty) {
                                           if (_model.selectedDate != null) {
                                             if (widget!.visitorDocument !=
