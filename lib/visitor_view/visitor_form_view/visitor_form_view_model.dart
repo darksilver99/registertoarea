@@ -32,7 +32,7 @@ class VisitorFormViewModel extends FlutterFlowModel<VisitorFormViewWidget> {
 
   bool isAllZone = true;
 
-  List<String> selectedZone = ['ทั้งหมด'];
+  List<String> selectedZone = [];
   void addToSelectedZone(String item) => selectedZone.add(item);
   void removeFromSelectedZone(String item) => selectedZone.remove(item);
   void removeAtIndexFromSelectedZone(int index) => selectedZone.removeAt(index);
@@ -40,6 +40,15 @@ class VisitorFormViewModel extends FlutterFlowModel<VisitorFormViewWidget> {
       selectedZone.insert(index, item);
   void updateSelectedZoneAtIndex(int index, Function(String) updateFn) =>
       selectedZone[index] = updateFn(selectedZone[index]);
+
+  List<String> zoneList = [];
+  void addToZoneList(String item) => zoneList.add(item);
+  void removeFromZoneList(String item) => zoneList.remove(item);
+  void removeAtIndexFromZoneList(int index) => zoneList.removeAt(index);
+  void insertAtIndexInZoneList(int index, String item) =>
+      zoneList.insert(index, item);
+  void updateZoneListAtIndex(int index, Function(String) updateFn) =>
+      zoneList[index] = updateFn(zoneList[index]);
 
   ///  State fields for stateful widgets in this component.
 
@@ -149,5 +158,17 @@ class VisitorFormViewModel extends FlutterFlowModel<VisitorFormViewWidget> {
 
     carNumberTextfieldFocusNode?.dispose();
     carNumberTextfieldTextController?.dispose();
+  }
+
+  /// Action blocks.
+  Future initZone(BuildContext context) async {
+    List<ZoneListRecord>? zoneResult;
+
+    zoneResult = await queryZoneListRecordOnce(
+      parent: FFAppState().customerData.customerRef,
+      queryBuilder: (zoneListRecord) => zoneListRecord.orderBy('subject'),
+    );
+    zoneList =
+        zoneResult!.map((e) => e.subject).toList().toList().cast<String>();
   }
 }
