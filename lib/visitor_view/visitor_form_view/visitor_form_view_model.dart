@@ -30,6 +30,8 @@ class VisitorFormViewModel extends FlutterFlowModel<VisitorFormViewWidget> {
 
   String? imageUrl;
 
+  bool isAllZone = true;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
@@ -100,6 +102,8 @@ class VisitorFormViewModel extends FlutterFlowModel<VisitorFormViewWidget> {
     return null;
   }
 
+  // State field(s) for Checkbox widget.
+  bool? checkboxValue;
   // State field(s) for ChoiceChips widget.
   FormFieldController<List<String>>? choiceChipsValueController;
   List<String>? get choiceChipsValues => choiceChipsValueController?.value;
