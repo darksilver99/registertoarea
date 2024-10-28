@@ -221,38 +221,53 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                     children: [
                                                                       Expanded(
                                                                         child:
-                                                                            Padding(
-                                                                          padding:
-                                                                              EdgeInsets.all(4.0),
-                                                                          child:
-                                                                              Builder(
-                                                                            builder:
-                                                                                (context) {
-                                                                              final areaList = _model.visitorResult?.areaList?.toList() ?? [];
+                                                                            Builder(
+                                                                          builder:
+                                                                              (context) {
+                                                                            if (!_model.visitorResult!.isAllZone) {
+                                                                              return Padding(
+                                                                                padding: EdgeInsets.all(4.0),
+                                                                                child: Builder(
+                                                                                  builder: (context) {
+                                                                                    final areaList = _model.visitorResult?.areaList?.toList() ?? [];
 
-                                                                              return Wrap(
-                                                                                spacing: 4.0,
-                                                                                runSpacing: 4.0,
-                                                                                alignment: WrapAlignment.center,
-                                                                                crossAxisAlignment: WrapCrossAlignment.start,
-                                                                                direction: Axis.horizontal,
-                                                                                runAlignment: WrapAlignment.start,
-                                                                                verticalDirection: VerticalDirection.down,
-                                                                                clipBehavior: Clip.antiAlias,
-                                                                                children: List.generate(areaList.length, (areaListIndex) {
-                                                                                  final areaListItem = areaList[areaListIndex];
-                                                                                  return Text(
-                                                                                    areaListItem,
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          fontFamily: 'Inter',
-                                                                                          fontSize: 12.0,
-                                                                                          letterSpacing: 0.0,
-                                                                                        ),
-                                                                                  );
-                                                                                }),
+                                                                                    return Wrap(
+                                                                                      spacing: 4.0,
+                                                                                      runSpacing: 4.0,
+                                                                                      alignment: WrapAlignment.center,
+                                                                                      crossAxisAlignment: WrapCrossAlignment.start,
+                                                                                      direction: Axis.horizontal,
+                                                                                      runAlignment: WrapAlignment.start,
+                                                                                      verticalDirection: VerticalDirection.down,
+                                                                                      clipBehavior: Clip.antiAlias,
+                                                                                      children: List.generate(areaList.length, (areaListIndex) {
+                                                                                        final areaListItem = areaList[areaListIndex];
+                                                                                        return Text(
+                                                                                          areaListItem,
+                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                fontFamily: 'Inter',
+                                                                                                fontSize: 12.0,
+                                                                                                letterSpacing: 0.0,
+                                                                                              ),
+                                                                                        );
+                                                                                      }),
+                                                                                    );
+                                                                                  },
+                                                                                ),
                                                                               );
-                                                                            },
-                                                                          ),
+                                                                            } else {
+                                                                              return Text(
+                                                                                'ทั้งหมด',
+                                                                                textAlign: TextAlign.center,
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Inter',
+                                                                                      fontSize: 24.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FontWeight.normal,
+                                                                                    ),
+                                                                              );
+                                                                            }
+                                                                          },
                                                                         ),
                                                                       ),
                                                                     ],
@@ -431,9 +446,9 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                         FontAwesomeIcons
                                                                             .userTie,
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .primary,
+                                                                            .secondaryText,
                                                                         size:
-                                                                            128.0,
+                                                                            64.0,
                                                                       ),
                                                                     ],
                                                                   ),
@@ -469,32 +484,74 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                   MainAxisAlignment
                                                                       .center,
                                                               children: [
-                                                                BarcodeWidget(
-                                                                  data: _model
-                                                                      .visitorResult!
-                                                                      .reference
-                                                                      .id,
-                                                                  barcode: Barcode
-                                                                      .code128(),
-                                                                  width: 200.0,
-                                                                  height: 50.0,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryText,
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  errorBuilder:
-                                                                      (_context,
-                                                                              _error) =>
-                                                                          SizedBox(
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          4.0),
+                                                                  child:
+                                                                      BarcodeWidget(
+                                                                    data: _model
+                                                                        .visitorResult!
+                                                                        .reference
+                                                                        .id,
+                                                                    barcode: Barcode
+                                                                        .code128(),
                                                                     width:
                                                                         200.0,
                                                                     height:
-                                                                        50.0,
+                                                                        45.0,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    errorBuilder:
+                                                                        (_context,
+                                                                                _error) =>
+                                                                            SizedBox(
+                                                                      width:
+                                                                          200.0,
+                                                                      height:
+                                                                          45.0,
+                                                                    ),
+                                                                    drawText:
+                                                                        false,
                                                                   ),
-                                                                  drawText:
-                                                                      false,
+                                                                ),
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          _model
+                                                                              .visitorResult
+                                                                              ?.no,
+                                                                          '-',
+                                                                        ),
+                                                                        textAlign:
+                                                                            TextAlign.center,
+                                                                        maxLines:
+                                                                            1,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              fontSize: 20.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FontWeight.bold,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
                                                                 ),
                                                               ],
                                                             ),
