@@ -89,6 +89,8 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
           _model.statusDropdownValueController?.value =
               (_model.visitorResult?.status == 1 ? 'เปิดใช้งาน' : 'ปิดใช้งาน');
         });
+        _model.selectedZone =
+            _model.visitorResult!.areaList.toList().cast<String>();
         if (_model.visitorResult!.areaList.contains('ทั้งหมด')) {
           _model.isAllZone = true;
         } else {
@@ -96,8 +98,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
         }
 
         safeSetState(() {
-          _model.choiceChipsValueController?.value =
-              _model.visitorResult!.areaList;
+          _model.choiceChipsValueController?.value = _model.selectedZone;
         });
         _model.selectedDate = _model.visitorResult?.expireDate;
         _model.imageUrl = _model.visitorResult?.image;
@@ -1252,10 +1253,21 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                                     ChipData(
                                                                         label))
                                                                 .toList(),
-                                                            onChanged: (val) =>
-                                                                safeSetState(() =>
-                                                                    _model.choiceChipsValues =
-                                                                        val),
+                                                            onChanged:
+                                                                (val) async {
+                                                              safeSetState(() =>
+                                                                  _model.choiceChipsValues =
+                                                                      val);
+                                                              _model.selectedZone =
+                                                                  ['ทั้งหมด'];
+                                                              _model.selectedZone = _model
+                                                                  .choiceChipsValues!
+                                                                  .toList()
+                                                                  .cast<
+                                                                      String>();
+                                                              safeSetState(
+                                                                  () {});
+                                                            },
                                                             selectedChipStyle:
                                                                 ChipStyle(
                                                               backgroundColor:
@@ -1348,8 +1360,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                               widget!.visitorDocument !=
                                                                       null
                                                                   ? _model
-                                                                      .visitorResult
-                                                                      ?.areaList
+                                                                      .selectedZone
                                                                   : ([]),
                                                             ),
                                                             wrapped: true,
@@ -1441,9 +1452,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                             null) {
                                           return;
                                         }
-                                        if (_model.choiceChipsValues != null &&
-                                            (_model.choiceChipsValues)!
-                                                .isNotEmpty) {
+                                        if (_model.selectedZone.isNotEmpty) {
                                           if (_model.selectedDate != null) {
                                             if (widget!.visitorDocument !=
                                                 null) {
@@ -1478,11 +1487,8 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                 ),
                                                 ...mapToFirestore(
                                                   {
-                                                    'area_list': _model
-                                                            .isAllZone
-                                                        ? (["ทั้งหมด"])
-                                                        : _model
-                                                            .choiceChipsValues,
+                                                    'area_list':
+                                                        _model.selectedZone,
                                                   },
                                                 ),
                                               });
@@ -1533,11 +1539,8 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                 ),
                                                 ...mapToFirestore(
                                                   {
-                                                    'area_list': _model
-                                                            .isAllZone
-                                                        ? (["ทั้งหมด"])
-                                                        : _model
-                                                            .choiceChipsValues,
+                                                    'area_list':
+                                                        _model.selectedZone,
                                                   },
                                                 ),
                                               });
