@@ -21,20 +21,10 @@ class VisitorRecord extends FirestoreRecord {
   DateTime? get createDate => _createDate;
   bool hasCreateDate() => _createDate != null;
 
-  // "create_by" field.
-  DocumentReference? _createBy;
-  DocumentReference? get createBy => _createBy;
-  bool hasCreateBy() => _createBy != null;
-
   // "update_date" field.
   DateTime? _updateDate;
   DateTime? get updateDate => _updateDate;
   bool hasUpdateDate() => _updateDate != null;
-
-  // "update_by" field.
-  DocumentReference? _updateBy;
-  DocumentReference? get updateBy => _updateBy;
-  bool hasUpdateBy() => _updateBy != null;
 
   // "status" field.
   int? _status;
@@ -90,9 +80,7 @@ class VisitorRecord extends FirestoreRecord {
 
   void _initializeFields() {
     _createDate = snapshotData['create_date'] as DateTime?;
-    _createBy = snapshotData['create_by'] as DocumentReference?;
     _updateDate = snapshotData['update_date'] as DateTime?;
-    _updateBy = snapshotData['update_by'] as DocumentReference?;
     _status = castToType<int>(snapshotData['status']);
     _expireDate = snapshotData['expire_date'] as DateTime?;
     _fullName = snapshotData['full_name'] as String?;
@@ -146,9 +134,7 @@ class VisitorRecord extends FirestoreRecord {
 
 Map<String, dynamic> createVisitorRecordData({
   DateTime? createDate,
-  DocumentReference? createBy,
   DateTime? updateDate,
-  DocumentReference? updateBy,
   int? status,
   DateTime? expireDate,
   String? fullName,
@@ -162,9 +148,7 @@ Map<String, dynamic> createVisitorRecordData({
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'create_date': createDate,
-      'create_by': createBy,
       'update_date': updateDate,
-      'update_by': updateBy,
       'status': status,
       'expire_date': expireDate,
       'full_name': fullName,
@@ -187,9 +171,7 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
   bool equals(VisitorRecord? e1, VisitorRecord? e2) {
     const listEquality = ListEquality();
     return e1?.createDate == e2?.createDate &&
-        e1?.createBy == e2?.createBy &&
         e1?.updateDate == e2?.updateDate &&
-        e1?.updateBy == e2?.updateBy &&
         e1?.status == e2?.status &&
         e1?.expireDate == e2?.expireDate &&
         e1?.fullName == e2?.fullName &&
@@ -205,9 +187,7 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
   @override
   int hash(VisitorRecord? e) => const ListEquality().hash([
         e?.createDate,
-        e?.createBy,
         e?.updateDate,
-        e?.updateBy,
         e?.status,
         e?.expireDate,
         e?.fullName,

@@ -104,6 +104,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/vistitorListPage',
           requireAuth: true,
           builder: (context, params) => VistitorListPageWidget(),
+        ),
+        FFRoute(
+          name: 'ZoneListPage',
+          path: '/zoneListPage',
+          requireAuth: true,
+          builder: (context, params) => ZoneListPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

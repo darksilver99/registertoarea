@@ -2,15 +2,14 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/component/loading_view/loading_view_widget.dart';
 import '/component/no_data_view/no_data_view_widget.dart';
-import '/components/visitor_form_view_widget.dart';
-import '/components/visitor_print_view_widget.dart';
 import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/zone_view/zone_form_view/zone_form_view_widget.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'vistitor_list_page_widget.dart' show VistitorListPageWidget;
+import 'zone_list_page_widget.dart' show ZoneListPageWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -18,16 +17,16 @@ import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class VistitorListPageModel extends FlutterFlowModel<VistitorListPageWidget> {
+class ZoneListPageModel extends FlutterFlowModel<ZoneListPageWidget> {
   ///  Local state fields for this page.
 
-  List<VisitorRecord> dataList = [];
-  void addToDataList(VisitorRecord item) => dataList.add(item);
-  void removeFromDataList(VisitorRecord item) => dataList.remove(item);
+  List<ZoneListRecord> dataList = [];
+  void addToDataList(ZoneListRecord item) => dataList.add(item);
+  void removeFromDataList(ZoneListRecord item) => dataList.remove(item);
   void removeAtIndexFromDataList(int index) => dataList.removeAt(index);
-  void insertAtIndexInDataList(int index, VisitorRecord item) =>
+  void insertAtIndexInDataList(int index, ZoneListRecord item) =>
       dataList.insert(index, item);
-  void updateDataListAtIndex(int index, Function(VisitorRecord) updateFn) =>
+  void updateDataListAtIndex(int index, Function(ZoneListRecord) updateFn) =>
       dataList[index] = updateFn(dataList[index]);
 
   bool isLoading = true;
@@ -36,7 +35,7 @@ class VistitorListPageModel extends FlutterFlowModel<VistitorListPageWidget> {
 
   // State field(s) for PaginatedDataTable widget.
   final paginatedDataTableController =
-      FlutterFlowDataTableController<VisitorRecord>();
+      FlutterFlowDataTableController<ZoneListRecord>();
   // Model for LoadingView component.
   late LoadingViewModel loadingViewModel;
 
@@ -52,14 +51,14 @@ class VistitorListPageModel extends FlutterFlowModel<VistitorListPageWidget> {
   }
 
   /// Action blocks.
-  Future initVisitorData(BuildContext context) async {
-    List<VisitorRecord>? dataListResult;
+  Future initZoneData(BuildContext context) async {
+    List<ZoneListRecord>? dataListResult;
 
-    dataListResult = await queryVisitorRecordOnce(
+    dataListResult = await queryZoneListRecordOnce(
       parent: FFAppState().customerData.customerRef,
-      queryBuilder: (visitorRecord) =>
-          visitorRecord.orderBy('create_date', descending: true),
+      queryBuilder: (zoneListRecord) =>
+          zoneListRecord.orderBy('create_date', descending: true),
     );
-    dataList = dataListResult!.toList().cast<VisitorRecord>();
+    dataList = dataListResult!.toList().cast<ZoneListRecord>();
   }
 }
