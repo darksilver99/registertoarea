@@ -16,12 +16,10 @@ Future<VisitorRecord?> getVisitorDataByDocID(String qrCode) async {
     return null;
   }
   final rs = await FirebaseFirestore.instance
-      .collection(
-          "${FFAppState().customerData.customerRef!.path}/visitor/${qrCode}")
+      .doc("${FFAppState().customerData.customerRef!.path}/visitor/${qrCode}")
       .get();
-  if (rs.size == 0) {
+  if (!rs.exists) {
     return null;
   }
-  return VisitorRecord.getDocumentFromData(
-      rs.docs[0].data(), rs.docs[0].reference);
+  return VisitorRecord.getDocumentFromData(rs.data()!, rs.reference);
 }
