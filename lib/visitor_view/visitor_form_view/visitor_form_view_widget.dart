@@ -1228,10 +1228,34 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                             .map((label) =>
                                                                 ChipData(label))
                                                             .toList(),
-                                                        onChanged: (val) =>
-                                                            safeSetState(() =>
-                                                                _model.choiceChipsValues =
-                                                                    val),
+                                                        onChanged: (val) async {
+                                                          safeSetState(() =>
+                                                              _model.choiceChipsValues =
+                                                                  val);
+                                                          if (functions.areListsEqual(
+                                                              _model.zoneList
+                                                                  .toList(),
+                                                              _model
+                                                                  .choiceChipsValues!
+                                                                  .toList())) {
+                                                            _model.isAllZone =
+                                                                true;
+                                                            _model.selectedZone =
+                                                                [].toList().cast<
+                                                                    String>();
+                                                            safeSetState(() {});
+                                                          } else {
+                                                            _model.isAllZone =
+                                                                false;
+                                                            _model.selectedZone =
+                                                                _model
+                                                                    .choiceChipsValues!
+                                                                    .toList()
+                                                                    .cast<
+                                                                        String>();
+                                                            safeSetState(() {});
+                                                          }
+                                                        },
                                                         selectedChipStyle:
                                                             ChipStyle(
                                                           backgroundColor:
