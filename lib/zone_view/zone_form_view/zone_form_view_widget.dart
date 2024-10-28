@@ -7,7 +7,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'zone_form_view_model.dart';
@@ -258,17 +257,12 @@ class _ZoneFormViewWidgetState extends State<ZoneFormViewWidget> {
                                                 fontSize: 22.0,
                                                 letterSpacing: 0.0,
                                               ),
-                                          keyboardType: TextInputType.number,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
                                           validator: _model
                                               .subjectTextfieldTextControllerValidator
                                               .asValidator(context),
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp('[0-9]'))
-                                          ],
                                         ),
                                       ),
                                     ),
