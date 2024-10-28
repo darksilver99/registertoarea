@@ -50,6 +50,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await _model.initZone(context);
       if (widget!.visitorDocument != null) {
         _model.visitorResult = await VisitorRecord.getDocumentOnce(
             widget!.visitorDocument!.reference);
@@ -89,7 +90,12 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
           _model.statusDropdownValueController?.value =
               (_model.visitorResult?.status == 1 ? 'เปิดใช้งาน' : 'ปิดใช้งาน');
         });
-        if (_model.visitorResult!.areaList.contains('ทั้งหมด')) {
+        _model.selectedZone = functions
+            .removeNotContainerInList(_model.zoneList.toList(),
+                _model.visitorResult!.areaList.toList())
+            .toList()
+            .cast<String>();
+        if (_model.visitorResult!.isAllZone) {
           _model.isAllZone = true;
         } else {
           _model.isAllZone = false;
@@ -1140,15 +1146,15 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                       ),
                                                       child: Checkbox(
                                                         value: _model
-                                                                .checkboxValue ??=
-                                                            widget!.visitorDocument !=
-                                                                    null
-                                                                ? _model
+                                                            .checkboxValue ??= widget!
+                                                                    .visitorDocument !=
+                                                                null
+                                                            ? (_model
                                                                     .visitorResult!
-                                                                    .areaList
-                                                                    .contains(
-                                                                        'ทั้งหมด')
-                                                                : true,
+                                                                    .isAllZone
+                                                                ? true
+                                                                : false)
+                                                            : true,
                                                         onChanged:
                                                             (newValue) async {
                                                           safeSetState(() =>
@@ -1162,12 +1168,9 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                             });
                                                             _model.isAllZone =
                                                                 true;
-                                                            _model
-                                                                .selectedZone = [
-                                                              'ทั้งหมด'
-                                                            ]
-                                                                .toList()
-                                                                .cast<String>();
+                                                            _model.selectedZone =
+                                                                [].toList().cast<
+                                                                    String>();
                                                             safeSetState(() {});
                                                           } else {
                                                             safeSetState(() {
@@ -1219,159 +1222,117 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                       MainAxisSize.max,
                                                   children: [
                                                     Expanded(
-                                                      child: StreamBuilder<
-                                                          List<ZoneListRecord>>(
-                                                        stream:
-                                                            queryZoneListRecord(
-                                                          parent: FFAppState()
-                                                              .customerData
-                                                              .customerRef,
-                                                          queryBuilder:
-                                                              (zoneListRecord) =>
-                                                                  zoneListRecord
-                                                                      .orderBy(
-                                                                          'subject'),
-                                                        ),
-                                                        builder: (context,
-                                                            snapshot) {
-                                                          // Customize what your widget looks like when it's loading.
-                                                          if (!snapshot
-                                                              .hasData) {
-                                                            return Center(
-                                                              child: SizedBox(
-                                                                width: 50.0,
-                                                                height: 50.0,
-                                                                child:
-                                                                    CircularProgressIndicator(
-                                                                  valueColor:
-                                                                      AlwaysStoppedAnimation<
-                                                                          Color>(
-                                                                    FlutterFlowTheme.of(
+                                                      child:
+                                                          FlutterFlowChoiceChips(
+                                                        options: _model.zoneList
+                                                            .map((label) =>
+                                                                ChipData(label))
+                                                            .toList(),
+                                                        onChanged: (val) =>
+                                                            safeSetState(() =>
+                                                                _model.choiceChipsValues =
+                                                                    val),
+                                                        selectedChipStyle:
+                                                            ChipStyle(
+                                                          backgroundColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primary,
+                                                          textStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .primary,
+                                                                        .info,
+                                                                    fontSize:
+                                                                        22.0,
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
-                                                                ),
-                                                              ),
-                                                            );
-                                                          }
-                                                          List<ZoneListRecord>
-                                                              choiceChipsZoneListRecordList =
-                                                              snapshot.data!;
-
-                                                          return FlutterFlowChoiceChips(
-                                                            options: choiceChipsZoneListRecordList
-                                                                .map((e) =>
-                                                                    e.subject)
-                                                                .toList()
-                                                                .map((label) =>
-                                                                    ChipData(
-                                                                        label))
-                                                                .toList(),
-                                                            onChanged: (val) =>
-                                                                safeSetState(() =>
-                                                                    _model.choiceChipsValues =
-                                                                        val),
-                                                            selectedChipStyle:
-                                                                ChipStyle(
-                                                              backgroundColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                              textStyle:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .info,
-                                                                        fontSize:
-                                                                            22.0,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                      ),
-                                                              iconColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .info,
-                                                              iconSize: 16.0,
-                                                              labelPadding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          16.0,
-                                                                          8.0,
-                                                                          16.0,
-                                                                          8.0),
-                                                              elevation: 0.0,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          100.0),
-                                                            ),
-                                                            unselectedChipStyle:
-                                                                ChipStyle(
-                                                              backgroundColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .alternate,
-                                                              textStyle:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
-                                                                        fontSize:
-                                                                            22.0,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                      ),
-                                                              iconColor: FlutterFlowTheme
-                                                                      .of(context)
+                                                          iconColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .info,
+                                                          iconSize: 16.0,
+                                                          labelPadding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      16.0,
+                                                                      8.0,
+                                                                      16.0,
+                                                                      8.0),
+                                                          elevation: 0.0,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100.0),
+                                                        ),
+                                                        unselectedChipStyle:
+                                                            ChipStyle(
+                                                          backgroundColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .alternate,
+                                                          textStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryText,
+                                                                    fontSize:
+                                                                        22.0,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
+                                                          iconColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
                                                                   .secondaryText,
-                                                              iconSize: 0.0,
-                                                              labelPadding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          16.0,
-                                                                          8.0,
-                                                                          16.0,
-                                                                          8.0),
-                                                              elevation: 0.0,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          100.0),
-                                                            ),
-                                                            chipSpacing: 8.0,
-                                                            rowSpacing: 8.0,
-                                                            multiselect: true,
-                                                            initialized: _model
-                                                                    .choiceChipsValues !=
-                                                                null,
-                                                            alignment:
-                                                                WrapAlignment
-                                                                    .start,
-                                                            controller: _model
-                                                                    .choiceChipsValueController ??=
-                                                                FormFieldController<
-                                                                    List<
-                                                                        String>>(
-                                                              widget!.visitorDocument !=
-                                                                      null
-                                                                  ? _model
-                                                                      .visitorResult
-                                                                      ?.areaList
-                                                                  : ([
-                                                                      'ทั้งหมด'
-                                                                    ]),
-                                                            ),
-                                                            wrapped: true,
-                                                          );
-                                                        },
+                                                          iconSize: 0.0,
+                                                          labelPadding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      16.0,
+                                                                      8.0,
+                                                                      16.0,
+                                                                      8.0),
+                                                          elevation: 0.0,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100.0),
+                                                        ),
+                                                        chipSpacing: 8.0,
+                                                        rowSpacing: 8.0,
+                                                        multiselect: true,
+                                                        initialized: _model
+                                                                .choiceChipsValues !=
+                                                            null,
+                                                        alignment:
+                                                            WrapAlignment.start,
+                                                        controller: _model
+                                                                .choiceChipsValueController ??=
+                                                            FormFieldController<
+                                                                List<String>>(
+                                                          widget!.visitorDocument !=
+                                                                  null
+                                                              ? (_model
+                                                                      .visitorResult!
+                                                                      .isAllZone
+                                                                  ? ([])
+                                                                  : _model
+                                                                      .selectedZone)
+                                                              : ([]),
+                                                        ),
+                                                        wrapped: true,
                                                       ),
                                                     ),
                                                   ],
@@ -1458,13 +1419,19 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                             null) {
                                           return;
                                         }
-                                        _model.selectedZone = _model.isAllZone
-                                            ? (['ทั้งหมด'])
-                                            : _model.choiceChipsValues!
-                                                .toList()
-                                                .cast<String>();
-                                        safeSetState(() {});
-                                        if (_model.selectedZone.isNotEmpty) {
+                                        _model.selectedZone = _model
+                                            .choiceChipsValues!
+                                            .toList()
+                                            .cast<String>();
+                                        if (() {
+                                          if (_model.selectedZone.isNotEmpty) {
+                                            return true;
+                                          } else if (_model.isAllZone) {
+                                            return true;
+                                          } else {
+                                            return false;
+                                          }
+                                        }()) {
                                           if (_model.selectedDate != null) {
                                             if (widget!.visitorDocument !=
                                                 null) {
@@ -1496,6 +1463,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                       .companyTextfieldTextController
                                                       .text,
                                                   image: _model.imageUrl,
+                                                  isAllZone: _model.isAllZone,
                                                 ),
                                                 ...mapToFirestore(
                                                   {
@@ -1548,6 +1516,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                   no: functions.getNextNo(
                                                       _model.lastVisitorResult),
                                                   image: _model.imageUrl,
+                                                  isAllZone: _model.isAllZone,
                                                 ),
                                                 ...mapToFirestore(
                                                   {

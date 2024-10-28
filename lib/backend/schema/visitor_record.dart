@@ -76,6 +76,11 @@ class VisitorRecord extends FirestoreRecord {
   String get no => _no ?? '';
   bool hasNo() => _no != null;
 
+  // "is_all_zone" field.
+  bool? _isAllZone;
+  bool get isAllZone => _isAllZone ?? false;
+  bool hasIsAllZone() => _isAllZone != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -91,6 +96,7 @@ class VisitorRecord extends FirestoreRecord {
     _areaList = getDataList(snapshotData['area_list']);
     _company = snapshotData['company'] as String?;
     _no = snapshotData['no'] as String?;
+    _isAllZone = snapshotData['is_all_zone'] as bool?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -144,6 +150,7 @@ Map<String, dynamic> createVisitorRecordData({
   String? image,
   String? company,
   String? no,
+  bool? isAllZone,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -158,6 +165,7 @@ Map<String, dynamic> createVisitorRecordData({
       'image': image,
       'company': company,
       'no': no,
+      'is_all_zone': isAllZone,
     }.withoutNulls,
   );
 
@@ -181,7 +189,8 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
         e1?.image == e2?.image &&
         listEquality.equals(e1?.areaList, e2?.areaList) &&
         e1?.company == e2?.company &&
-        e1?.no == e2?.no;
+        e1?.no == e2?.no &&
+        e1?.isAllZone == e2?.isAllZone;
   }
 
   @override
@@ -197,7 +206,8 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
         e?.image,
         e?.areaList,
         e?.company,
-        e?.no
+        e?.no,
+        e?.isAllZone
       ]);
 
   @override

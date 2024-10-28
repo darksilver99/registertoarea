@@ -44,3 +44,10 @@ String getNextNo(VisitorRecord? lastVisitor) {
         .padLeft(6, '0'); // Convert back to string and pad with zeros
   }
 }
+
+List<String> removeNotContainerInList(
+  List<String> list1,
+  List<String> list2,
+) {
+  return list2.where((element) => list1.contains(element)).toList();
+}
