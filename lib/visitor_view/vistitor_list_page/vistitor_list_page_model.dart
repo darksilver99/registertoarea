@@ -6,9 +6,11 @@ import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
 import '/visitor_view/visitor_form_view/visitor_form_view_widget.dart';
 import '/visitor_view/visitor_print_view/visitor_print_view_widget.dart';
 import '/actions/actions.dart' as action_blocks;
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'vistitor_list_page_widget.dart' show VistitorListPageWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -38,6 +40,12 @@ class VistitorListPageModel extends FlutterFlowModel<VistitorListPageWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+
+  // Stores action output result for [Custom Action - importExcel] action in Button widget.
+  bool? isImport;
   // State field(s) for PaginatedDataTable widget.
   final paginatedDataTableController =
       FlutterFlowDataTableController<VisitorRecord>();

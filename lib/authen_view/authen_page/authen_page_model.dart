@@ -1,6 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/authen_view/register_view/register_view_widget.dart';
 import '/component/background_view/background_view_widget.dart';
+import '/component/password_to_register_view/password_to_register_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';

@@ -9,4 +9,3 @@ export '/scan_bar_code_with_web_page/scan_bar_code_with_web_page_widget.dart'
     show ScanBarCodeWithWebPageWidget;
 export '/transaction_view/transaction_list_page/transaction_list_page_widget.dart'
     show TransactionListPageWidget;
-export '/component/test/test_widget.dart' show TestWidget;
