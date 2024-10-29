@@ -1734,18 +1734,18 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                               idCardNumber: _model
                                                   .idCardTextfieldTextController
                                                   .text,
-                                              company: _model
-                                                  .companyTextfieldTextController
-                                                  .text,
                                               image: _model.imageUrl,
-                                              nationality: _model
-                                                  .nationalityTextfieldTextController
-                                                  .text,
                                               type: _model.typeDropdownValue,
                                               address: _model
                                                   .addressTextfieldTextController
                                                   .text,
                                               zone: _model.zoneDropdownValue,
+                                              company: _model
+                                                  .companyTextfieldTextController
+                                                  .text,
+                                              nationality: _model
+                                                  .nationalityTextfieldTextController
+                                                  .text,
                                             ));
                                           } else {
                                             _model.lastVisitorResult =
@@ -1783,20 +1783,20 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                               idCardNumber: _model
                                                   .idCardTextfieldTextController
                                                   .text,
-                                              company: _model
-                                                  .companyTextfieldTextController
-                                                  .text,
                                               image: _model.imageUrl,
                                               cardNo: functions.getNextNo(
                                                   _model.lastVisitorResult),
-                                              nationality: _model
-                                                  .nationalityTextfieldTextController
-                                                  .text,
                                               address: _model
                                                   .addressTextfieldTextController
                                                   .text,
                                               type: _model.typeDropdownValue,
                                               zone: _model.zoneDropdownValue,
+                                              company: _model
+                                                  .companyTextfieldTextController
+                                                  .text,
+                                              nationality: _model
+                                                  .nationalityTextfieldTextController
+                                                  .text,
                                             ));
                                           }
 
