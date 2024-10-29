@@ -84,12 +84,11 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                   offset: _model.carNumberTextfieldTextController!.text.length);
         });
         safeSetState(() {
-          _model.nationalityTextfieldTextController?.text =
-              _model.visitorResult!.nationality;
-          _model.nationalityTextfieldTextController?.selection =
+          _model.companyTextfieldTextController?.text =
+              _model.visitorResult!.company;
+          _model.companyTextfieldTextController?.selection =
               TextSelection.collapsed(
-                  offset:
-                      _model.nationalityTextfieldTextController!.text.length);
+                  offset: _model.companyTextfieldTextController!.text.length);
         });
         safeSetState(() {
           _model.addressTextfieldTextController?.text =
