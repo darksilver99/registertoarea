@@ -172,7 +172,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 32.0),
-                                            child: Center(
+                                            child: WidgetsToImage(
                                               controller : controller,
                                               child: Container(
                                                 width: 400.0,
@@ -686,7 +686,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                         _model.isLoadingPrinting = true;
                                         safeSetState(() {});
                                         await actions.sentDataToPrint(
-                                          null!,
+                                          controller,
                                         );
                                         _model.isLoadingPrinting = false;
                                         safeSetState(() {});
