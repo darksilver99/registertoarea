@@ -37,8 +37,13 @@ Future<bool> importExcel(FFUploadedFile? file) async {
       int maxRows = sheet.rows.length;
 
       print("maxRows : $maxRows");
+      print("maxCols : $maxCols");
 
-      for (int rowIndex = 0; rowIndex < maxRows; rowIndex++) {
+      if (maxCols != 10) {
+        return false;
+      }
+
+      for (int rowIndex = 1; rowIndex < maxRows; rowIndex++) {
         var row = sheet.rows[rowIndex];
         List<dynamic> rowData = [];
 
@@ -48,26 +53,31 @@ Future<bool> importExcel(FFUploadedFile? file) async {
           tmp = tmp.toString().replaceAll('"', '');
           rowData.add(tmp);
         }
-
-        List<String> zoneList = await updateZone(rowData[7]);
-
+        List<String> zoneList = await updateZone(rowData[8]);
         dataList.add({
           "status": getStatus(rowData[0]),
           "card_no": rowData[1],
           "full_name": "${rowData[2]} ${rowData[3]}",
           "gender": getGender(rowData[4] ?? ""),
-          "company": rowData[5],
-          "expire_date": getDateFromString(rowData[6]),
+          "id_card_number": rowData[5],
+          "company": rowData[6],
+          "expire_date": getDateFromString(rowData[7]),
           "area_list": zoneList,
-          "car_number": rowData[8],
+          "car_number": rowData[9],
           "is_all_zone": zoneList.isEmpty ? true : false,
           "create_date": getCurrentTimestamp,
         });
       }
-      print("dataList");
-      print(dataList);
+
+      for (final data in dataList) {
+        await FirebaseFirestore.instance
+            .collection(
+                "${FFAppState().customerData.customerRef!.path}/visitor")
+            .doc()
+            .set(data);
+      }
     }
   }
 
-  return false;
+  return true;
 }
