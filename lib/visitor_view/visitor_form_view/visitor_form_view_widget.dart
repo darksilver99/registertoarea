@@ -1486,8 +1486,14 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
                                                 .typeDropdownValueController ??=
-                                            FormFieldController<String>(null),
-                                        options: <String>[],
+                                            FormFieldController<String>(
+                                          _model.typeDropdownValue ??=
+                                              widget!.visitorDocument != null
+                                                  ? _model.visitorResult?.type
+                                                  : '',
+                                        ),
+                                        options:
+                                            FFAppState().customerData.typeList,
                                         onChanged: (val) => safeSetState(() =>
                                             _model.typeDropdownValue = val),
                                         width: double.infinity,
@@ -1528,8 +1534,14 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
                                                 .zoneDropdownValueController ??=
-                                            FormFieldController<String>(null),
-                                        options: ['เปิดใช้งาน', 'ปิดใช้งาน'],
+                                            FormFieldController<String>(
+                                          _model.zoneDropdownValue ??=
+                                              widget!.visitorDocument != null
+                                                  ? _model.visitorResult?.zone
+                                                  : '',
+                                        ),
+                                        options:
+                                            FFAppState().customerData.zoneList,
                                         onChanged: (val) => safeSetState(() =>
                                             _model.zoneDropdownValue = val),
                                         width: double.infinity,
