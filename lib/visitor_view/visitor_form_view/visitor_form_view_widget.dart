@@ -1735,7 +1735,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                   .idCardTextfieldTextController
                                                   .text,
                                               company: _model
-                                                  .nationalityTextfieldTextController
+                                                  .companyTextfieldTextController
                                                   .text,
                                               image: _model.imageUrl,
                                               nationality: _model
@@ -1784,7 +1784,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                   .idCardTextfieldTextController
                                                   .text,
                                               company: _model
-                                                  .nationalityTextfieldTextController
+                                                  .companyTextfieldTextController
                                                   .text,
                                               image: _model.imageUrl,
                                               cardNo: functions.getNextNo(
