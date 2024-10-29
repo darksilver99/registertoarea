@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:csslib/visitor.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:html' as html;
 
 import 'package:register_to_area/app_state.dart';
+import 'package:register_to_area/backend/backend.dart';
 import 'package:register_to_area/flutter_flow/flutter_flow_util.dart';
 
 bool isMobileBrowser() {
@@ -62,4 +64,43 @@ Future<List<String>> updateZone(String zone) async {
   } catch (e) {
     return [];
   }
+}
+
+Future<int> getVisitorDataCount() async {
+  try {
+    AggregateQuerySnapshot visitorCountSnapshot = await FirebaseFirestore
+        .instance
+        .collection("${FFAppState().customerData.customerRef!.path}/visitor")
+        .count()
+        .get();
+    return visitorCountSnapshot.count ?? 0;
+  } catch (e) {
+    print("Error getting document count: $e");
+    return 0;
+  }
+}
+
+Future<List<VisitorRecord>> getVisitorDataList(DocumentSnapshot? lastDocument) async {
+  const int pageSize = 10;
+
+  QuerySnapshot<Map<String, dynamic>> tmp;
+
+  if (lastDocument != null) {
+    tmp = await FirebaseFirestore.instance
+        .collection("${FFAppState().customerData.customerRef!.path}/visitor")
+        .startAfterDocument(lastDocument)
+        .limit(pageSize)
+        .get();
+  } else {
+    tmp = await FirebaseFirestore.instance
+        .collection("${FFAppState().customerData.customerRef!.path}/visitor")
+        .limit(pageSize)
+        .get();
+  }
+
+  List<VisitorRecord> data = tmp.docs.map((doc) {
+    return VisitorRecord.getDocumentFromData(doc.data(), doc.reference);
+  }).toList();
+
+  return data;
 }
