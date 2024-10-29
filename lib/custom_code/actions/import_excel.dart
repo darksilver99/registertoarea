@@ -39,7 +39,7 @@ Future<bool> importExcel(FFUploadedFile? file) async {
       print("maxRows : $maxRows");
       print("maxCols : $maxCols");
 
-      if (maxCols != 10) {
+      if (maxCols != 13) {
         return false;
       }
 
@@ -53,7 +53,7 @@ Future<bool> importExcel(FFUploadedFile? file) async {
           tmp = tmp.toString().replaceAll('"', '');
           rowData.add(tmp);
         }
-        List<String> zoneList = await updateZone(rowData[8]);
+        // List<String> zoneList = await updateZone(rowData[8]);
         dataList.add({
           "status": getStatus(rowData[0]),
           "card_no": rowData[1],
@@ -62,9 +62,11 @@ Future<bool> importExcel(FFUploadedFile? file) async {
           "id_card_number": rowData[5],
           "company": rowData[6],
           "expire_date": getDateFromString(rowData[7]),
-          "area_list": zoneList,
+          "zone": rowData[8],
           "car_number": rowData[9],
-          "is_all_zone": zoneList.isEmpty ? true : false,
+          "type": rowData[10],
+          "nationality": rowData[11],
+          "address": rowData[12],
           "create_date": getCurrentTimestamp,
         });
       }
