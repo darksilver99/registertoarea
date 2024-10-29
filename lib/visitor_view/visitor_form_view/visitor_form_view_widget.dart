@@ -69,14 +69,6 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                   offset: _model.idCardTextfieldTextController!.text.length);
         });
         safeSetState(() {
-          _model.nationalityTextfieldTextController?.text =
-              _model.visitorResult!.company;
-          _model.nationalityTextfieldTextController?.selection =
-              TextSelection.collapsed(
-                  offset:
-                      _model.nationalityTextfieldTextController!.text.length);
-        });
-        safeSetState(() {
           _model.carNumberTextfieldTextController?.text =
               _model.visitorResult!.carNumber;
           _model.carNumberTextfieldTextController?.selection =
@@ -96,6 +88,14 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
           _model.addressTextfieldTextController?.selection =
               TextSelection.collapsed(
                   offset: _model.addressTextfieldTextController!.text.length);
+        });
+        safeSetState(() {
+          _model.nationalityTextfieldTextController?.text =
+              _model.visitorResult!.nationality;
+          _model.nationalityTextfieldTextController?.selection =
+              TextSelection.collapsed(
+                  offset:
+                      _model.nationalityTextfieldTextController!.text.length);
         });
         _model.selectedDate = _model.visitorResult?.expireDate;
         _model.imageUrl = _model.visitorResult?.image;
