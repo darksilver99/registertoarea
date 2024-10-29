@@ -143,7 +143,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
             } else if (MediaQuery.sizeOf(context).width < kBreakpointLarge) {
               return 600.0;
             } else {
-              return 600.0;
+              return 1000.0;
             }
           }(),
           height: double.infinity,
