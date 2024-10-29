@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'visitor_form_view_widget.dart' show VisitorFormViewWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -61,6 +62,8 @@ class VisitorFormViewModel extends FlutterFlowModel<VisitorFormViewWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl = '';
 
+  // Stores action output result for [Custom Action - tekePhotoOnWeb] action in Button widget.
+  String? photoPath;
   // State field(s) for fullnameTextfield widget.
   FocusNode? fullnameTextfieldFocusNode;
   TextEditingController? fullnameTextfieldTextController;
