@@ -17,21 +17,38 @@ class FFAppState extends ChangeNotifier {
     _instance = FFAppState._internal();
   }
 
-  Future initializePersistedState() async {}
+  Future initializePersistedState() async {
+    prefs = await SharedPreferences.getInstance();
+    _safeInit(() {
+      if (prefs.containsKey('ff_customerData')) {
+        try {
+          final serializedData = prefs.getString('ff_customerData') ?? '{}';
+          _customerData = CustomerDataStruct.fromSerializableMap(
+              jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
+  }
 
   void update(VoidCallback callback) {
     callback();
     notifyListeners();
   }
 
+  late SharedPreferences prefs;
+
   CustomerDataStruct _customerData = CustomerDataStruct();
   CustomerDataStruct get customerData => _customerData;
   set customerData(CustomerDataStruct value) {
     _customerData = value;
+    prefs.setString('ff_customerData', value.serialize());
   }
 
   void updateCustomerDataStruct(Function(CustomerDataStruct) updateFn) {
     updateFn(_customerData);
+    prefs.setString('ff_customerData', _customerData.serialize());
   }
 
   List<String> _tmpZone = [];
@@ -62,4 +79,16 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInTmpZone(int index, String value) {
     tmpZone.insert(index, value);
   }
+}
+
+void _safeInit(Function() initializeField) {
+  try {
+    initializeField();
+  } catch (_) {}
+}
+
+Future _safeInitAsync(Function() initializeField) async {
+  try {
+    await initializeField();
+  } catch (_) {}
 }
