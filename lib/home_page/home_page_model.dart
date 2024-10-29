@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/component/loading_view/loading_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -11,9 +12,22 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HomePageModel extends FlutterFlowModel<HomePageWidget> {
-  @override
-  void initState(BuildContext context) {}
+  ///  Local state fields for this page.
+
+  bool isLoading = true;
+
+  ///  State fields for stateful widgets in this page.
+
+  // Model for LoadingView component.
+  late LoadingViewModel loadingViewModel;
 
   @override
-  void dispose() {}
+  void initState(BuildContext context) {
+    loadingViewModel = createModel(context, () => LoadingViewModel());
+  }
+
+  @override
+  void dispose() {
+    loadingViewModel.dispose();
+  }
 }
