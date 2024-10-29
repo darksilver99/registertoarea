@@ -116,8 +116,10 @@ class _CustomCameraWebState extends State<CustomCameraWeb> {
   @override
   Widget build(BuildContext context) {
     if (!isReady) {
-      return Container(
-        child: Text("Loading..."),
+      return const Scaffold(
+        body: Center(
+          child: Text("Loading..."),
+        ),
       );
     }
     return Scaffold(
