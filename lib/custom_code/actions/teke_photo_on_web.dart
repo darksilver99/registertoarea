@@ -10,7 +10,12 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:register_to_area/custom_toon/CustomCameraWeb.dart';
+
 Future<String?> tekePhotoOnWeb(BuildContext context) async {
   // Add your function code here!
-  return "";
+  return await Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const CustomCameraWeb()),
+  );
 }
