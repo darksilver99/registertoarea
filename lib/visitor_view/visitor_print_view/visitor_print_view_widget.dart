@@ -1,5 +1,3 @@
-import 'package:widgets_to_image/widgets_to_image.dart';
-
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/component/loading_view/loading_view_widget.dart';
@@ -32,7 +30,6 @@ class VisitorPrintViewWidget extends StatefulWidget {
 
 class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
   late VisitorPrintViewModel _model;
-  WidgetsToImageController controller = WidgetsToImageController();
 
   @override
   void setState(VoidCallback callback) {
@@ -140,37 +137,38 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
               Expanded(
                 child: Stack(
                   children: [
-                    if (!_model.isLoading)
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 16.0),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.0),
-                            border: Border.all(
-                              color: FlutterFlowTheme.of(context).alternate,
+                    Container(
+                      decoration: BoxDecoration(),
+                      child: Visibility(
+                        visible: !_model.isLoading,
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 16.0),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).alternate,
+                              ),
                             ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 8.0, 16.0, 8.0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 32.0),
-                                          child: WidgetsToImage(
-                                            controller: controller,
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 8.0, 16.0, 8.0),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 32.0),
                                             child: Container(
                                               width: 400.0,
                                               height: 211.0,
@@ -181,15 +179,16 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                 borderRadius:
                                                     BorderRadius.circular(8.0),
                                                 border: Border.all(
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .alternate,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
                                                 ),
                                               ),
                                               child: Padding(
                                                 padding: EdgeInsets.all(8.0),
                                                 child: Column(
-                                                  mainAxisSize: MainAxisSize.max,
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
                                                   children: [
                                                     Expanded(
                                                       flex: 6,
@@ -213,69 +212,76 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                         .max,
                                                                 children: [
                                                                   Expanded(
-                                                                    child: Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .center,
-                                                                      children: [
-                                                                        Expanded(
-                                                                          child:
-                                                                              Builder(
-                                                                            builder:
-                                                                                (context) {
-                                                                              if (!_model.visitorResult!.isAllZone) {
-                                                                                return Padding(
-                                                                                  padding: EdgeInsets.all(4.0),
-                                                                                  child: Builder(
-                                                                                    builder: (context) {
-                                                                                      final areaList = _model.visitorResult?.areaList?.toList() ?? [];
+                                                                    child:
+                                                                        Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                      ),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.center,
+                                                                        children: [
+                                                                          Expanded(
+                                                                            child:
+                                                                                Builder(
+                                                                              builder: (context) {
+                                                                                if (!_model.visitorResult!.isAllZone) {
+                                                                                  return Padding(
+                                                                                    padding: EdgeInsets.all(4.0),
+                                                                                    child: Builder(
+                                                                                      builder: (context) {
+                                                                                        final areaList = _model.visitorResult?.areaList?.toList() ?? [];
 
-                                                                                      return Wrap(
-                                                                                        spacing: 4.0,
-                                                                                        runSpacing: 4.0,
-                                                                                        alignment: WrapAlignment.center,
-                                                                                        crossAxisAlignment: WrapCrossAlignment.start,
-                                                                                        direction: Axis.horizontal,
-                                                                                        runAlignment: WrapAlignment.start,
-                                                                                        verticalDirection: VerticalDirection.down,
-                                                                                        clipBehavior: Clip.antiAlias,
-                                                                                        children: List.generate(areaList.length, (areaListIndex) {
-                                                                                          final areaListItem = areaList[areaListIndex];
-                                                                                          return Text(
-                                                                                            areaListItem,
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  fontFamily: 'Inter',
-                                                                                                  fontSize: 12.0,
-                                                                                                  letterSpacing: 0.0,
-                                                                                                ),
-                                                                                          );
-                                                                                        }),
-                                                                                      );
-                                                                                    },
-                                                                                  ),
-                                                                                );
-                                                                              } else {
-                                                                                return Text(
-                                                                                  'ทั้งหมด',
-                                                                                  textAlign: TextAlign.center,
-                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        fontFamily: 'Inter',
-                                                                                        fontSize: 24.0,
-                                                                                        letterSpacing: 0.0,
-                                                                                        fontWeight: FontWeight.normal,
-                                                                                      ),
-                                                                                );
-                                                                              }
-                                                                            },
+                                                                                        return Wrap(
+                                                                                          spacing: 4.0,
+                                                                                          runSpacing: 4.0,
+                                                                                          alignment: WrapAlignment.center,
+                                                                                          crossAxisAlignment: WrapCrossAlignment.start,
+                                                                                          direction: Axis.horizontal,
+                                                                                          runAlignment: WrapAlignment.start,
+                                                                                          verticalDirection: VerticalDirection.down,
+                                                                                          clipBehavior: Clip.antiAlias,
+                                                                                          children: List.generate(areaList.length, (areaListIndex) {
+                                                                                            final areaListItem = areaList[areaListIndex];
+                                                                                            return Text(
+                                                                                              areaListItem,
+                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                    fontFamily: 'Inter',
+                                                                                                    color: FlutterFlowTheme.of(context).primaryBackground,
+                                                                                                    fontSize: 12.0,
+                                                                                                    letterSpacing: 0.0,
+                                                                                                  ),
+                                                                                            );
+                                                                                          }),
+                                                                                        );
+                                                                                      },
+                                                                                    ),
+                                                                                  );
+                                                                                } else {
+                                                                                  return Text(
+                                                                                    'ทั้งหมด',
+                                                                                    textAlign: TextAlign.center,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Inter',
+                                                                                          color: FlutterFlowTheme.of(context).primaryBackground,
+                                                                                          fontSize: 24.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          fontWeight: FontWeight.normal,
+                                                                                        ),
+                                                                                  );
+                                                                                }
+                                                                              },
+                                                                            ),
                                                                           ),
-                                                                        ),
-                                                                      ],
+                                                                        ],
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                   Padding(
@@ -289,11 +295,11 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                         Container(
                                                                       width: double
                                                                           .infinity,
-                                                                      height: 1.0,
+                                                                      height:
+                                                                          1.0,
                                                                       decoration:
                                                                           BoxDecoration(
-                                                                        color: FlutterFlowTheme.of(
-                                                                                context)
+                                                                        color: FlutterFlowTheme.of(context)
                                                                             .alternate,
                                                                       ),
                                                                     ),
@@ -369,7 +375,8 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                           Expanded(
                                                             flex: 5,
                                                             child: Builder(
-                                                              builder: (context) {
+                                                              builder:
+                                                                  (context) {
                                                                 if (_model.visitorResult
                                                                             ?.image !=
                                                                         null &&
@@ -389,8 +396,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                       border:
                                                                           Border
                                                                               .all(
-                                                                        color: FlutterFlowTheme.of(
-                                                                                context)
+                                                                        color: FlutterFlowTheme.of(context)
                                                                             .alternate,
                                                                         width:
                                                                             1.0,
@@ -408,8 +414,8 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                             .image,
                                                                         width: double
                                                                             .infinity,
-                                                                        height: double
-                                                                            .infinity,
+                                                                        height:
+                                                                            double.infinity,
                                                                         fit: BoxFit
                                                                             .contain,
                                                                       ),
@@ -432,14 +438,14 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                       border:
                                                                           Border
                                                                               .all(
-                                                                        color: FlutterFlowTheme.of(
-                                                                                context)
+                                                                        color: FlutterFlowTheme.of(context)
                                                                             .alternate,
                                                                         width:
                                                                             1.0,
                                                                       ),
                                                                     ),
-                                                                    child: Column(
+                                                                    child:
+                                                                        Column(
                                                                       mainAxisSize:
                                                                           MainAxisSize
                                                                               .max,
@@ -450,8 +456,8 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                         FaIcon(
                                                                           FontAwesomeIcons
                                                                               .userTie,
-                                                                          color: FlutterFlowTheme.of(context)
-                                                                              .secondaryText,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).secondaryText,
                                                                           size:
                                                                               64.0,
                                                                         ),
@@ -481,33 +487,34 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                           0.0,
                                                                           8.0,
                                                                           0.0),
-                                                              child: Column(
+                                                              child: Row(
                                                                 mainAxisSize:
                                                                     MainAxisSize
                                                                         .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
                                                                 children: [
                                                                   Padding(
                                                                     padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
-                                                                            0.0,
-                                                                            4.0),
+                                                                            8.0,
+                                                                            0.0),
                                                                     child:
                                                                         BarcodeWidget(
                                                                       data: _model
                                                                           .visitorResult!
                                                                           .reference
                                                                           .id,
-                                                                      barcode: Barcode
-                                                                          .code128(),
+                                                                      barcode:
+                                                                          Barcode
+                                                                              .qrCode(),
                                                                       width:
-                                                                          200.0,
+                                                                          80.0,
                                                                       height:
-                                                                          45.0,
+                                                                          80.0,
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
                                                                           .primaryText,
@@ -515,48 +522,70 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                                           Colors
                                                                               .transparent,
                                                                       errorBuilder:
-                                                                          (_context,
-                                                                                  _error) =>
+                                                                          (_context, _error) =>
                                                                               SizedBox(
                                                                         width:
-                                                                            200.0,
+                                                                            80.0,
                                                                         height:
-                                                                            45.0,
+                                                                            80.0,
                                                                       ),
                                                                       drawText:
                                                                           false,
                                                                     ),
                                                                   ),
-                                                                  Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Expanded(
-                                                                        child:
-                                                                            Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            _model
-                                                                                .visitorResult
-                                                                                ?.cardNo,
-                                                                            '-',
-                                                                          ),
-                                                                          textAlign:
-                                                                              TextAlign.center,
-                                                                          maxLines:
-                                                                              1,
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'Inter',
-                                                                                fontSize: 20.0,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.bold,
+                                                                  Expanded(
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Expanded(
+                                                                              child: Text(
+                                                                                'หมายเลขบัตร',
+                                                                                textAlign: TextAlign.center,
+                                                                                maxLines: 1,
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Inter',
+                                                                                      fontSize: 18.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FontWeight.w300,
+                                                                                    ),
                                                                               ),
+                                                                            ),
+                                                                          ],
                                                                         ),
-                                                                      ),
-                                                                    ],
+                                                                        Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Expanded(
+                                                                              child: Text(
+                                                                                valueOrDefault<String>(
+                                                                                  _model.visitorResult?.cardNo,
+                                                                                  '-',
+                                                                                ),
+                                                                                textAlign: TextAlign.center,
+                                                                                maxLines: 2,
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Inter',
+                                                                                      fontSize: 20.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FontWeight.bold,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                 ],
                                                               ),
@@ -564,57 +593,75 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                           ),
                                                           Expanded(
                                                             flex: 5,
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Text(
-                                                                  'หมดอายุ',
-                                                                  maxLines: 1,
-                                                                  style: FlutterFlowTheme.of(
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(6.0),
+                                                              child: Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        fontSize:
-                                                                            14.0,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w600,
-                                                                      ),
+                                                                      .error,
                                                                 ),
-                                                                Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    functions.dateTh(_model
-                                                                        .visitorResult
-                                                                        ?.expireDate),
-                                                                    '-',
-                                                                  ),
-                                                                  textAlign:
-                                                                      TextAlign
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
                                                                           .center,
-                                                                  maxLines: 2,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        fontSize:
-                                                                            10.0,
-                                                                        letterSpacing:
-                                                                            0.0,
+                                                                  children: [
+                                                                    Text(
+                                                                      'หมดอายุ',
+                                                                      maxLines:
+                                                                          1,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Inter',
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).secondaryBackground,
+                                                                            fontSize:
+                                                                                14.0,
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                            fontWeight:
+                                                                                FontWeight.w600,
+                                                                          ),
+                                                                    ),
+                                                                    Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        functions.dateTh(_model
+                                                                            .visitorResult
+                                                                            ?.expireDate),
+                                                                        '-',
                                                                       ),
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center,
+                                                                      maxLines:
+                                                                          2,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Inter',
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).secondaryBackground,
+                                                                            fontSize:
+                                                                                10.0,
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                          ),
+                                                                    ),
+                                                                  ],
                                                                 ),
-                                                              ],
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
@@ -625,51 +672,53 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  FFButtonWidget(
-                                    onPressed: () async {
-                                      _model.isLoadingPrinting = true;
-                                      safeSetState(() {});
-                                      await actions.sentDataToPrint(
-                                        controller,
-                                      );
-                                      _model.isLoadingPrinting = false;
-                                      safeSetState(() {});
-                                    },
-                                    text: 'พิมพ์บัตร',
-                                    options: FFButtonOptions(
-                                      width: 300.0,
-                                      height: 54.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 0.0, 16.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            color: Colors.white,
-                                            fontSize: 22.0,
-                                            letterSpacing: 0.0,
-                                          ),
-                                      elevation: 0.0,
-                                      borderRadius: BorderRadius.circular(8.0),
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        _model.isLoadingPrinting = true;
+                                        safeSetState(() {});
+                                        await actions.sentDataToPrint(
+                                          null!,
+                                        );
+                                        _model.isLoadingPrinting = false;
+                                        safeSetState(() {});
+                                      },
+                                      text: 'พิมพ์บัตร',
+                                      options: FFButtonOptions(
+                                        width: 300.0,
+                                        height: 54.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 0.0, 16.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              color: Colors.white,
+                                              fontSize: 22.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                        elevation: 0.0,
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
                                     ),
-                                  ),
-                                ]
-                                    .addToStart(SizedBox(height: 8.0))
-                                    .addToEnd(SizedBox(height: 32.0)),
+                                  ]
+                                      .addToStart(SizedBox(height: 8.0))
+                                      .addToEnd(SizedBox(height: 32.0)),
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
+                    ),
                     if (_model.isLoadingPrinting)
                       Container(
                         width: double.infinity,
