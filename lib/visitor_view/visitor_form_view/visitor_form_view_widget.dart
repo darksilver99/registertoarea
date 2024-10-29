@@ -1071,7 +1071,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                           _model.genderDropdownValue ??=
                                               widget!.visitorDocument != null
                                                   ? _model.visitorResult?.gender
-                                                  : '',
+                                                  : null,
                                         ),
                                         options: ['ชาย', 'หญิง'],
                                         onChanged: (val) => safeSetState(() =>
@@ -1490,7 +1490,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                           _model.typeDropdownValue ??=
                                               widget!.visitorDocument != null
                                                   ? _model.visitorResult?.type
-                                                  : '',
+                                                  : null,
                                         ),
                                         options:
                                             FFAppState().customerData.typeList,
@@ -1538,7 +1538,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                           _model.zoneDropdownValue ??=
                                               widget!.visitorDocument != null
                                                   ? _model.visitorResult?.zone
-                                                  : '',
+                                                  : null,
                                         ),
                                         options:
                                             FFAppState().customerData.zoneList,
