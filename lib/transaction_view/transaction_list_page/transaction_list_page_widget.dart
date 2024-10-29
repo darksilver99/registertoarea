@@ -502,10 +502,10 @@ class _TransactionListPageWidgetState extends State<TransactionListPageWidget> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  valueOrDefault<String>(
-                                    dataListViewItem.duration.toString(),
-                                    '-',
-                                  ),
+                                  dataListViewItem.dateOut != null
+                                      ? functions.formatDuration(
+                                          dataListViewItem.duration)
+                                      : '-',
                                   textAlign: TextAlign.center,
                                   maxLines: 1,
                                   style: FlutterFlowTheme.of(context)

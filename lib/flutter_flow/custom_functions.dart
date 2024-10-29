@@ -73,3 +73,33 @@ bool areListsEqual(
 
   return true;
 }
+
+String formatDuration(int milliseconds) {
+  // Convert milliseconds to total seconds
+  int totalSeconds = milliseconds ~/ 1000;
+
+  // Calculate days, hours, minutes, and seconds
+  int days = totalSeconds ~/ (24 * 3600);
+  int hours = (totalSeconds % (24 * 3600)) ~/ 3600;
+  int minutes = (totalSeconds % 3600) ~/ 60;
+  int seconds = totalSeconds % 60;
+
+  // Create the formatted string
+  String formatted = '';
+
+  if (days > 0) {
+    formatted += '$days วัน ';
+  }
+  if (hours > 0) {
+    formatted += '$hours ชม ';
+  }
+  if (minutes > 0) {
+    formatted += '$minutes นาที ';
+  }
+  if (seconds > 0 || formatted.isEmpty) {
+    // Always show seconds or show if everything else is 0
+    formatted += '$seconds วินาที';
+  }
+
+  return formatted.trim();
+}
