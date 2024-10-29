@@ -1,3 +1,5 @@
+import 'package:register_to_area/custom_toon/custom_toon.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
@@ -564,7 +566,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                 ),
                                               FFButtonWidget(
                                                 onPressed: () async {
-                                                  if (!isWeb) {
+                                                  if (isMobileBrowser()) {
                                                     final selectedMedia =
                                                         await selectMediaWithSourceBottomSheet(
                                                       context: context,
