@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:register_to_area/custom_toon/custom_toon.dart';
+
 Future<int> updateTransaction(VisitorRecord visitorDoc) async {
   // Add your function code here!
   final rs = await FirebaseFirestore.instance
