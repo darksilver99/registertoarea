@@ -180,8 +180,22 @@ class _TransactionListPageWidgetState extends State<TransactionListPageWidget> {
                           ),
                         ),
                         FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Coming soon.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('ตกลง'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           },
                           text: 'ค้นหา',
                           icon: Icon(
@@ -283,6 +297,31 @@ class _TransactionListPageWidgetState extends State<TransactionListPageWidget> {
                               children: [
                                 Expanded(
                                   child: Text(
+                                    'บริษัท',
+                                    textAlign: TextAlign.center,
+                                    maxLines: 1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        DataColumn2(
+                          label: DefaultTextStyle.merge(
+                            softWrap: true,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: Text(
                                     'วันเวลาที่เข้า',
                                     textAlign: TextAlign.center,
                                     maxLines: 1,
@@ -309,6 +348,31 @@ class _TransactionListPageWidgetState extends State<TransactionListPageWidget> {
                                 Expanded(
                                   child: Text(
                                     'วันเวลาที่ออก',
+                                    textAlign: TextAlign.center,
+                                    maxLines: 1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        DataColumn2(
+                          label: DefaultTextStyle.merge(
+                            softWrap: true,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'ระยะเวลา',
                                     textAlign: TextAlign.center,
                                     maxLines: 1,
                                     style: FlutterFlowTheme.of(context)
@@ -376,6 +440,24 @@ class _TransactionListPageWidgetState extends State<TransactionListPageWidget> {
                             children: [
                               Expanded(
                                 child: Text(
+                                  dataListViewItem.company,
+                                  textAlign: TextAlign.center,
+                                  maxLines: 1,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Text(
                                   valueOrDefault<String>(
                                     functions
                                         .dateTimeTh(dataListViewItem.dateIn),
@@ -401,6 +483,27 @@ class _TransactionListPageWidgetState extends State<TransactionListPageWidget> {
                                   valueOrDefault<String>(
                                     functions
                                         .dateTimeTh(dataListViewItem.dateOut),
+                                    '-',
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  maxLines: 1,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    dataListViewItem.duration.toString(),
                                     '-',
                                   ),
                                   textAlign: TextAlign.center,

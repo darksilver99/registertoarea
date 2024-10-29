@@ -800,6 +800,7 @@ class _RegisterViewWidgetState extends State<RegisterViewWidget> {
                                         customerName:
                                             _model.textController3.text,
                                         expireDate: getCurrentTimestamp,
+                                        superAdminMode: false,
                                       ));
                                   await showDialog(
                                     context: context,

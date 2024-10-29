@@ -41,6 +41,21 @@ class TransactionListRecord extends FirestoreRecord {
   String get fullName => _fullName ?? '';
   bool hasFullName() => _fullName != null;
 
+  // "company" field.
+  String? _company;
+  String get company => _company ?? '';
+  bool hasCompany() => _company != null;
+
+  // "duration" field.
+  int? _duration;
+  int get duration => _duration ?? 0;
+  bool hasDuration() => _duration != null;
+
+  // "visitor_ref" field.
+  DocumentReference? _visitorRef;
+  DocumentReference? get visitorRef => _visitorRef;
+  bool hasVisitorRef() => _visitorRef != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -49,6 +64,9 @@ class TransactionListRecord extends FirestoreRecord {
     _dateOut = snapshotData['date_out'] as DateTime?;
     _cardNo = snapshotData['card_no'] as String?;
     _fullName = snapshotData['full_name'] as String?;
+    _company = snapshotData['company'] as String?;
+    _duration = castToType<int>(snapshotData['duration']);
+    _visitorRef = snapshotData['visitor_ref'] as DocumentReference?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -96,6 +114,9 @@ Map<String, dynamic> createTransactionListRecordData({
   DateTime? dateOut,
   String? cardNo,
   String? fullName,
+  String? company,
+  int? duration,
+  DocumentReference? visitorRef,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -104,6 +125,9 @@ Map<String, dynamic> createTransactionListRecordData({
       'date_out': dateOut,
       'card_no': cardNo,
       'full_name': fullName,
+      'company': company,
+      'duration': duration,
+      'visitor_ref': visitorRef,
     }.withoutNulls,
   );
 
@@ -120,12 +144,23 @@ class TransactionListRecordDocumentEquality
         e1?.dateIn == e2?.dateIn &&
         e1?.dateOut == e2?.dateOut &&
         e1?.cardNo == e2?.cardNo &&
-        e1?.fullName == e2?.fullName;
+        e1?.fullName == e2?.fullName &&
+        e1?.company == e2?.company &&
+        e1?.duration == e2?.duration &&
+        e1?.visitorRef == e2?.visitorRef;
   }
 
   @override
-  int hash(TransactionListRecord? e) => const ListEquality()
-      .hash([e?.status, e?.dateIn, e?.dateOut, e?.cardNo, e?.fullName]);
+  int hash(TransactionListRecord? e) => const ListEquality().hash([
+        e?.status,
+        e?.dateIn,
+        e?.dateOut,
+        e?.cardNo,
+        e?.fullName,
+        e?.company,
+        e?.duration,
+        e?.visitorRef
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is TransactionListRecord;

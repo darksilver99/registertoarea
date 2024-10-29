@@ -3,7 +3,6 @@ import 'package:register_to_area/custom_toon/custom_toon.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
-import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -54,7 +53,6 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await _model.initZone(context);
       if (widget!.visitorDocument != null) {
         _model.visitorResult = await VisitorRecord.getDocumentOnce(
             widget!.visitorDocument!.reference);
@@ -73,11 +71,12 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                   offset: _model.idCardTextfieldTextController!.text.length);
         });
         safeSetState(() {
-          _model.companyTextfieldTextController?.text =
+          _model.nationalityTextfieldTextController?.text =
               _model.visitorResult!.company;
-          _model.companyTextfieldTextController?.selection =
+          _model.nationalityTextfieldTextController?.selection =
               TextSelection.collapsed(
-                  offset: _model.companyTextfieldTextController!.text.length);
+                  offset:
+                      _model.nationalityTextfieldTextController!.text.length);
         });
         safeSetState(() {
           _model.carNumberTextfieldTextController?.text =
@@ -87,19 +86,20 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                   offset: _model.carNumberTextfieldTextController!.text.length);
         });
         safeSetState(() {
-          _model.genderDropdownValueController?.value =
-              _model.visitorResult!.gender;
+          _model.nationalityTextfieldTextController?.text =
+              _model.visitorResult!.nationality;
+          _model.nationalityTextfieldTextController?.selection =
+              TextSelection.collapsed(
+                  offset:
+                      _model.nationalityTextfieldTextController!.text.length);
         });
         safeSetState(() {
-          _model.statusDropdownValueController?.value =
-              (_model.visitorResult?.status == 1 ? 'เปิดใช้งาน' : 'ปิดใช้งาน');
+          _model.addressTextfieldTextController?.text =
+              _model.visitorResult!.address;
+          _model.addressTextfieldTextController?.selection =
+              TextSelection.collapsed(
+                  offset: _model.addressTextfieldTextController!.text.length);
         });
-        _model.selectedZone = functions
-            .removeNotContainerInList(_model.zoneList.toList(),
-                _model.visitorResult!.areaList.toList())
-            .toList()
-            .cast<String>();
-        _model.isAllZone = _model.visitorResult!.isAllZone;
         _model.selectedDate = _model.visitorResult?.expireDate;
         _model.imageUrl = _model.visitorResult?.image;
       }
@@ -112,6 +112,12 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
 
     _model.idCardTextfieldTextController ??= TextEditingController();
     _model.idCardTextfieldFocusNode ??= FocusNode();
+
+    _model.nationalityTextfieldTextController ??= TextEditingController();
+    _model.nationalityTextfieldFocusNode ??= FocusNode();
+
+    _model.addressTextfieldTextController ??= TextEditingController();
+    _model.addressTextfieldFocusNode ??= FocusNode();
 
     _model.companyTextfieldTextController ??= TextEditingController();
     _model.companyTextfieldFocusNode ??= FocusNode();
@@ -270,7 +276,6 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                 .override(
                                   fontFamily: 'Inter',
                                   color: FlutterFlowTheme.of(context).error,
-                                  fontSize: 22.0,
                                   letterSpacing: 0.0,
                                   decoration: TextDecoration.underline,
                                 ),
@@ -468,7 +473,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                                   height: double
                                                                       .infinity,
                                                                   fit: BoxFit
-                                                                      .contain,
+                                                                      .cover,
                                                                 ),
                                                               ),
                                                             ),
@@ -1110,6 +1115,192 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                         width: double.infinity,
                                         child: TextFormField(
                                           controller: _model
+                                              .nationalityTextfieldTextController,
+                                          focusNode: _model
+                                              .nationalityTextfieldFocusNode,
+                                          autofocus: false,
+                                          obscureText: false,
+                                          decoration: InputDecoration(
+                                            isDense: false,
+                                            labelText: 'สัญชาติ',
+                                            labelStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      fontSize: 22.0,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            hintStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      fontSize: 22.0,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            filled: true,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                fontSize: 22.0,
+                                                letterSpacing: 0.0,
+                                              ),
+                                          cursorColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          validator: _model
+                                              .nationalityTextfieldTextControllerValidator
+                                              .asValidator(context),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 16.0),
+                                      child: Container(
+                                        width: double.infinity,
+                                        child: TextFormField(
+                                          controller: _model
+                                              .addressTextfieldTextController,
+                                          focusNode:
+                                              _model.addressTextfieldFocusNode,
+                                          autofocus: false,
+                                          obscureText: false,
+                                          decoration: InputDecoration(
+                                            isDense: false,
+                                            labelText: 'ที่อยู่',
+                                            labelStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      fontSize: 22.0,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            hintStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      fontSize: 22.0,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            filled: true,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                fontSize: 22.0,
+                                                letterSpacing: 0.0,
+                                              ),
+                                          cursorColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          validator: _model
+                                              .addressTextfieldTextControllerValidator
+                                              .asValidator(context),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 16.0),
+                                      child: Container(
+                                        width: double.infinity,
+                                        child: TextFormField(
+                                          controller: _model
                                               .companyTextfieldTextController,
                                           focusNode:
                                               _model.companyTextfieldFocusNode,
@@ -1292,292 +1483,85 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 16.0),
-                                      child: Container(
+                                      child: FlutterFlowDropDown<String>(
+                                        controller: _model
+                                                .typeDropdownValueController ??=
+                                            FormFieldController<String>(null),
+                                        options: <String>[],
+                                        onChanged: (val) => safeSetState(() =>
+                                            _model.typeDropdownValue = val),
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        height: 54.0,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              fontSize: 22.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                        hintText: ' ประเภท',
+                                        icon: Icon(
+                                          Icons.keyboard_arrow_down_rounded,
                                           color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(0.0),
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 24.0,
+                                        ),
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        elevation: 2.0,
+                                        borderColor:
+                                            FlutterFlowTheme.of(context)
                                                 .alternate,
-                                          ),
+                                        borderWidth: 1.0,
+                                        borderRadius: 8.0,
+                                        margin: EdgeInsetsDirectional.fromSTEB(
+                                            12.0, 0.0, 12.0, 0.0),
+                                        hidesUnderline: true,
+                                        isOverButton: false,
+                                        isSearchable: false,
+                                        isMultiSelect: false,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 16.0),
+                                      child: FlutterFlowDropDown<String>(
+                                        controller: _model
+                                                .zoneDropdownValueController ??=
+                                            FormFieldController<String>(null),
+                                        options: ['เปิดใช้งาน', 'ปิดใช้งาน'],
+                                        onChanged: (val) => safeSetState(() =>
+                                            _model.zoneDropdownValue = val),
+                                        width: double.infinity,
+                                        height: 54.0,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              fontSize: 22.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                        hintText: 'พื้นที่ให้เข้า',
+                                        icon: Icon(
+                                          Icons.keyboard_arrow_down_rounded,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 24.0,
                                         ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    'โซนพื้นที่ที่ให้เข้า',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          fontSize: 22.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 0.0, 4.0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Theme(
-                                                      data: ThemeData(
-                                                        checkboxTheme:
-                                                            CheckboxThemeData(
-                                                          visualDensity:
-                                                              VisualDensity
-                                                                  .compact,
-                                                          materialTapTargetSize:
-                                                              MaterialTapTargetSize
-                                                                  .shrinkWrap,
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4.0),
-                                                          ),
-                                                        ),
-                                                        unselectedWidgetColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
-                                                      ),
-                                                      child: Checkbox(
-                                                        value: _model
-                                                                .checkboxValue ??=
-                                                            _model.isAllZone,
-                                                        onChanged:
-                                                            (newValue) async {
-                                                          safeSetState(() =>
-                                                              _model.checkboxValue =
-                                                                  newValue!);
-                                                          if (newValue!) {
-                                                            safeSetState(() {
-                                                              _model
-                                                                  .choiceChipsValueController
-                                                                  ?.value = ([]);
-                                                            });
-                                                            _model.isAllZone =
-                                                                true;
-                                                            _model.selectedZone =
-                                                                [].toList().cast<
-                                                                    String>();
-                                                            safeSetState(() {});
-                                                          } else {
-                                                            safeSetState(() {
-                                                              _model
-                                                                  .choiceChipsValueController
-                                                                  ?.value = ([]);
-                                                            });
-                                                            _model.isAllZone =
-                                                                false;
-                                                            _model.selectedZone =
-                                                                [].toList().cast<
-                                                                    String>();
-                                                            safeSetState(() {});
-                                                          }
-                                                        },
-                                                        side: BorderSide(
-                                                          width: 2,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
-                                                        ),
-                                                        activeColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        checkColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .info,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      'ทั้งหมด',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily: 'Inter',
-                                                            fontSize: 22.0,
-                                                            letterSpacing: 0.0,
-                                                          ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              if (!_model.isAllZone)
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Expanded(
-                                                      child:
-                                                          FlutterFlowChoiceChips(
-                                                        options: _model.zoneList
-                                                            .map((label) =>
-                                                                ChipData(label))
-                                                            .toList(),
-                                                        onChanged: (val) async {
-                                                          safeSetState(() =>
-                                                              _model.choiceChipsValues =
-                                                                  val);
-                                                          if (functions.areListsEqual(
-                                                              _model.zoneList
-                                                                  .toList(),
-                                                              _model
-                                                                  .choiceChipsValues!
-                                                                  .toList())) {
-                                                            _model.isAllZone =
-                                                                true;
-                                                            _model.selectedZone =
-                                                                [].toList().cast<
-                                                                    String>();
-                                                            safeSetState(() {});
-                                                            safeSetState(() {
-                                                              _model
-                                                                  .choiceChipsValueController
-                                                                  ?.value = ([]);
-                                                            });
-                                                            safeSetState(() {
-                                                              _model.checkboxValue =
-                                                                  true;
-                                                            });
-                                                          } else {
-                                                            _model.isAllZone =
-                                                                false;
-                                                            _model.selectedZone =
-                                                                _model
-                                                                    .choiceChipsValues!
-                                                                    .toList()
-                                                                    .cast<
-                                                                        String>();
-                                                            safeSetState(() {});
-                                                          }
-                                                        },
-                                                        selectedChipStyle:
-                                                            ChipStyle(
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .primary,
-                                                          textStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Inter',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .info,
-                                                                    fontSize:
-                                                                        22.0,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                  ),
-                                                          iconColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .info,
-                                                          iconSize: 16.0,
-                                                          labelPadding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      16.0,
-                                                                      8.0,
-                                                                      16.0,
-                                                                      8.0),
-                                                          elevation: 0.0,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      100.0),
-                                                        ),
-                                                        unselectedChipStyle:
-                                                            ChipStyle(
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .alternate,
-                                                          textStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Inter',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryText,
-                                                                    fontSize:
-                                                                        22.0,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                  ),
-                                                          iconColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .secondaryText,
-                                                          iconSize: 0.0,
-                                                          labelPadding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      16.0,
-                                                                      8.0,
-                                                                      16.0,
-                                                                      8.0),
-                                                          elevation: 0.0,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      100.0),
-                                                        ),
-                                                        chipSpacing: 8.0,
-                                                        rowSpacing: 8.0,
-                                                        multiselect: true,
-                                                        initialized: _model
-                                                                .choiceChipsValues !=
-                                                            null,
-                                                        alignment:
-                                                            WrapAlignment.start,
-                                                        controller: _model
-                                                                .choiceChipsValueController ??=
-                                                            FormFieldController<
-                                                                List<String>>(
-                                                          widget!.visitorDocument !=
-                                                                  null
-                                                              ? (_model
-                                                                      .visitorResult!
-                                                                      .isAllZone
-                                                                  ? ([])
-                                                                  : _model
-                                                                      .selectedZone)
-                                                              : ([]),
-                                                        ),
-                                                        wrapped: true,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                            ],
-                                          ),
-                                        ),
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        elevation: 2.0,
+                                        borderColor:
+                                            FlutterFlowTheme.of(context)
+                                                .alternate,
+                                        borderWidth: 1.0,
+                                        borderRadius: 8.0,
+                                        margin: EdgeInsetsDirectional.fromSTEB(
+                                            12.0, 0.0, 12.0, 0.0),
+                                        hidesUnderline: true,
+                                        isOverButton: false,
+                                        isSearchable: false,
+                                        isMultiSelect: false,
                                       ),
                                     ),
                                     Padding(
@@ -1659,164 +1643,179 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                           );
                                           return;
                                         }
-                                        if (_model.statusDropdownValue ==
-                                            null) {
+                                        if (_model.typeDropdownValue == null) {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text('เลือกประเภท'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: Text('ตกลง'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
                                           return;
                                         }
-                                        _model.selectedZone =
-                                            _model.choiceChipsValues != null &&
-                                                    (_model.choiceChipsValues)!
-                                                        .isNotEmpty
-                                                ? _model.choiceChipsValues!
-                                                : ([]).toList().cast<String>();
-                                        if (() {
-                                          if (_model.selectedZone.isNotEmpty) {
-                                            return true;
-                                          } else if (_model.isAllZone) {
-                                            return true;
+                                        if (_model.zoneDropdownValue == null) {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title:
+                                                    Text('เลือกพื้นที่ให้เข้า'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: Text('ตกลง'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                          return;
+                                        }
+                                        if (_model.statusDropdownValue ==
+                                            null) {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text('เลือกสถานะ'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: Text('ตกลง'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                          return;
+                                        }
+                                        if (_model.selectedDate != null) {
+                                          if (widget!.visitorDocument != null) {
+                                            await widget!
+                                                .visitorDocument!.reference
+                                                .update(createVisitorRecordData(
+                                              updateDate: getCurrentTimestamp,
+                                              status:
+                                                  _model.typeDropdownValue ==
+                                                          'เปิดใช้งาน'
+                                                      ? 1
+                                                      : 0,
+                                              expireDate: _model.selectedDate,
+                                              fullName: _model
+                                                  .fullnameTextfieldTextController
+                                                  .text,
+                                              gender:
+                                                  _model.genderDropdownValue,
+                                              carNumber: _model
+                                                  .carNumberTextfieldTextController
+                                                  .text,
+                                              idCardNumber: _model
+                                                  .idCardTextfieldTextController
+                                                  .text,
+                                              company: _model
+                                                  .nationalityTextfieldTextController
+                                                  .text,
+                                              image: _model.imageUrl,
+                                              nationality: _model
+                                                  .nationalityTextfieldTextController
+                                                  .text,
+                                              type: _model.typeDropdownValue,
+                                              address: _model
+                                                  .addressTextfieldTextController
+                                                  .text,
+                                              zone: _model.zoneDropdownValue,
+                                            ));
                                           } else {
-                                            return false;
-                                          }
-                                        }()) {
-                                          if (_model.selectedDate != null) {
-                                            if (widget!.visitorDocument !=
-                                                null) {
-                                              await widget!
-                                                  .visitorDocument!.reference
-                                                  .update({
-                                                ...createVisitorRecordData(
-                                                  updateDate:
-                                                      getCurrentTimestamp,
-                                                  status:
-                                                      _model.statusDropdownValue ==
-                                                              'เปิดใช้งาน'
-                                                          ? 1
-                                                          : 0,
-                                                  expireDate:
-                                                      _model.selectedDate,
-                                                  fullName: _model
-                                                      .fullnameTextfieldTextController
-                                                      .text,
-                                                  gender: _model
-                                                      .genderDropdownValue,
-                                                  carNumber: _model
-                                                      .carNumberTextfieldTextController
-                                                      .text,
-                                                  idCardNumber: _model
-                                                      .idCardTextfieldTextController
-                                                      .text,
-                                                  company: _model
-                                                      .companyTextfieldTextController
-                                                      .text,
-                                                  image: _model.imageUrl,
-                                                  isAllZone: _model.isAllZone,
-                                                ),
-                                                ...mapToFirestore(
-                                                  {
-                                                    'area_list':
-                                                        _model.selectedZone,
-                                                  },
-                                                ),
-                                              });
-                                            } else {
-                                              _model.lastVisitorResult =
-                                                  await queryVisitorRecordOnce(
-                                                parent: FFAppState()
-                                                    .customerData
-                                                    .customerRef,
-                                                queryBuilder: (visitorRecord) =>
-                                                    visitorRecord.orderBy(
-                                                        'create_date',
-                                                        descending: true),
-                                                singleRecord: true,
-                                              ).then((s) => s.firstOrNull);
+                                            _model.lastVisitorResult =
+                                                await queryVisitorRecordOnce(
+                                              parent: FFAppState()
+                                                  .customerData
+                                                  .customerRef,
+                                              queryBuilder: (visitorRecord) =>
+                                                  visitorRecord.orderBy(
+                                                      'create_date',
+                                                      descending: true),
+                                              singleRecord: true,
+                                            ).then((s) => s.firstOrNull);
 
-                                              await VisitorRecord.createDoc(
-                                                      FFAppState()
-                                                          .customerData
-                                                          .customerRef!)
-                                                  .set({
-                                                ...createVisitorRecordData(
-                                                  createDate:
-                                                      getCurrentTimestamp,
-                                                  status:
-                                                      _model.statusDropdownValue ==
-                                                              'เปิดใช้งาน'
-                                                          ? 1
-                                                          : 0,
-                                                  expireDate: _model.datePicked,
-                                                  fullName: _model
-                                                      .fullnameTextfieldTextController
-                                                      .text,
-                                                  carNumber: _model
-                                                      .carNumberTextfieldTextController
-                                                      .text,
-                                                  gender: _model
-                                                      .genderDropdownValue,
-                                                  idCardNumber: _model
-                                                      .idCardTextfieldTextController
-                                                      .text,
-                                                  company: _model
-                                                      .companyTextfieldTextController
-                                                      .text,
-                                                  image: _model.imageUrl,
-                                                  isAllZone: _model.isAllZone,
-                                                  cardNo: functions.getNextNo(
-                                                      _model.lastVisitorResult),
-                                                ),
-                                                ...mapToFirestore(
-                                                  {
-                                                    'area_list':
-                                                        _model.selectedZone,
-                                                  },
-                                                ),
-                                              });
-                                            }
-
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                      'บันทึกข้อมูลเรียบร้อยแล้ว'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('ตกลง'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                            Navigator.pop(context, 'update');
-                                          } else {
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                      'เลือกวันที่หมดอายุบัตร'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('ตกลง'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
+                                            await VisitorRecord.createDoc(
+                                                    FFAppState()
+                                                        .customerData
+                                                        .customerRef!)
+                                                .set(createVisitorRecordData(
+                                              createDate: getCurrentTimestamp,
+                                              status:
+                                                  _model.typeDropdownValue ==
+                                                          'เปิดใช้งาน'
+                                                      ? 1
+                                                      : 0,
+                                              expireDate: _model.datePicked,
+                                              fullName: _model
+                                                  .fullnameTextfieldTextController
+                                                  .text,
+                                              carNumber: _model
+                                                  .carNumberTextfieldTextController
+                                                  .text,
+                                              gender:
+                                                  _model.genderDropdownValue,
+                                              idCardNumber: _model
+                                                  .idCardTextfieldTextController
+                                                  .text,
+                                              company: _model
+                                                  .nationalityTextfieldTextController
+                                                  .text,
+                                              image: _model.imageUrl,
+                                              cardNo: functions.getNextNo(
+                                                  _model.lastVisitorResult),
+                                              nationality: _model
+                                                  .nationalityTextfieldTextController
+                                                  .text,
+                                              address: _model
+                                                  .addressTextfieldTextController
+                                                  .text,
+                                              type: _model.typeDropdownValue,
+                                              zone: _model.zoneDropdownValue,
+                                            ));
                                           }
+
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                    'บันทึกข้อมูลเรียบร้อยแล้ว'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: Text('ตกลง'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                          Navigator.pop(context, 'update');
                                         } else {
                                           await showDialog(
                                             context: context,
                                             builder: (alertDialogContext) {
                                               return AlertDialog(
                                                 title: Text(
-                                                    'เลือกโซนพื้นที่ที่ให้เข้า'),
+                                                    'เลือกวันที่หมดอายุบัตร'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>

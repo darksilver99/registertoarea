@@ -106,12 +106,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => VistitorListPageWidget(),
         ),
         FFRoute(
-          name: 'ZoneListPage',
-          path: '/zoneListPage',
-          requireAuth: true,
-          builder: (context, params) => ZoneListPageWidget(),
-        ),
-        FFRoute(
           name: 'ScanBarCodeWithWebPage',
           path: '/scanBarCodeWithWebPage',
           requireAuth: true,
