@@ -7,14 +7,14 @@ import 'package:flutter_web_qrcode_scanner/flutter_web_qrcode_scanner.dart';
 import 'package:register_to_area/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:register_to_area/flutter_flow/flutter_flow_theme.dart';
 
-class CustomCarmera extends StatefulWidget {
-  const CustomCarmera({super.key});
+class CustomQrCodeScan extends StatefulWidget {
+  const CustomQrCodeScan({super.key});
 
   @override
-  State<CustomCarmera> createState() => _CustomCarmeraState();
+  State<CustomQrCodeScan> createState() => _CustomQrCodeScanState();
 }
 
-class _CustomCarmeraState extends State<CustomCarmera> {
+class _CustomQrCodeScanState extends State<CustomQrCodeScan> {
   final CameraController _controller = CameraController(autoPlay: true);
 
   @override

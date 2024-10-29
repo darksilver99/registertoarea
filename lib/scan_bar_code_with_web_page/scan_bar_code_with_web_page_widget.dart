@@ -1,4 +1,3 @@
-import 'package:register_to_area/custom_toon/CustomCarmera.dart';
 
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -138,8 +137,7 @@ class _ScanBarCodeWithWebPageWidgetState
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).primaryText,
-                ),
-                child: CustomCarmera(),
+                )
               ),
             ),
           ],
