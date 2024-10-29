@@ -1296,6 +1296,7 @@ class _CustomerSettingViewWidgetState extends State<CustomerSettingViewWidget> {
                                             .update({
                                           ...createCustomerListRecordData(
                                             updateDate: getCurrentTimestamp,
+                                            logo: _model.imageUrl,
                                           ),
                                           ...mapToFirestore(
                                             {
