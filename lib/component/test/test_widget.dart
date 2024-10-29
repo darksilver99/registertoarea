@@ -27,9 +27,7 @@ class _TestWidgetState extends State<TestWidget> {
     _model = createModel(context, () => TestModel());
 
     // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      FFAppState().addToTmpZone('aaa');
-    });
+    SchedulerBinding.instance.addPostFrameCallback((_) async {});
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }

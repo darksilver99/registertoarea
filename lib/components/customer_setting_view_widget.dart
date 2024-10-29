@@ -1311,8 +1311,41 @@ class _CustomerSettingViewWidgetState extends State<CustomerSettingViewWidget> {
                                       ),
                                     ),
                                     FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
+                                      onPressed: () async {
+                                        await FFAppState()
+                                            .customerData
+                                            .customerRef!
+                                            .update({
+                                          ...createCustomerListRecordData(
+                                            updateDate: getCurrentTimestamp,
+                                          ),
+                                          ...mapToFirestore(
+                                            {
+                                              'zone_list': _model.tmpZoneList,
+                                              'type_list': _model.tmpTypeList,
+                                            },
+                                          ),
+                                        });
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                  'บันทึกข้อมูลเรียบร้อยแล้ว'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('ตกลง'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                        await action_blocks
+                                            .initCustomer(context);
+                                        Navigator.pop(context);
                                       },
                                       text: 'บันทึกข้อมูล',
                                       options: FFButtonOptions(
