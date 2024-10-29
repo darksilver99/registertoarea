@@ -104,3 +104,11 @@ Future<List<VisitorRecord>> getVisitorDataList(DocumentSnapshot? lastDocument) a
 
   return data;
 }
+
+int millisecondsBetween(
+    DateTime start,
+    DateTime end,
+    ) {
+  Duration difference = end.difference(start);
+  return difference.inMilliseconds;
+}
