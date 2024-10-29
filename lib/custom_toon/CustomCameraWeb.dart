@@ -6,6 +6,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:register_to_area/auth/firebase_auth/auth_util.dart';
 import 'package:register_to_area/backend/firebase_storage/storage.dart';
 import 'package:register_to_area/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:register_to_area/flutter_flow/flutter_flow_theme.dart';
@@ -60,6 +61,27 @@ class _CustomCameraWebState extends State<CustomCameraWeb> {
     super.dispose();
   }
 
+  String _firebasePathPrefix() => 'users/$currentUserUid/uploads';
+
+  String? _removeTrailingSlash(String? path) =>
+      path != null && path.endsWith('/')
+          ? path.substring(0, path.length - 1)
+          : path;
+
+  String _getStoragePath(
+    String? pathPrefix,
+    String filePath,
+    bool isVideo, [
+    int? index,
+  ]) {
+    pathPrefix ??= _firebasePathPrefix();
+    pathPrefix = _removeTrailingSlash(pathPrefix);
+    final timestamp = DateTime.now().microsecondsSinceEpoch;
+    final ext = isVideo ? 'mp4' : filePath.split('.').last;
+    final indexStr = index != null ? '_$index' : '';
+    return '$pathPrefix/$timestamp$indexStr.$ext';
+  }
+
   Future<dynamic> onTakePictureButtonPressed() async {
     var file = await takePicture();
     print("file!.path");
@@ -67,7 +89,7 @@ class _CustomCameraWebState extends State<CustomCameraWeb> {
     final tmpImage = await file!.readAsBytes();
     final mediaBytes = await FlutterImageCompress.compressWithList(tmpImage,
         minHeight: 400, quality: 80);
-    final path = getStoragePath(null, file!.name, false);
+    final path = _getStoragePath(null, file!.name, false);
     final url = await uploadData(path, mediaBytes);
     Navigator.pop(context, url);
   }
