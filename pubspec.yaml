@@ -128,6 +128,7 @@ dependencies:
   flutter_web_qrcode_scanner: ^1.1.1
   camera: ^0.11.0+2
   flutter_image_compress: ^2.3.0
+  excel: ^4.0.6
 
 
 dependency_overrides:

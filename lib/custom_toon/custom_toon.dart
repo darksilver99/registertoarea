@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:html' as html;
+
+import 'package:register_to_area/app_state.dart';
 
 bool isMobileBrowser() {
   if (kIsWeb) {
@@ -9,4 +13,37 @@ bool isMobileBrowser() {
         userAgent.contains('ipad');
   }
   return false;
+}
+
+String getGender(String gender) {
+  if (gender == "") {
+    return "";
+  }
+  return gender.toLowerCase() == "male" ? "ชาย" : "หญิง";
+}
+
+int getStatus(String status) {
+  return status.toLowerCase() == "active" ? 1 : 0;
+}
+
+DateTime? getDateFromString(String dateTime) {
+  try {
+    return DateTime.parse(dateTime);
+  } catch (e) {
+    return null;
+  }
+}
+
+Future<List<String>> updateZone(String zone) async {
+  await Future.delayed(Duration(seconds: 1));
+  try {
+    List<String> listZone = zone.split(',').map((e) => e.trim()).toList();
+    for(zone in listZone){
+      final rs = await FirebaseFirestore.instance.collection("${FFAppState().customerData.customerRef!.path}/zone_list").where("subject", isEqualTo: zone).get();
+    }
+
+    return ["aa"];
+  } catch (e) {
+    return [];
+  }
 }
