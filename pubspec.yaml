@@ -123,8 +123,10 @@ dependencies:
   #custom
   widgets_to_image: ^1.0.0
   printing: ^5.13.3
-  mobile_scanner: ^6.0.2
-  qr_code_scanner: ^1.0.1
+  #mobile_scanner: ^6.0.2
+  #qr_code_scanner: ^1.0.1
+  flutter_web_qrcode_scanner: ^1.1.1
+
 
 dependency_overrides:
   http: 1.2.2
