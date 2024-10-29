@@ -1718,7 +1718,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                 .update(createVisitorRecordData(
                                               updateDate: getCurrentTimestamp,
                                               status:
-                                                  _model.typeDropdownValue ==
+                                                  _model.statusDropdownValue ==
                                                           'เปิดใช้งาน'
                                                       ? 1
                                                       : 0,
@@ -1767,7 +1767,7 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                 .set(createVisitorRecordData(
                                               createDate: getCurrentTimestamp,
                                               status:
-                                                  _model.typeDropdownValue ==
+                                                  _model.statusDropdownValue ==
                                                           'เปิดใช้งาน'
                                                       ? 1
                                                       : 0,
