@@ -64,7 +64,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       width: double.infinity,
                       height: 80.0,
                       decoration: BoxDecoration(
-                        color: Color(0xFF6493FF),
+                        color: FlutterFlowTheme.of(context).primary,
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
