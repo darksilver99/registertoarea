@@ -90,6 +90,7 @@ class _ScanBarCodeWithWebPageWidgetState
               );
             },
           );
+          context.safePop();
         }
       } else {
         await showDialog(
@@ -106,6 +107,7 @@ class _ScanBarCodeWithWebPageWidgetState
             );
           },
         );
+        context.safePop();
       }
     });
 
@@ -129,40 +131,6 @@ class _ScanBarCodeWithWebPageWidgetState
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Text(
-                      'สแกนบัตรผ่าน',
-                      maxLines: 1,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
-                            fontSize: 22.0,
-                            letterSpacing: 0.0,
-                          ),
-                    ),
-                  ),
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.safePop();
-                    },
-                    child: Icon(
-                      Icons.close_rounded,
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      size: 36.0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             Expanded(
               child: Container(
                 width: double.infinity,
