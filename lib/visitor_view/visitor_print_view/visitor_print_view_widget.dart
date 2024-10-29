@@ -641,7 +641,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                     },
                                     text: 'พิมพ์บัตร',
                                     options: FFButtonOptions(
-                                      width: double.infinity,
+                                      width: 300.0,
                                       height: 54.0,
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 0.0, 16.0, 0.0),
