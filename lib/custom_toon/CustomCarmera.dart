@@ -42,6 +42,7 @@ class _CustomCarmeraState extends State<CustomCarmera> {
             size: 30,
           ),
           onPressed: () async {
+            _controller.stopVideoStream();
             Navigator.pop(context, "");
           },
         ),
