@@ -61,25 +61,35 @@ class VisitorRecord extends FirestoreRecord {
   String get image => _image ?? '';
   bool hasImage() => _image != null;
 
-  // "area_list" field.
-  List<String>? _areaList;
-  List<String> get areaList => _areaList ?? const [];
-  bool hasAreaList() => _areaList != null;
-
   // "company" field.
   String? _company;
   String get company => _company ?? '';
   bool hasCompany() => _company != null;
 
-  // "is_all_zone" field.
-  bool? _isAllZone;
-  bool get isAllZone => _isAllZone ?? false;
-  bool hasIsAllZone() => _isAllZone != null;
-
   // "card_no" field.
   String? _cardNo;
   String get cardNo => _cardNo ?? '';
   bool hasCardNo() => _cardNo != null;
+
+  // "nationality" field.
+  String? _nationality;
+  String get nationality => _nationality ?? '';
+  bool hasNationality() => _nationality != null;
+
+  // "type" field.
+  String? _type;
+  String get type => _type ?? '';
+  bool hasType() => _type != null;
+
+  // "address" field.
+  String? _address;
+  String get address => _address ?? '';
+  bool hasAddress() => _address != null;
+
+  // "zone" field.
+  String? _zone;
+  String get zone => _zone ?? '';
+  bool hasZone() => _zone != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
 
@@ -93,10 +103,12 @@ class VisitorRecord extends FirestoreRecord {
     _carNumber = snapshotData['car_number'] as String?;
     _idCardNumber = snapshotData['id_card_number'] as String?;
     _image = snapshotData['image'] as String?;
-    _areaList = getDataList(snapshotData['area_list']);
     _company = snapshotData['company'] as String?;
-    _isAllZone = snapshotData['is_all_zone'] as bool?;
     _cardNo = snapshotData['card_no'] as String?;
+    _nationality = snapshotData['nationality'] as String?;
+    _type = snapshotData['type'] as String?;
+    _address = snapshotData['address'] as String?;
+    _zone = snapshotData['zone'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -149,8 +161,11 @@ Map<String, dynamic> createVisitorRecordData({
   String? idCardNumber,
   String? image,
   String? company,
-  bool? isAllZone,
   String? cardNo,
+  String? nationality,
+  String? type,
+  String? address,
+  String? zone,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -164,8 +179,11 @@ Map<String, dynamic> createVisitorRecordData({
       'id_card_number': idCardNumber,
       'image': image,
       'company': company,
-      'is_all_zone': isAllZone,
       'card_no': cardNo,
+      'nationality': nationality,
+      'type': type,
+      'address': address,
+      'zone': zone,
     }.withoutNulls,
   );
 
@@ -177,7 +195,6 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
 
   @override
   bool equals(VisitorRecord? e1, VisitorRecord? e2) {
-    const listEquality = ListEquality();
     return e1?.createDate == e2?.createDate &&
         e1?.updateDate == e2?.updateDate &&
         e1?.status == e2?.status &&
@@ -187,10 +204,12 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
         e1?.carNumber == e2?.carNumber &&
         e1?.idCardNumber == e2?.idCardNumber &&
         e1?.image == e2?.image &&
-        listEquality.equals(e1?.areaList, e2?.areaList) &&
         e1?.company == e2?.company &&
-        e1?.isAllZone == e2?.isAllZone &&
-        e1?.cardNo == e2?.cardNo;
+        e1?.cardNo == e2?.cardNo &&
+        e1?.nationality == e2?.nationality &&
+        e1?.type == e2?.type &&
+        e1?.address == e2?.address &&
+        e1?.zone == e2?.zone;
   }
 
   @override
@@ -204,10 +223,12 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
         e?.carNumber,
         e?.idCardNumber,
         e?.image,
-        e?.areaList,
         e?.company,
-        e?.isAllZone,
-        e?.cardNo
+        e?.cardNo,
+        e?.nationality,
+        e?.type,
+        e?.address,
+        e?.zone
       ]);
 
   @override

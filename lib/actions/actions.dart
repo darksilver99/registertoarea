@@ -22,5 +22,9 @@ Future initCustomer(BuildContext context) async {
     expireDate: customerResult?.expireDate,
     customerId: customerResult?.reference.id,
     customerRef: customerResult?.reference,
+    superAdminMode: customerResult?.superAdminMode,
+    zoneList: customerResult?.zoneList,
+    typeList: customerResult?.typeList,
+    logo: customerResult?.logo,
   );
 }

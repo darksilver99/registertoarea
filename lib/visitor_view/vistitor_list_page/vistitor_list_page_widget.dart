@@ -58,6 +58,8 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -183,8 +185,22 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                           ),
                         ),
                         FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Coming soon.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('ตกลง'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           },
                           text: 'ค้นหา',
                           icon: Icon(
@@ -250,138 +266,142 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        FFButtonWidget(
-                          onPressed: () async {
-                            final selectedFiles = await selectFiles(
-                              multiFile: false,
-                            );
-                            if (selectedFiles != null) {
-                              safeSetState(() => _model.isDataUploading = true);
-                              var selectedUploadedFiles = <FFUploadedFile>[];
-
-                              try {
-                                selectedUploadedFiles = selectedFiles
-                                    .map((m) => FFUploadedFile(
-                                          name: m.storagePath.split('/').last,
-                                          bytes: m.bytes,
-                                        ))
-                                    .toList();
-                              } finally {
-                                _model.isDataUploading = false;
-                              }
-                              if (selectedUploadedFiles.length ==
-                                  selectedFiles.length) {
-                                safeSetState(() {
-                                  _model.uploadedLocalFile =
-                                      selectedUploadedFiles.first;
-                                });
-                              } else {
-                                safeSetState(() {});
-                                return;
-                              }
-                            }
-
-                            if (_model.uploadedLocalFile != null &&
-                                (_model.uploadedLocalFile.bytes?.isNotEmpty ??
-                                    false)) {
-                              _model.isImport = await actions.importExcel(
-                                _model.uploadedLocalFile,
+                        if (FFAppState().customerData.superAdminMode)
+                          FFButtonWidget(
+                            onPressed: () async {
+                              final selectedFiles = await selectFiles(
+                                multiFile: false,
                               );
-                              if (_model.isImport!) {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('นำเข้าข้อมูลเรียบร้อยแล้ว'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('ตกลง'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                                _model.isLoading = true;
-                                safeSetState(() {});
-                                await _model.initVisitorData(context);
-                                _model.isLoading = false;
-                                safeSetState(() {});
-                              } else {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('ไม่สามารถนำข้อมูลได้'),
-                                      content: Text(
-                                          'กรุณาตรวจสอบไฟล์ (รองรับนามสกุล .xlsx, xls) หรือตรวจสอบรูปแบบข้อมูลในตาราง'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('ตกลง'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              }
-                            }
+                              if (selectedFiles != null) {
+                                safeSetState(
+                                    () => _model.isDataUploading = true);
+                                var selectedUploadedFiles = <FFUploadedFile>[];
 
-                            safeSetState(() {});
-                          },
-                          text: 'นำเข้าข้อมูลจาก Excel',
-                          options: FFButtonOptions(
-                            height: 40.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 0.0, 16.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).warning,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Inter',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
+                                try {
+                                  selectedUploadedFiles = selectedFiles
+                                      .map((m) => FFUploadedFile(
+                                            name: m.storagePath.split('/').last,
+                                            bytes: m.bytes,
+                                          ))
+                                      .toList();
+                                } finally {
+                                  _model.isDataUploading = false;
+                                }
+                                if (selectedUploadedFiles.length ==
+                                    selectedFiles.length) {
+                                  safeSetState(() {
+                                    _model.uploadedLocalFile =
+                                        selectedUploadedFiles.first;
+                                  });
+                                } else {
+                                  safeSetState(() {});
+                                  return;
+                                }
+                              }
+
+                              if (_model.uploadedLocalFile != null &&
+                                  (_model.uploadedLocalFile.bytes?.isNotEmpty ??
+                                      false)) {
+                                _model.isImport = await actions.importExcel(
+                                  _model.uploadedLocalFile,
+                                );
+                                if (_model.isImport!) {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title:
+                                            Text('นำเข้าข้อมูลเรียบร้อยแล้ว'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('ตกลง'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  _model.isLoading = true;
+                                  safeSetState(() {});
+                                  await _model.initVisitorData(context);
+                                  _model.isLoading = false;
+                                  safeSetState(() {});
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('ไม่สามารถนำข้อมูลได้'),
+                                        content: Text(
+                                            'กรุณาตรวจสอบไฟล์ (รองรับนามสกุล .xlsx, xls) หรือตรวจสอบรูปแบบข้อมูลในตาราง'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('ตกลง'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
+                              }
+
+                              safeSetState(() {});
+                            },
+                            text: 'นำเข้าข้อมูลจาก Excel',
+                            options: FFButtonOptions(
+                              height: 40.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).warning,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                  ),
+                              elevation: 0.0,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                        if (FFAppState().customerData.superAdminMode)
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              await launchURL(
+                                  'https://www.silver-api.com/regis_area/error_image.jpg');
+                            },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Icon(
+                                  Icons.info_sharp,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
                                 ),
-                            elevation: 0.0,
-                            borderRadius: BorderRadius.circular(8.0),
+                                Text(
+                                  'ตัวอย่าง\nไฟล์ excel',
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        fontSize: 8.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            await launchURL(
-                                'https://www.silver-api.com/regis_area/error_image.jpg');
-                          },
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Icon(
-                                Icons.info_sharp,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
-                              ),
-                              Text(
-                                'ตัวอย่าง\nไฟล์ excel',
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      fontSize: 8.0,
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
                       ],
                     ),
                   ),

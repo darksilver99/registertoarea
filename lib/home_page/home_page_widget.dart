@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/component/loading_view/loading_view_widget.dart';
+import '/components/customer_setting_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -606,8 +607,27 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
-                                                        context.pushNamed(
-                                                            'ZoneListPage');
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          enableDrag: false,
+                                                          useSafeArea: true,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return Padding(
+                                                              padding: MediaQuery
+                                                                  .viewInsetsOf(
+                                                                      context),
+                                                              child:
+                                                                  CustomerSettingViewWidget(),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            safeSetState(
+                                                                () {}));
                                                       },
                                                       child: Material(
                                                         color:
@@ -654,7 +674,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   children: [
                                                                     Icon(
                                                                       Icons
-                                                                          .warehouse,
+                                                                          .business,
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
                                                                           .primary,
@@ -683,7 +703,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       Expanded(
                                                                         child:
                                                                             Text(
-                                                                          'จัดการโซนพื้นที่',
+                                                                          'ตั้งค่าโครงการ',
                                                                           textAlign:
                                                                               TextAlign.center,
                                                                           maxLines:

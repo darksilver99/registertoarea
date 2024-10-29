@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
-import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -31,26 +30,6 @@ class VisitorFormViewModel extends FlutterFlowModel<VisitorFormViewWidget> {
   bool isLoading = true;
 
   String? imageUrl;
-
-  bool isAllZone = true;
-
-  List<String> selectedZone = [];
-  void addToSelectedZone(String item) => selectedZone.add(item);
-  void removeFromSelectedZone(String item) => selectedZone.remove(item);
-  void removeAtIndexFromSelectedZone(int index) => selectedZone.removeAt(index);
-  void insertAtIndexInSelectedZone(int index, String item) =>
-      selectedZone.insert(index, item);
-  void updateSelectedZoneAtIndex(int index, Function(String) updateFn) =>
-      selectedZone[index] = updateFn(selectedZone[index]);
-
-  List<String> zoneList = [];
-  void addToZoneList(String item) => zoneList.add(item);
-  void removeFromZoneList(String item) => zoneList.remove(item);
-  void removeAtIndexFromZoneList(int index) => zoneList.removeAt(index);
-  void insertAtIndexInZoneList(int index, String item) =>
-      zoneList.insert(index, item);
-  void updateZoneListAtIndex(int index, Function(String) updateFn) =>
-      zoneList[index] = updateFn(zoneList[index]);
 
   ///  State fields for stateful widgets in this component.
 
@@ -96,6 +75,16 @@ class VisitorFormViewModel extends FlutterFlowModel<VisitorFormViewWidget> {
   // State field(s) for genderDropdown widget.
   String? genderDropdownValue;
   FormFieldController<String>? genderDropdownValueController;
+  // State field(s) for nationalityTextfield widget.
+  FocusNode? nationalityTextfieldFocusNode;
+  TextEditingController? nationalityTextfieldTextController;
+  String? Function(BuildContext, String?)?
+      nationalityTextfieldTextControllerValidator;
+  // State field(s) for addressTextfield widget.
+  FocusNode? addressTextfieldFocusNode;
+  TextEditingController? addressTextfieldTextController;
+  String? Function(BuildContext, String?)?
+      addressTextfieldTextControllerValidator;
   // State field(s) for companyTextfield widget.
   FocusNode? companyTextfieldFocusNode;
   TextEditingController? companyTextfieldTextController;
@@ -124,13 +113,12 @@ class VisitorFormViewModel extends FlutterFlowModel<VisitorFormViewWidget> {
     return null;
   }
 
-  // State field(s) for Checkbox widget.
-  bool? checkboxValue;
-  // State field(s) for ChoiceChips widget.
-  FormFieldController<List<String>>? choiceChipsValueController;
-  List<String>? get choiceChipsValues => choiceChipsValueController?.value;
-  set choiceChipsValues(List<String>? val) =>
-      choiceChipsValueController?.value = val;
+  // State field(s) for typeDropdown widget.
+  String? typeDropdownValue;
+  FormFieldController<String>? typeDropdownValueController;
+  // State field(s) for zoneDropdown widget.
+  String? zoneDropdownValue;
+  FormFieldController<String>? zoneDropdownValueController;
   // State field(s) for statusDropdown widget.
   String? statusDropdownValue;
   FormFieldController<String>? statusDropdownValueController;
@@ -157,22 +145,16 @@ class VisitorFormViewModel extends FlutterFlowModel<VisitorFormViewWidget> {
     idCardTextfieldFocusNode?.dispose();
     idCardTextfieldTextController?.dispose();
 
+    nationalityTextfieldFocusNode?.dispose();
+    nationalityTextfieldTextController?.dispose();
+
+    addressTextfieldFocusNode?.dispose();
+    addressTextfieldTextController?.dispose();
+
     companyTextfieldFocusNode?.dispose();
     companyTextfieldTextController?.dispose();
 
     carNumberTextfieldFocusNode?.dispose();
     carNumberTextfieldTextController?.dispose();
-  }
-
-  /// Action blocks.
-  Future initZone(BuildContext context) async {
-    List<ZoneListRecord>? zoneResult;
-
-    zoneResult = await queryZoneListRecordOnce(
-      parent: FFAppState().customerData.customerRef,
-      queryBuilder: (zoneListRecord) => zoneListRecord.orderBy('subject'),
-    );
-    zoneList =
-        zoneResult!.map((e) => e.subject).toList().toList().cast<String>();
   }
 }
