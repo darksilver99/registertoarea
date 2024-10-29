@@ -16,6 +16,6 @@ Future<String> scanBarCodeWithWeb(BuildContext context) async {
   // Add your function code here!
   return await Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => const CustomCarmera()),
+    MaterialPageRoute(builder: (context) => const CustomQrCodeScan()),
   );
 }
