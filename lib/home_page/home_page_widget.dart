@@ -215,7 +215,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           child: Wrap(
                                             spacing: 32.0,
                                             runSpacing: 32.0,
-                                            alignment: WrapAlignment.start,
+                                            alignment: (MediaQuery.sizeOf(context).width < kBreakpointMedium) ? WrapAlignment.center : WrapAlignment.start,
                                             crossAxisAlignment:
                                                 WrapCrossAlignment.start,
                                             direction: Axis.horizontal,
@@ -820,7 +820,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           child: Wrap(
                                             spacing: 32.0,
                                             runSpacing: 32.0,
-                                            alignment: WrapAlignment.start,
+                                            alignment: (MediaQuery.sizeOf(context).width < kBreakpointMedium) ? WrapAlignment.center : WrapAlignment.start,
                                             crossAxisAlignment:
                                                 WrapCrossAlignment.start,
                                             direction: Axis.horizontal,
