@@ -487,7 +487,7 @@ class _VisitorPrintViewWidgetState extends State<VisitorPrintViewWidget> {
                                                             padding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        8.0,
+                                                                        0.0,
                                                                         0.0,
                                                                         8.0,
                                                                         0.0),
