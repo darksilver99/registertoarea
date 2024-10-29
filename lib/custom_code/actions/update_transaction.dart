@@ -25,8 +25,8 @@ Future<int> updateTransaction(VisitorRecord visitorDoc) async {
     rs.docs[0].reference.update({
       "status": 1,
       "date_out": getCurrentTimestamp,
-      "duration":
-          millisecondsBetween(rs.docs[0].data()["date_in"], getCurrentTimestamp)
+      "duration": millisecondsBetween(
+          rs.docs[0].data()["date_in"].toDate(), getCurrentTimestamp)
     });
     return 1; // สแกนออก
   } else {
