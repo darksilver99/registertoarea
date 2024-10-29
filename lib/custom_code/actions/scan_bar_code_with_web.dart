@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:register_to_area/custom_toon/CustomCarmera.dart';
+import 'package:register_to_area/custom_toon/CustomQrCodeScan.dart';
 
 Future<String> scanBarCodeWithWeb(BuildContext context) async {
   // Add your function code here!
   return await Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => const CustomCarmera()),
+    MaterialPageRoute(builder: (context) => const CustomQrCodeScan()),
   );
 }
