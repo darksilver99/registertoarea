@@ -40,6 +40,7 @@ Future<int> updateTransaction(VisitorRecord visitorDoc) async {
       "card_no": visitorDoc.cardNo,
       "full_name": visitorDoc.fullName,
       "company": visitorDoc.company,
+      "visitor_ref": visitorDoc.reference,
     });
     return 0; // สแกนเข้า
   }
