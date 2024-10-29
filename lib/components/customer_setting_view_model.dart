@@ -9,7 +9,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import '/actions/actions.dart' as action_blocks;
-import '/custom_code/actions/index.dart' as actions;
 import 'customer_setting_view_widget.dart' show CustomerSettingViewWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -53,8 +52,6 @@ class CustomerSettingViewModel
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl = '';
 
-  // Stores action output result for [Custom Action - tekePhotoOnWeb] action in Button widget.
-  String? photoPath;
   // State field(s) for typeTextField widget.
   FocusNode? typeTextFieldFocusNode;
   TextEditingController? typeTextFieldTextController;
