@@ -1,4 +1,6 @@
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import '/components/info_custom_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -19,7 +21,7 @@ class ScanBarCodeWithWebPageModel
   // Stores action output result for [Custom Action - getVisitorDataByDocID] action in ScanBarCodeWithWebPage widget.
   VisitorRecord? visitorResult;
   // Stores action output result for [Custom Action - updateTransaction] action in ScanBarCodeWithWebPage widget.
-  int? status;
+  StatusDataStruct? statusResult;
 
   @override
   void initState(BuildContext context) {}

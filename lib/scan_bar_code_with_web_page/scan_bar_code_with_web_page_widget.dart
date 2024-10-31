@@ -1,4 +1,6 @@
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
+import '/components/info_custom_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -11,7 +13,12 @@ import 'scan_bar_code_with_web_page_model.dart';
 export 'scan_bar_code_with_web_page_model.dart';
 
 class ScanBarCodeWithWebPageWidget extends StatefulWidget {
-  const ScanBarCodeWithWebPageWidget({super.key});
+  const ScanBarCodeWithWebPageWidget({
+    super.key,
+    bool? isEnter,
+  }) : this.isEnter = isEnter ?? true;
+
+  final bool isEnter;
 
   @override
   State<ScanBarCodeWithWebPageWidget> createState() =>
@@ -39,74 +46,67 @@ class _ScanBarCodeWithWebPageWidgetState
           _model.qrCode!,
         );
         if (_model.visitorResult != null) {
-          _model.status = await actions.updateTransaction(
+          _model.statusResult = await actions.updateTransaction(
             _model.visitorResult!,
+            widget!.isEnter,
           );
-          if (_model.status == 1) {
-            await showDialog(
-              context: context,
-              builder: (alertDialogContext) {
-                return AlertDialog(
-                  title: Text('สแกนออกแล้ว'),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(alertDialogContext),
-                      child: Text('ตกลง'),
-                    ),
-                  ],
-                );
-              },
-            );
-          } else {
-            await showDialog(
-              context: context,
-              builder: (alertDialogContext) {
-                return AlertDialog(
-                  title: Text('สแกนเข้าแล้ว'),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(alertDialogContext),
-                      child: Text('ตกลง'),
-                    ),
-                  ],
-                );
-              },
-            );
-          }
+          await showDialog(
+            context: context,
+            builder: (dialogContext) {
+              return Dialog(
+                elevation: 0,
+                insetPadding: EdgeInsets.zero,
+                backgroundColor: Colors.transparent,
+                alignment: AlignmentDirectional(0.0, 0.0)
+                    .resolve(Directionality.of(context)),
+                child: InfoCustomViewWidget(
+                  title: _model.statusResult!.msg,
+                  status:
+                      _model.statusResult?.status == 1 ? 'success' : 'error',
+                ),
+              );
+            },
+          );
 
           context.safePop();
         } else {
           await showDialog(
             context: context,
-            builder: (alertDialogContext) {
-              return AlertDialog(
-                title: Text('ไม่พบข้อมูลบัตรผ่าน'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('ตกลง'),
-                  ),
-                ],
+            builder: (dialogContext) {
+              return Dialog(
+                elevation: 0,
+                insetPadding: EdgeInsets.zero,
+                backgroundColor: Colors.transparent,
+                alignment: AlignmentDirectional(0.0, 0.0)
+                    .resolve(Directionality.of(context)),
+                child: InfoCustomViewWidget(
+                  title: 'ไม่พบข้อมูลบัตรผ่าน',
+                  status: 'error',
+                ),
               );
             },
           );
+
           context.safePop();
         }
       } else {
         await showDialog(
           context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('ไม่พบข้อมูลบัตรผ่าน'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('ตกลง'),
-                ),
-              ],
+          builder: (dialogContext) {
+            return Dialog(
+              elevation: 0,
+              insetPadding: EdgeInsets.zero,
+              backgroundColor: Colors.transparent,
+              alignment: AlignmentDirectional(0.0, 0.0)
+                  .resolve(Directionality.of(context)),
+              child: InfoCustomViewWidget(
+                title: 'ไม่พบข้อมูลบัตรผ่าน',
+                status: 'error',
+              ),
             );
           },
         );
+
         context.safePop();
       }
     });
@@ -123,23 +123,25 @@ class _ScanBarCodeWithWebPageWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: SafeArea(
-        top: true,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).primaryText,
+    return Builder(
+      builder: (context) => Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: SafeArea(
+          top: true,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryText,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

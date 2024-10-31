@@ -12,7 +12,10 @@ import 'package:flutter/material.dart';
 
 import 'package:register_to_area/custom_toon/custom_toon.dart';
 
-Future<int> updateTransaction(VisitorRecord visitorDoc) async {
+Future<StatusDataStruct> updateTransaction(
+  VisitorRecord visitorDoc,
+  bool isEnter,
+) async {
   // Add your function code here!
   final rs = await FirebaseFirestore.instance
       .collection(
@@ -21,6 +24,12 @@ Future<int> updateTransaction(VisitorRecord visitorDoc) async {
       .where("visitor_ref", isEqualTo: visitorDoc.reference)
       .get();
   if (rs.size != 0) {
+    if (isEnter) {
+      return StatusDataStruct(
+          status: 0,
+          msg: "ขออภัยสแกนออกไม่ได้ เนื่องจากบัตรนี้ยังไม่ได้สแกนเข้า");
+    }
+
     // แสดงว่ามีเข้าค้างอยู่ให้ เปลี่ยนสถานะเป็น 1 คือ การสแกนออก
     rs.docs[0].reference.update({
       "status": 1,
@@ -28,8 +37,14 @@ Future<int> updateTransaction(VisitorRecord visitorDoc) async {
       "duration": millisecondsBetween(
           rs.docs[0].data()["date_in"].toDate(), getCurrentTimestamp)
     });
-    return 1; // สแกนออก
+    return StatusDataStruct(status: 1, msg: "สแกนออกเรียบร้อยแล้ว");
   } else {
+    if (!isEnter) {
+      return StatusDataStruct(
+          status: 0,
+          msg:
+              "ขออภัยสแกนเข้าไม่ได้ เนื่องจากบัตรนี้ยังมีรายกายค้างอยู่กรุณาสแกนออกก่อน");
+    }
     FirebaseFirestore.instance
         .collection(
             "${FFAppState().customerData.customerRef!.path}/transaction_list")
@@ -42,6 +57,6 @@ Future<int> updateTransaction(VisitorRecord visitorDoc) async {
       "company": visitorDoc.company,
       "visitor_ref": visitorDoc.reference,
     });
-    return 0; // สแกนเข้า
+    return StatusDataStruct(status: 1, msg: "สแกนเข้าเรียบร้อยแล้ว");
   }
 }

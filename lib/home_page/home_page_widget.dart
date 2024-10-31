@@ -323,14 +323,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Icon(
-                                                                      Icons
-                                                                          .edit_document,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          64.0,
+                                                                    ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                      child: Image
+                                                                          .asset(
+                                                                        'assets/images/register_3456426.png',
+                                                                        width:
+                                                                            64.0,
+                                                                        height:
+                                                                            64.0,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -433,14 +439,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Icon(
-                                                                      Icons
-                                                                          .people_alt_rounded,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          64.0,
+                                                                    ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                      child: Image
+                                                                          .asset(
+                                                                        'assets/images/id-card_3277444.png',
+                                                                        width:
+                                                                            64.0,
+                                                                        height:
+                                                                            64.0,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -543,14 +555,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Icon(
-                                                                      Icons
-                                                                          .transfer_within_a_station_rounded,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          64.0,
+                                                                    ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                      child: Image
+                                                                          .asset(
+                                                                        'assets/images/up-down_9053137.png',
+                                                                        width:
+                                                                            64.0,
+                                                                        height:
+                                                                            64.0,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -607,27 +625,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
-                                                        await showModalBottomSheet(
-                                                          isScrollControlled:
+                                                        context.pushNamed(
+                                                          'ScanBarCodeWithWebPage',
+                                                          queryParameters: {
+                                                            'isEnter':
+                                                                serializeParam(
                                                               true,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          enableDrag: false,
-                                                          useSafeArea: true,
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return Padding(
-                                                              padding: MediaQuery
-                                                                  .viewInsetsOf(
-                                                                      context),
-                                                              child:
-                                                                  CustomerSettingViewWidget(),
-                                                            );
-                                                          },
-                                                        ).then((value) =>
-                                                            safeSetState(
-                                                                () {}));
+                                                              ParamType.bool,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
                                                       },
                                                       child: Material(
                                                         color:
@@ -672,14 +679,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Icon(
-                                                                      Icons
-                                                                          .business,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          64.0,
+                                                                    ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                      child: Image
+                                                                          .asset(
+                                                                        'assets/images/scan_14440504.png',
+                                                                        width:
+                                                                            64.0,
+                                                                        height:
+                                                                            64.0,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -703,7 +716,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       Expanded(
                                                                         child:
                                                                             Text(
-                                                                          'ตั้งค่าโครงการ',
+                                                                          'ตรวจบัตรเข้า',
                                                                           textAlign:
                                                                               TextAlign.center,
                                                                           maxLines:
@@ -737,7 +750,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           Colors.transparent,
                                                       onTap: () async {
                                                         context.pushNamed(
-                                                            'ScanBarCodeWithWebPage');
+                                                          'ScanBarCodeWithWebPage',
+                                                          queryParameters: {
+                                                            'isEnter':
+                                                                serializeParam(
+                                                              false,
+                                                              ParamType.bool,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
                                                       },
                                                       child: Material(
                                                         color:
@@ -782,14 +803,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Icon(
-                                                                      Icons
-                                                                          .document_scanner_outlined,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          64.0,
+                                                                    ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                      child: Image
+                                                                          .asset(
+                                                                        'assets/images/scanner_4059239.png',
+                                                                        width:
+                                                                            64.0,
+                                                                        height:
+                                                                            64.0,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -813,7 +840,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       Expanded(
                                                                         child:
                                                                             Text(
-                                                                          'ตรวจบัตรผ่าน',
+                                                                          'ตรวจบัตรออก',
                                                                           textAlign:
                                                                               TextAlign.center,
                                                                           maxLines:
@@ -917,6 +944,141 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          enableDrag: false,
+                                                          useSafeArea: true,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return Padding(
+                                                              padding: MediaQuery
+                                                                  .viewInsetsOf(
+                                                                      context),
+                                                              child:
+                                                                  CustomerSettingViewWidget(),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            safeSetState(
+                                                                () {}));
+                                                      },
+                                                      child: Material(
+                                                        color:
+                                                            Colors.transparent,
+                                                        elevation: 3.0,
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                        ),
+                                                        child: Container(
+                                                          width: 200.0,
+                                                          height: 200.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryBackground,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                            border: Border.all(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .alternate,
+                                                            ),
+                                                          ),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                      child: Image
+                                                                          .asset(
+                                                                        'assets/images/enterprise_3456337.png',
+                                                                        width:
+                                                                            64.0,
+                                                                        height:
+                                                                            64.0,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          8.0,
+                                                                          16.0,
+                                                                          8.0,
+                                                                          0.0),
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Text(
+                                                                          'ตั้งค่าโครงการ',
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                          maxLines:
+                                                                              2,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: 'Inter',
+                                                                                fontSize: 22.0,
+                                                                                letterSpacing: 0.0,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
                                                         await showDialog(
                                                           context: context,
                                                           builder:
@@ -980,14 +1142,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Icon(
-                                                                      Icons
-                                                                          .file_copy,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          64.0,
+                                                                    ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                      child: Image
+                                                                          .asset(
+                                                                        'assets/images/guide-book_2471007.png',
+                                                                        width:
+                                                                            64.0,
+                                                                        height:
+                                                                            64.0,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -1107,14 +1275,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Icon(
-                                                                      Icons
-                                                                          .help_outlined,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          64.0,
+                                                                    ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                      child: Image
+                                                                          .asset(
+                                                                        'assets/images/faq_4501545.png',
+                                                                        width:
+                                                                            64.0,
+                                                                        height:
+                                                                            64.0,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
                                                                     ),
                                                                   ],
                                                                 ),

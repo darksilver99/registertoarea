@@ -109,7 +109,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ScanBarCodeWithWebPage',
           path: '/scanBarCodeWithWebPage',
           requireAuth: true,
-          builder: (context, params) => ScanBarCodeWithWebPageWidget(),
+          builder: (context, params) => ScanBarCodeWithWebPageWidget(
+            isEnter: params.getParam(
+              'isEnter',
+              ParamType.bool,
+            ),
+          ),
         ),
         FFRoute(
           name: 'TransactionListPage',
