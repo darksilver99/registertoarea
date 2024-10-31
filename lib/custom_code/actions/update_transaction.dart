@@ -27,7 +27,8 @@ Future<StatusDataStruct> updateTransaction(
     if (isEnter) {
       return StatusDataStruct(
           status: 0,
-          msg: "ขออภัยสแกนออกไม่ได้ เนื่องจากบัตรนี้ยังไม่ได้สแกนเข้า");
+          msg:
+              "ขออภัยสแกนเข้าไม่ได้ เนื่องจากบัตรนี้ยังมีรายกายค้างอยู่กรุณาสแกนออกก่อน");
     }
 
     // แสดงว่ามีเข้าค้างอยู่ให้ เปลี่ยนสถานะเป็น 1 คือ การสแกนออก
@@ -42,8 +43,7 @@ Future<StatusDataStruct> updateTransaction(
     if (!isEnter) {
       return StatusDataStruct(
           status: 0,
-          msg:
-              "ขออภัยสแกนเข้าไม่ได้ เนื่องจากบัตรนี้ยังมีรายกายค้างอยู่กรุณาสแกนออกก่อน");
+          msg: "ขออภัยสแกนออกไม่ได้ เนื่องจากบัตรนี้ยังไม่ได้สแกนเข้า");
     }
     FirebaseFirestore.instance
         .collection(
