@@ -36,6 +36,7 @@ Future<bool> importExcel(FFUploadedFile? file) async {
     if (sheet != null) {
       int maxCols = sheet.maxColumns;
       int maxRows = sheet.rows.length;
+      bool isBreak = false;
 
       print("maxRows : $maxRows");
       print("maxCols : $maxCols");
@@ -51,8 +52,15 @@ Future<bool> importExcel(FFUploadedFile? file) async {
         for (int colIndex = 0; colIndex < maxCols; colIndex++) {
           var cellValue = colIndex < row.length ? row[colIndex]?.value : '';
           var tmp = cellValue ?? '';
+          if (colIndex == 0 && tmp == "") {
+            isBreak = true;
+            break;
+          }
           tmp = tmp.toString().replaceAll('"', '');
           rowData.add(tmp);
+        }
+        if (isBreak) {
+          break;
         }
         // List<String> zoneList = await updateZone(rowData[8]);
         dataList.add({
