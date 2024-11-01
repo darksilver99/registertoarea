@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 
 import 'package:excel/excel.dart' as ex;
 import 'package:register_to_area/custom_toon/custom_toon.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 
 Future<bool> importExcel(FFUploadedFile? file) async {
   // Add your function code here!
@@ -68,6 +69,8 @@ Future<bool> importExcel(FFUploadedFile? file) async {
           "nationality": rowData[11],
           "address": rowData[12],
           "create_date": getCurrentTimestamp,
+          "keyword_list": functions.getVisitorKeywordList(
+              "${rowData[2]} ${rowData[3]} ${rowData[1]} ${rowData[5]} ${rowData[6]} ${rowData[8]} ${rowData[9]} ${rowData[10]} ${rowData[11]}"),
         });
       }
 
