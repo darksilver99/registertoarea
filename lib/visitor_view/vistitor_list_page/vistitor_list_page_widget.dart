@@ -38,6 +38,8 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await action_blocks.initCustomer(context);
+      _model.isLoading = false;
+      safeSetState(() {});
     });
 
     _model.textController ??= TextEditingController();
