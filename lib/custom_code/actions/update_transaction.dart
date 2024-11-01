@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:register_to_area/custom_toon/custom_toon.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 
 Future<StatusDataStruct> updateTransaction(
   VisitorRecord visitorDoc,
@@ -56,6 +57,8 @@ Future<StatusDataStruct> updateTransaction(
       "full_name": visitorDoc.fullName,
       "company": visitorDoc.company,
       "visitor_ref": visitorDoc.reference,
+      "keyword_list": functions.getVisitorKeywordList(
+          "${visitorDoc.cardNo} ${visitorDoc.fullName} ${visitorDoc.company}"),
     });
     return StatusDataStruct(status: 1, msg: "สแกนเข้าเรียบร้อยแล้ว");
   }
