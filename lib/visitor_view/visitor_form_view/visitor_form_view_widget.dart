@@ -1763,9 +1763,11 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                   .customerData
                                                   .customerRef,
                                               queryBuilder: (visitorRecord) =>
-                                                  visitorRecord.orderBy(
-                                                      'create_date',
-                                                      descending: true),
+                                                  visitorRecord
+                                                      .orderBy('create_date',
+                                                          descending: true)
+                                                      .orderBy('card_no',
+                                                          descending: true),
                                               singleRecord: true,
                                             ).then((s) => s.firstOrNull);
                                             _model.tmpCardNo =

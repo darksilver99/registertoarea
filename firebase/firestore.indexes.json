@@ -1,3 +1,18 @@
 {
-  "indexes": []
+  "indexes": [
+    {
+      "collectionGroup": "visitor",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "create_date",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "card_no",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ]
 }
