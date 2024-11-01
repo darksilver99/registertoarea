@@ -11,6 +11,7 @@ import '/visitor_view/visitor_print_view/visitor_print_view_widget.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,7 +45,7 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
-
+    _model.textFieldFocusNode!.addListener(() => safeSetState(() {}));
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -123,6 +124,11 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                           child: TextFormField(
                             controller: _model.textController,
                             focusNode: _model.textFieldFocusNode,
+                            onChanged: (_) => EasyDebounce.debounce(
+                              '_model.textController',
+                              Duration(milliseconds: 2000),
+                              () => safeSetState(() {}),
+                            ),
                             autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
@@ -171,6 +177,18 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                               filled: true,
                               fillColor: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
+                              suffixIcon: _model.textController!.text.isNotEmpty
+                                  ? InkWell(
+                                      onTap: () async {
+                                        _model.textController?.clear();
+                                        safeSetState(() {});
+                                      },
+                                      child: Icon(
+                                        Icons.clear,
+                                        size: 28.0,
+                                      ),
+                                    )
+                                  : null,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
