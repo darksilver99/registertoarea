@@ -31,6 +31,8 @@ class VisitorFormViewModel extends FlutterFlowModel<VisitorFormViewWidget> {
 
   String? imageUrl;
 
+  String? tmpCardNo;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();

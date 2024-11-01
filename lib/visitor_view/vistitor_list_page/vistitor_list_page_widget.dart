@@ -187,21 +187,12 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                         ),
                         FFButtonWidget(
                           onPressed: () async {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('Coming soon.'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('ตกลง'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                            _model.isLoading = true;
+                            safeSetState(() {});
+                            await Future.delayed(
+                                const Duration(milliseconds: 1000));
+                            _model.isLoading = false;
+                            safeSetState(() {});
                           },
                           text: 'ค้นหา',
                           icon: Icon(
@@ -853,7 +844,7 @@ class _VistitorListPageWidgetState extends State<VistitorListPageWidget> {
                       headingRowHeight: 56.0,
                       dataRowHeight: 48.0,
                       columnSpacing: 20.0,
-                      headingRowColor: FlutterFlowTheme.of(context).primary,
+                      headingRowColor: FlutterFlowTheme.of(context).header,
                       borderRadius: BorderRadius.circular(0.0),
                       addHorizontalDivider: true,
                       addTopAndBottomDivider: false,

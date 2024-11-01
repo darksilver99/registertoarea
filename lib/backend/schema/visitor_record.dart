@@ -91,6 +91,11 @@ class VisitorRecord extends FirestoreRecord {
   String get zone => _zone ?? '';
   bool hasZone() => _zone != null;
 
+  // "keyword_list" field.
+  List<String>? _keywordList;
+  List<String> get keywordList => _keywordList ?? const [];
+  bool hasKeywordList() => _keywordList != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -109,6 +114,7 @@ class VisitorRecord extends FirestoreRecord {
     _type = snapshotData['type'] as String?;
     _address = snapshotData['address'] as String?;
     _zone = snapshotData['zone'] as String?;
+    _keywordList = getDataList(snapshotData['keyword_list']);
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -195,6 +201,7 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
 
   @override
   bool equals(VisitorRecord? e1, VisitorRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.createDate == e2?.createDate &&
         e1?.updateDate == e2?.updateDate &&
         e1?.status == e2?.status &&
@@ -209,7 +216,8 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
         e1?.nationality == e2?.nationality &&
         e1?.type == e2?.type &&
         e1?.address == e2?.address &&
-        e1?.zone == e2?.zone;
+        e1?.zone == e2?.zone &&
+        listEquality.equals(e1?.keywordList, e2?.keywordList);
   }
 
   @override
@@ -228,7 +236,8 @@ class VisitorRecordDocumentEquality implements Equality<VisitorRecord> {
         e?.nationality,
         e?.type,
         e?.address,
-        e?.zone
+        e?.zone,
+        e?.keywordList
       ]);
 
   @override

@@ -56,6 +56,11 @@ class TransactionListRecord extends FirestoreRecord {
   DocumentReference? get visitorRef => _visitorRef;
   bool hasVisitorRef() => _visitorRef != null;
 
+  // "keyword_list" field.
+  List<String>? _keywordList;
+  List<String> get keywordList => _keywordList ?? const [];
+  bool hasKeywordList() => _keywordList != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -67,6 +72,7 @@ class TransactionListRecord extends FirestoreRecord {
     _company = snapshotData['company'] as String?;
     _duration = castToType<int>(snapshotData['duration']);
     _visitorRef = snapshotData['visitor_ref'] as DocumentReference?;
+    _keywordList = getDataList(snapshotData['keyword_list']);
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -140,6 +146,7 @@ class TransactionListRecordDocumentEquality
 
   @override
   bool equals(TransactionListRecord? e1, TransactionListRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.status == e2?.status &&
         e1?.dateIn == e2?.dateIn &&
         e1?.dateOut == e2?.dateOut &&
@@ -147,7 +154,8 @@ class TransactionListRecordDocumentEquality
         e1?.fullName == e2?.fullName &&
         e1?.company == e2?.company &&
         e1?.duration == e2?.duration &&
-        e1?.visitorRef == e2?.visitorRef;
+        e1?.visitorRef == e2?.visitorRef &&
+        listEquality.equals(e1?.keywordList, e2?.keywordList);
   }
 
   @override
@@ -159,7 +167,8 @@ class TransactionListRecordDocumentEquality
         e?.fullName,
         e?.company,
         e?.duration,
-        e?.visitorRef
+        e?.visitorRef,
+        e?.keywordList
       ]);
 
   @override

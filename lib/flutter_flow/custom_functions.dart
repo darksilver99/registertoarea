@@ -103,3 +103,12 @@ String formatDuration(int milliseconds) {
 
   return formatted.trim();
 }
+
+List<String> getVisitorKeywordList(String keyword) {
+  return keyword
+      .replaceAll(",", "") // Remove all commas
+      .split(" ") // Split by spaces
+      .map((word) => word.trim()) // Trim each word
+      .where((word) => word.isNotEmpty) // Remove any empty strings
+      .toList();
+}

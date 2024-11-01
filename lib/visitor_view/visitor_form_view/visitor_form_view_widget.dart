@@ -1715,38 +1715,47 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                           if (widget!.visitorDocument != null) {
                                             await widget!
                                                 .visitorDocument!.reference
-                                                .update(createVisitorRecordData(
-                                              updateDate: getCurrentTimestamp,
-                                              status:
-                                                  _model.statusDropdownValue ==
-                                                          'เปิดใช้งาน'
-                                                      ? 1
-                                                      : 0,
-                                              expireDate: _model.selectedDate,
-                                              fullName: _model
-                                                  .fullnameTextfieldTextController
-                                                  .text,
-                                              gender:
-                                                  _model.genderDropdownValue,
-                                              carNumber: _model
-                                                  .carNumberTextfieldTextController
-                                                  .text,
-                                              idCardNumber: _model
-                                                  .idCardTextfieldTextController
-                                                  .text,
-                                              image: _model.imageUrl,
-                                              type: _model.typeDropdownValue,
-                                              address: _model
-                                                  .addressTextfieldTextController
-                                                  .text,
-                                              zone: _model.zoneDropdownValue,
-                                              company: _model
-                                                  .companyTextfieldTextController
-                                                  .text,
-                                              nationality: _model
-                                                  .nationalityTextfieldTextController
-                                                  .text,
-                                            ));
+                                                .update({
+                                              ...createVisitorRecordData(
+                                                updateDate: getCurrentTimestamp,
+                                                status:
+                                                    _model.statusDropdownValue ==
+                                                            'เปิดใช้งาน'
+                                                        ? 1
+                                                        : 0,
+                                                expireDate: _model.selectedDate,
+                                                fullName: _model
+                                                    .fullnameTextfieldTextController
+                                                    .text,
+                                                gender:
+                                                    _model.genderDropdownValue,
+                                                carNumber: _model
+                                                    .carNumberTextfieldTextController
+                                                    .text,
+                                                idCardNumber: _model
+                                                    .idCardTextfieldTextController
+                                                    .text,
+                                                image: _model.imageUrl,
+                                                type: _model.typeDropdownValue,
+                                                address: _model
+                                                    .addressTextfieldTextController
+                                                    .text,
+                                                zone: _model.zoneDropdownValue,
+                                                company: _model
+                                                    .companyTextfieldTextController
+                                                    .text,
+                                                nationality: _model
+                                                    .nationalityTextfieldTextController
+                                                    .text,
+                                              ),
+                                              ...mapToFirestore(
+                                                {
+                                                  'keyword_list': functions
+                                                      .getVisitorKeywordList(
+                                                          '${_model.fullnameTextfieldTextController.text} ${_model.idCardTextfieldTextController.text} ${_model.nationalityTextfieldTextController.text} ${_model.companyTextfieldTextController.text} ${_model.carNumberTextfieldTextController.text} ${_model.typeDropdownValue} ${_model.zoneDropdownValue} ${_model.visitorResult?.cardNo}'),
+                                                },
+                                              ),
+                                            });
                                           } else {
                                             _model.lastVisitorResult =
                                                 await queryVisitorRecordOnce(
@@ -1759,45 +1768,56 @@ class _VisitorFormViewWidgetState extends State<VisitorFormViewWidget> {
                                                       descending: true),
                                               singleRecord: true,
                                             ).then((s) => s.firstOrNull);
+                                            _model.tmpCardNo =
+                                                functions.getNextNo(
+                                                    _model.lastVisitorResult);
 
                                             await VisitorRecord.createDoc(
                                                     FFAppState()
                                                         .customerData
                                                         .customerRef!)
-                                                .set(createVisitorRecordData(
-                                              createDate: getCurrentTimestamp,
-                                              status:
-                                                  _model.statusDropdownValue ==
-                                                          'เปิดใช้งาน'
-                                                      ? 1
-                                                      : 0,
-                                              expireDate: _model.datePicked,
-                                              fullName: _model
-                                                  .fullnameTextfieldTextController
-                                                  .text,
-                                              carNumber: _model
-                                                  .carNumberTextfieldTextController
-                                                  .text,
-                                              gender:
-                                                  _model.genderDropdownValue,
-                                              idCardNumber: _model
-                                                  .idCardTextfieldTextController
-                                                  .text,
-                                              image: _model.imageUrl,
-                                              cardNo: functions.getNextNo(
-                                                  _model.lastVisitorResult),
-                                              address: _model
-                                                  .addressTextfieldTextController
-                                                  .text,
-                                              type: _model.typeDropdownValue,
-                                              zone: _model.zoneDropdownValue,
-                                              company: _model
-                                                  .companyTextfieldTextController
-                                                  .text,
-                                              nationality: _model
-                                                  .nationalityTextfieldTextController
-                                                  .text,
-                                            ));
+                                                .set({
+                                              ...createVisitorRecordData(
+                                                createDate: getCurrentTimestamp,
+                                                status:
+                                                    _model.statusDropdownValue ==
+                                                            'เปิดใช้งาน'
+                                                        ? 1
+                                                        : 0,
+                                                expireDate: _model.datePicked,
+                                                fullName: _model
+                                                    .fullnameTextfieldTextController
+                                                    .text,
+                                                carNumber: _model
+                                                    .carNumberTextfieldTextController
+                                                    .text,
+                                                gender:
+                                                    _model.genderDropdownValue,
+                                                idCardNumber: _model
+                                                    .idCardTextfieldTextController
+                                                    .text,
+                                                image: _model.imageUrl,
+                                                cardNo: _model.tmpCardNo,
+                                                address: _model
+                                                    .addressTextfieldTextController
+                                                    .text,
+                                                type: _model.typeDropdownValue,
+                                                zone: _model.zoneDropdownValue,
+                                                company: _model
+                                                    .companyTextfieldTextController
+                                                    .text,
+                                                nationality: _model
+                                                    .nationalityTextfieldTextController
+                                                    .text,
+                                              ),
+                                              ...mapToFirestore(
+                                                {
+                                                  'keyword_list': functions
+                                                      .getVisitorKeywordList(
+                                                          '${_model.fullnameTextfieldTextController.text} ${_model.idCardTextfieldTextController.text} ${_model.nationalityTextfieldTextController.text} ${_model.companyTextfieldTextController.text} ${_model.carNumberTextfieldTextController.text} ${_model.typeDropdownValue} ${_model.zoneDropdownValue} ${_model.tmpCardNo}'),
+                                                },
+                                              ),
+                                            });
                                           }
 
                                           await showDialog(

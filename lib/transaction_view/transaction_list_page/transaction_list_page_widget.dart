@@ -529,7 +529,7 @@ class _TransactionListPageWidgetState extends State<TransactionListPageWidget> {
                       headingRowHeight: 56.0,
                       dataRowHeight: 48.0,
                       columnSpacing: 20.0,
-                      headingRowColor: FlutterFlowTheme.of(context).primary,
+                      headingRowColor: FlutterFlowTheme.of(context).header,
                       borderRadius: BorderRadius.circular(0.0),
                       addHorizontalDivider: true,
                       addTopAndBottomDivider: false,
